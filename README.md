@@ -38,3 +38,5 @@ Development version dev.2 includes hash-bound exchange-loss.json with every nati
 `npx skills add full-aigc-skills/vectorcraft-skills --skill <skill-name>`
 
 Commands use `SKILL_DIR`, the absolute directory of the `SKILL.md` actually loaded by the host. User/project `.agents/skills` and plugin-internal/cache layouts are supported; the CLI runtime is installed separately in the user data directory. Each skill was copied alone into all three layouts, including paths with spaces, and its documented script entry points ran `--help`. [Path verification](docs/evidence/installed-skill-paths.json). Existing host caches need an explicit update to receive the corrected documentation.
+
+Version dev.5 adds explicit selection prerequisites for grouping/boolean/symbols and public image placement to the asset skill. Nine task skills independently cold-installed and edited native geometry, type, appearance, artboards and assets, with real SVG/PDF/PNG checks. Full regression: 38 passed, no skips. [Evidence](docs/evidence/task-skill-first-use.json). All 585 commands, complete interchange fidelity and final creative/GUI/model acceptance remain pending.

@@ -38,3 +38,5 @@
 `npx skills add full-aigc-skills/vectorcraft-skills --skill <skill-name>`
 
 命令统一使用 `SKILL_DIR`，其值为宿主实际加载的 `SKILL.md` 所在绝对目录。支持用户级、项目级 `.agents/skills` 及插件内部或缓存目录；CLI 运行时另外安装到用户数据目录。每个技能单独复制到三种含空格的布局后，文档中的脚本入口均可运行 `--help`。[路径验证](docs/evidence/installed-skill-paths.json)。既有宿主缓存需更新后才会收到修正文档。
+
+dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图像导入。九类场景技能各自冷安装并执行原生几何、文字、外观、画板和资产操作，核验真实 SVG/PDF/PNG；完整回归 38 项、零跳过。[证据](docs/evidence/task-skill-first-use.json)。全部 585 命令、完整交换保真及创作/GUI/模型验收仍未完成。

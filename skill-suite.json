@@ -1,7 +1,7 @@
 {
   "schema": "craft-skill-suite/v1",
   "pluginId": "vectorcraft",
-  "version": "0.1.0-dev.4",
+  "version": "0.1.0-dev.5",
   "source": {
     "repository": "https://github.com/storytold/vectorcraft",
     "commit": "36a6a8ae49f0e2d1059361ab1f842b1ec172bc9e",
@@ -60,7 +60,7 @@
       "title": "形状与组合",
       "description": "建立几何形状并组合、变换品牌图形",
       "kind": "scenario",
-      "commandCount": 18,
+      "commandCount": 19,
       "commandPrefixes": [
         "shape.",
         "object.group",
@@ -68,7 +68,8 @@
         "object.transform",
         "object.move",
         "object.rotate",
-        "object.scale"
+        "object.scale",
+        "select.set"
       ]
     },
     {
@@ -76,11 +77,12 @@
       "title": "布尔与形状构建",
       "description": "使用 Pathfinder、复合路径与形状构建工具",
       "kind": "scenario",
-      "commandCount": 14,
+      "commandCount": 15,
       "commandPrefixes": [
         "object.pathfinder.",
         "object.compoundPath.",
-        "shapeBuilder."
+        "shapeBuilder.",
+        "select.set"
       ]
     },
     {
@@ -126,11 +128,13 @@
       "title": "链接与可复用资产",
       "description": "放置素材、管理链接、符号与已有图像描摹",
       "kind": "scenario",
-      "commandCount": 27,
+      "commandCount": 31,
       "commandPrefixes": [
         "links.",
         "symbol.",
-        "imageTrace."
+        "imageTrace.",
+        "file.place",
+        "select.set"
       ]
     },
     {
