@@ -15,3 +15,24 @@ The `vectorcraft-use` workflow helper now executes a bounded native plan in one 
 Development version `0.1.0-dev.1` fixes concurrent first-use/reuse install-lock contention: wait up to 120 seconds, then verify and reuse; timeout preserves installations and never replays editing tasks.
 
 Development version dev.2 includes hash-bound exchange-loss.json with every native delivery. Reports distinguish format losses, observed structure and unknown font/effect fidelity; exported derivatives never replace the retained native project.
+
+## CLI and task skill suite
+
+[VectorCraft Skill Suite Architecture](docs/VectorCraft-Skill-Suite-Architecture.md)
+
+| Skill | Purpose |
+| :--- | :--- |
+| `vectorcraft-use` | use |
+| `vectorcraft-cli` | cli |
+| `vectorcraft-cli-setup` | cli setup |
+| `vectorcraft-cli-project` | cli project |
+| `vectorcraft-cli-paths` | cli paths |
+| `vectorcraft-cli-shapes` | cli shapes |
+| `vectorcraft-cli-boolean` | cli boolean |
+| `vectorcraft-cli-text` | cli text |
+| `vectorcraft-cli-appearance` | cli appearance |
+| `vectorcraft-cli-artboards` | cli artboards |
+| `vectorcraft-cli-assets` | cli assets |
+| `vectorcraft-cli-export` | cli export |
+
+`npx skills add full-aigc-skills/vectorcraft-skills --skill <skill-name>`

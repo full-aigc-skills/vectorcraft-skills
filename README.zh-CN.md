@@ -15,3 +15,24 @@
 开发版本 `0.1.0-dev.1` 修复并行首次安装/复用时的安装锁竞争：等待最多 120 秒，再核验复用；超时不覆盖安装或重放编辑任务。
 
 开发版本 dev.2 的原生交付包含摘要绑定的 exchange-loss.json，区分格式损失、结构观察与未验证字体/效果保真；导出派生物不替代原生工程。
+
+## CLI 与场景技能体系
+
+[VectorCraft Skill Suite Architecture](docs/VectorCraft-Skill-Suite-Architecture.zh_CN.md)
+
+| 技能 | 用途 |
+| :--- | :--- |
+| `vectorcraft-use` | 组合多个本工具能力并保留可编辑原生交付 |
+| `vectorcraft-cli` | 查询实际命令参数和能力，调用公开 CLI、MCP 与诊断 |
+| `vectorcraft-cli-setup` | 首次安装、摘要校验、版本检查与缺失运行时排障 |
+| `vectorcraft-cli-project` | 建立和重开 vectorcraft，整理图层与文档属性 |
+| `vectorcraft-cli-paths` | 创建锚点、控制柄、闭合和编辑矢量路径 |
+| `vectorcraft-cli-shapes` | 建立几何形状并组合、变换品牌图形 |
+| `vectorcraft-cli-boolean` | 使用 Pathfinder、复合路径与形状构建工具 |
+| `vectorcraft-cli-text` | 设置 Logo 和品牌文字，处理字体与导出轮廓 |
+| `vectorcraft-cli-appearance` | 修改品牌色、填充描边、透明与外观变体 |
+| `vectorcraft-cli-artboards` | 制作 Logo 图标多画板与画板尺寸变体 |
+| `vectorcraft-cli-assets` | 放置素材、管理链接、符号与已有图像描摹 |
+| `vectorcraft-cli-export` | 输出矢量交换、预览和多画板资产包 |
+
+`npx skills add full-aigc-skills/vectorcraft-skills --skill <skill-name>`
