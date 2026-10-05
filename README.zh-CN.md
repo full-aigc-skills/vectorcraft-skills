@@ -13,3 +13,5 @@
 `vectorcraft-use` 的工作流助手已支持在同一 headless MCP 会话中执行受限原生计划、保留源修订、双画板导出，并有定向改色的真实回归测试。执行完整实测：`CRAFT_LIVE_TEST=1 python3 -m unittest discover -s tests -v`。插件 Harness 与宿主验收仍待完成。
 
 开发版本 `0.1.0-dev.1` 修复并行首次安装/复用时的安装锁竞争：等待最多 120 秒，再核验复用；超时不覆盖安装或重放编辑任务。
+
+开发版本 dev.2 的原生交付包含摘要绑定的 exchange-loss.json，区分格式损失、结构观察与未验证字体/效果保真；导出派生物不替代原生工程。
