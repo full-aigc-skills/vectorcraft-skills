@@ -1,0 +1,10 @@
+{
+  "name": "vectorcraft-skills",
+  "version": "0.1.0-dev.0",
+  "description": "Vectorcraft independent skills with pinned first-use installation; development release.",
+  "author": {
+    "name": "Full AIGC Skills"
+  },
+  "repository": "https://github.com/full-aigc-skills/vectorcraft-skills",
+  "license": "Apache-2.0"
+}
