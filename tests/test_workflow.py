@@ -2,6 +2,8 @@
 import importlib.util
 from pathlib import Path
 import unittest
+import json
+import tempfile
 
 SOURCE = Path(__file__).resolve().parents[1] / 'skills/vectorcraft-use/scripts/workflow.py'
 
@@ -22,6 +24,35 @@ class WorkflowTests(unittest.TestCase):
     def test_file_side_effect_commands_are_rejected(self):
         with self.assertRaisesRegex(ValueError, 'unsupported_command'):
             self.module.validate({'operations': [{'command': 'document.save', 'params': {'path': '/outside'}}]})
+
+    def test_brand_revision_rejects_untrusted_export_plan_before_runtime(self):
+        for mode in ('modified', 'symlink'):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                source = root / 'source'
+                source.mkdir()
+                project = source / 'project.vectorcraft'
+                project.write_bytes(b'project fixture')
+                original = json.dumps({'exports': [{'format': 'png', 'artboard': 0}]})
+                plan_path = source / 'plan.json'
+                plan_path.write_text(original)
+                manifest = {'files': {'project.vectorcraft': self.module.sha(project), 'plan.json': self.module.sha(plan_path)}, 'bindings': {}}
+                (source / 'manifest.json').write_text(json.dumps(manifest))
+                if mode == 'modified':
+                    plan_path.write_text('{}')
+                else:
+                    external = root / 'external.json'
+                    external.write_text(original)
+                    plan_path.unlink()
+                    plan_path.symlink_to(external)
+                revision = {'expectedProjectSha256': manifest['files']['project.vectorcraft'], 'operations': [{'command': 'swatch.edit', 'params': {'name': 'Brand Primary', 'color': '#175cce'}}]}
+                output = root / 'revision'
+                runtime = root / 'runtime'
+                with self.assertRaisesRegex(ValueError, 'brand_source_plan_digest_mismatch'):
+                    self.module.execute(revision, output, source=source, runtime_home=runtime)
+                self.assertFalse(output.exists())
+                self.assertFalse(runtime.exists())
+                self.assertEqual(project.read_bytes(), b'project fixture')
 
     def test_duplicate_alias_rejected(self):
         with self.assertRaisesRegex(ValueError, 'duplicate_alias'):

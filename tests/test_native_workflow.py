@@ -37,6 +37,8 @@ class NativeWorkflowTests(unittest.TestCase):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         plan = json.loads((SKILL / 'examples/brand-assets.json').read_text())
+        next(o for o in plan['operations'] if o['command']=='paint.setFill')['params']['color']='#2366e8'
+        next(o for o in plan['operations'] if o['command']=='text.create')['params']['color']='#2366e8'
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             first = root / 'v1'
@@ -58,6 +60,14 @@ class NativeWorkflowTests(unittest.TestCase):
                     self.assertEqual(file.read_bytes()[:8], b'\x89PNG\r\n\x1a\n')
                 else:
                     self.assertTrue(file.read_bytes().startswith(b'%PDF-'))
+            # 初始品牌图形与图标的配色必须独立，避免依赖原生 CLI 的隐式选择。
+            from PIL import Image
+            with Image.open(first / 'artboard-1.png') as brand, Image.open(first / 'artboard-2.png') as icon_image:
+                brand_colors={color for count,color in brand.convert('RGBA').getcolors(brand.width*brand.height)}
+                icon_colors={color for count,color in icon_image.convert('RGBA').getcolors(icon_image.width*icon_image.height)}
+                self.assertIn((35,102,232,255),brand_colors)
+                self.assertNotIn((239,91,54,255),brand_colors)
+                self.assertIn((239,91,54,255),icon_colors)
             revision = {'expectedProjectSha256': manifest['files']['project.vectorcraft'],
                         'operations': [{'command': 'paint.setFill', 'params': {'ids': [{'$ref': 'logo.ids.0'}, {'$ref': 'wordmark.id'}], 'color': '#175cce'}}],
                         'exports': plan['exports']}

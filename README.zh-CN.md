@@ -42,3 +42,5 @@
 dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图像导入。九类场景技能各自冷安装并执行原生几何、文字、外观、画板和资产操作，核验真实 SVG/PDF/PNG；完整回归 38 项、零跳过。[证据](docs/evidence/task-skill-first-use.json)。全部 585 命令、完整交换保真及创作/GUI/模型验收仍未完成。
 
 补充安装后品牌导出验证通过：选定 Logo／字标改色后，SVG 色值与 PNG 解码像素同时更新；无关图标属性及第二画板 PNG 保持不变。本次使用已核验运行时缓存，不是新的冷安装，也不证明自动推导 token 依赖。[证据](docs/evidence/brand-export-color.json)。插件及技能源发布标签保持不变。
+
+原生 RGB 全局品牌色板工作流已通过单独复制 appearance 技能的首次在线冷启动验证，脚本与示例均来自同一技能；关联 SVG／PNG 更新、独立图标与旧工程保留有真实原生证据。新功能尚未发布，固定发行版安装验收待完成。详见 [品牌色架构](docs/VectorCraft-Brand-Tokens-Architecture.zh_CN.md) 与 [验证记录](docs/evidence/native-brand-token-first-use.json)。
