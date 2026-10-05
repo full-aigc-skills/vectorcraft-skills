@@ -1,5 +1,9 @@
 """真实原生工程、多格式导出与选择性改色回归。"""
 import importlib.util
+import sys
+
+# 宿主技能快照必须保持不可变；动态导入也不写字节码。
+sys.dont_write_bytecode = True
 import json
 import os
 from pathlib import Path
@@ -9,7 +13,8 @@ import unittest
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / 'skills/vectorcraft-use/scripts/workflow.py'
+SKILL = Path(os.environ['CRAFT_INSTALLED_SKILL_ROOT']).resolve() if os.environ.get('CRAFT_INSTALLED_SKILL_ROOT') else ROOT / 'skills/vectorcraft-use'
+SCRIPT = SKILL / 'scripts/workflow.py'
 
 
 def objects(value):
@@ -31,7 +36,7 @@ class NativeWorkflowTests(unittest.TestCase):
         spec = importlib.util.spec_from_file_location('workflow', SCRIPT)
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
-        plan = json.loads((ROOT / 'skills/vectorcraft-use/examples/brand-assets.json').read_text())
+        plan = json.loads((SKILL / 'examples/brand-assets.json').read_text())
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             first = root / 'v1'
