@@ -11,3 +11,5 @@ Normative requirements and implementation tracking: [VectorCraft plugin OpenSpec
 [简体中文](README.zh-CN.md)
 
 The `vectorcraft-use` workflow helper now executes a bounded native plan in one headless MCP session, preserves source revisions, exports two artboards, and validates targeted recoloring in live tests. Run all live tests with `CRAFT_LIVE_TEST=1 python3 -m unittest discover -s tests -v`. Full plugin Harness and host acceptance remain pending.
+
+Development version `0.1.0-dev.1` fixes concurrent first-use/reuse install-lock contention: wait up to 120 seconds, then verify and reuse; timeout preserves installations and never replays editing tasks.
