@@ -68,6 +68,17 @@ class NativeWorkflowTests(unittest.TestCase):
             self.assertNotEqual(before[manifest['bindings']['logo']['ids'][0]], after[manifest['bindings']['logo']['ids'][0]])
             self.assertEqual((first / 'artboard-2.png').read_bytes(), (second / 'artboard-2.png').read_bytes())
             self.assertEqual(changed['sourceProjectSha256'], manifest['files']['project.vectorcraft'])
+            # 用户拿到的交换格式也必须更新品牌色，不能只修改原生 JSON。
+            from PIL import Image
+            with Image.open(first / 'artboard-1.png') as old_image, Image.open(second / 'artboard-1.png') as new_image:
+                old_colors={color for count,color in old_image.convert('RGBA').getcolors(old_image.width*old_image.height)}
+                new_colors={color for count,color in new_image.convert('RGBA').getcolors(new_image.width*new_image.height)}
+                self.assertIn((23,92,206,255),new_colors)
+                self.assertNotIn((23,92,206,255),old_colors)
+                self.assertNotEqual(old_image.tobytes(),new_image.tobytes())
+            updated_svg=(second / 'artboard-1.svg').read_text().lower().replace(' ','')
+            self.assertTrue('#175cce' in updated_svg or 'rgb(23,92,206)' in updated_svg,
+                            'exported SVG must contain the revised brand color')
             # 旧摘要必须失败；既有交付不能被替换。
             revision['expectedProjectSha256'] = '0' * 64
             with self.assertRaisesRegex(ValueError, 'revision_conflict'):
