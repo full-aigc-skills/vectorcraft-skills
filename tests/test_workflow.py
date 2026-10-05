@@ -54,6 +54,12 @@ class WorkflowTests(unittest.TestCase):
                 self.assertFalse(runtime.exists())
                 self.assertEqual(project.read_bytes(), b'project fixture')
 
+    def test_text_edit_requires_explicit_valid_target(self):
+        invalid = [{'text': '新标题'}, {'id': 1, 'ids': [2], 'text': '新标题'}, {'ids': [], 'text': '新标题'}, {'id': True, 'text': '新标题'}, {'id': 1, 'text': 42}, {'id': 1, 'text': '新标题', 'font': 'Other'}]
+        for params in invalid:
+            with self.subTest(params=params), self.assertRaisesRegex(ValueError, 'invalid_text_edit'):
+                self.module.validate({'operations': [{'command': 'text.setText', 'params': params}]})
+
     def test_duplicate_alias_rejected(self):
         with self.assertRaisesRegex(ValueError, 'duplicate_alias'):
             self.module.validate({'operations': [{'command': 'shape.rectangle', 'as': 'logo'}, {'command': 'shape.ellipse', 'as': 'logo'}]})
