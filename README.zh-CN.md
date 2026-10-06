@@ -70,3 +70,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 登记素材技能源候选：公开工作流已接入 PNG 链接、SVG 嵌入、JPEG／SVG 替换、原生依赖收集与迁移。[架构](docs/VectorCraft-Asset-Handoff-Architecture.zh_CN.md)。既有固定插件快照未改动；新版发布与安装宿主复验仍待完成。
 
 技能源 dev.10 纳入登记素材：链接／嵌入 PNG、自包含 SVG、JPEG／SVG 替换、依赖收集与迁移，继续固定维护版 CLI `0.2.0-craft.2`。固定插件安装与 ArtCraft 接入分别验收；技能源候选证据不替代宿主安装回执。
+
+固定插件 dev.11／技能源 dev.10 已通过 Codex 0.153.4 公开标签安装与发现：58 项技能、零加载错误。安装后的素材／导出单技能空运行时原生测试 2 项通过、零跳过（4.855 秒、6.743 秒）；12 项 VectorCraft 技能逐项独立冷安装通过（56.275 秒）。实际核验链接／嵌入 PNG、SVG、JPEG／SVG 替换、移动后直接重开原生工程及无关画板保全，全部 58 项安装摘要保持不变。[固定证据](docs/evidence/codex-vectorcraft11-assets-first-use-20261006.json)。ArtCraft 仍消费旧 Vector bundle，分发升级与混合首次使用仍待完成。
