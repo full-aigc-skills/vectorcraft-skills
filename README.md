@@ -68,3 +68,5 @@ Fixed ArtCraft dev.50 / VectorCraft dev.10 first use passes in isolated Codex 0.
 All 22 updated skills pass individual public cold first use (159.811s): each is copied alone to .agents/skills and installs into an independent empty runtime, checks exact version and command contracts, and preserves its files and all host-installed hashes. This does not establish generic Skills CLI installation or every creative scenario.
 
 Registered-asset source candidate: linked PNG, embedded SVG, JPEG/SVG replacement, native dependency collection and relocation are implemented in the independent skill workflow. [Architecture](docs/VectorCraft-Asset-Handoff-Architecture.md). The existing fixed plugin snapshot is unchanged; new release and installed-host acceptance remain pending.
+
+Registered assets are included in skill source dev.10: linked/embedded PNG, self-contained SVG and JPEG/SVG replacements, dependency collection and relocation. This release retains maintained CLI `0.2.0-craft.2`. Fixed plugin installation and ArtCraft integration are verified separately; the source candidate evidence is not a host receipt.
