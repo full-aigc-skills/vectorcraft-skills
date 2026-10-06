@@ -8,7 +8,7 @@ Historical source-candidate note: Source candidate: complete native workflow gat
 
 固定发布前的候选记录：原生下载恢复候选：最多三次只读重试并丢弃半包；此前固定版本冷安装遇到SSL EOF失败，修复后的固定安装验收仍开放。
 
-当前独立技能源：`0.1.0-dev.19`；包含渐变／多重外观计划，固定安装待验收，完整 V1 仍开放。
+当前独立技能源：`0.1.0-dev.19`；包含渐变／多重外观计划，12 项固定安装冷启动场景通过；Art 更新分发待验证，完整 V1 仍开放。
 
 当前固定失败暂存验收：插件 dev.17、独立技能源 dev.15。全部58项独立CLI冷启动、24个原暂存原生故障案例及37原生场景＋6合同检查通过；Art77领域包升级仍开放。[证据](docs/evidence/codex-failed-stage-first-use-20261007.json)。
 
@@ -121,3 +121,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 完整命令内层JSON修复候选：非有限值、溢出和重复键在绑定返回值前记录unknown，真实保存后九类故障与原工程重开通过。这是候选技能源证据，固定发布与实际安装复验尚未完成；逐命令／GUI门禁仍开放。
 
 渐变与多重外观：12 项独立技能的源候选冷启动与原生返工验证已通过；固定安装与 Art 分发待验证。 [Architecture](docs/VectorCraft-Appearance-Gradient-Architecture.zh_CN.md).
+
+固定安装渐变／多重外观：12 项技能通过，控制对象与原交付保全；Art 更新分发仍开放。 [Evidence](docs/evidence/codex-vectorcraft-gradient-first-use-20261007.json).
