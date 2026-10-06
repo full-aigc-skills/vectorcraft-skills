@@ -98,3 +98,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 固定插件 dev.11／技能源 dev.10 已通过 Codex 0.153.4 公开标签安装与发现：58 项技能、零加载错误。安装后的素材／导出单技能空运行时原生测试 2 项通过、零跳过（4.855 秒、6.743 秒）；12 项 VectorCraft 技能逐项独立冷安装通过（56.275 秒）。实际核验链接／嵌入 PNG、SVG、JPEG／SVG 替换、移动后直接重开原生工程及无关画板保全，全部 58 项安装摘要保持不变。[固定证据](docs/evidence/codex-vectorcraft11-assets-first-use-20261006.json)。ArtCraft 仍消费旧 Vector bundle，分发升级与混合首次使用仍待完成。
 
 公开工作流回复检查已同步领域技能源候选，并通过有界原生／Art 协议验证。新的固定领域和 Art 分发包仍待发行与实际安装验收。[候选架构](docs/VectorCraft-Complete-Commands-Architecture.zh_CN.md) · [证据](docs/evidence/public-workflow-session-candidate-20261007.json)。
+
+失败暂存候选：公开工作流保留原生暂存原路径、依赖摘要、最后提交请求与已完成回执，禁止重放；固定发行与安装副本验收仍开放。[架构](docs/VectorCraft-Failed-Stage-Architecture.zh_CN.md)。
