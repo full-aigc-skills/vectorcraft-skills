@@ -6,16 +6,26 @@
   "candidateVersion": "0.2.0-craft.2",
   "patch": "runtime/patches/artboard-svg-pdf-date.patch",
   "patchSha256": "48ed297dcdb292913aa5d1a15e0cb4dbde5ec6ba2a9736096ba73638850db870",
-  "status": "candidate-not-distributed",
+  "status": "runtime-published-fixed-skill-plugin-and-artcraft-pending",
   "reason": "Maintained CLI craft.1 isolated SVG, but PDF encoder still used current export time; real ArtCraft mixed revision changed unrelated PDF CreationDate/ModDate.",
   "tests": {
     "redNative": "2 tests failed: explicit PDF creation date ignored and invalid boolean accepted",
     "greenNative": "956 complete engine library tests passed, including date type validation and source preservation",
-    "candidateColdFirstUse": "Actual standalone export skill with explicit local candidate archive; revisions separated by 2.1 seconds; unaffected SVG/PNG/PDF bytes and decoded PDF dates pass in 3.329 seconds"
+    "candidateColdFirstUse": "Actual standalone export skill with explicit local candidate archive; revisions separated by 2.1 seconds; unaffected SVG/PNG/PDF bytes and decoded PDF dates pass in 3.329 seconds",
+    "publicColdNative": "Working-tree single export skill with actual public craft.2 download and 2.1-second revision interval passes in 7.228 seconds; PDF dates decoded and bound.",
+    "cliIntegration": "12 integration tests passed"
   },
   "limits": [
     "Maintained craft.1 public release remains immutable",
     "Candidate proof does not establish a public craft.2 download or fixed skill/plugin installation",
     "ArtCraft mixed revision still fails PDF stability until consuming an updated fixed domain skill"
-  ]
+  ],
+  "runtimeRelease": "https://github.com/full-aigc-skills/vectorcraft-skills/releases/tag/runtime-v0.2.0-craft.2",
+  "runtimeEntry": {
+    "url": "https://github.com/full-aigc-skills/vectorcraft-skills/releases/download/runtime-v0.2.0-craft.2/vectorcraft-cli-0.2.0-craft.2-darwin-arm64.zip",
+    "archiveSha256": "0e3402b6c810551075183471f07cf05f925e3a91337cc188dd1f5b3ada6108de",
+    "binarySha256": "ac47d32f34b8910dd559cff59d64cafaaade066227714359d1821cb2b0e59d1b",
+    "versionOutput": "vectorcraft-cli 0.2.0-craft.2",
+    "evidenceScope": "maintained native SVG isolation and stable explicit PDF date; native engine and CLI tests"
+  }
 }

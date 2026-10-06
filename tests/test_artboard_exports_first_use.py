@@ -1,5 +1,6 @@
 """固定单导出技能冷启动：不同画幅、偏移、品牌修订与独立 PDF 解码。"""
 import hashlib
+from datetime import datetime, timezone
 import importlib.util
 import json
 import os
@@ -7,6 +8,7 @@ from pathlib import Path
 import shutil
 import sys
 import tempfile
+import time
 import unittest
 import xml.etree.ElementTree as ET
 sys.dont_write_bytecode = True
@@ -36,23 +38,29 @@ class ArtboardExportFirstUseTests(unittest.TestCase):
             first, second = root/'v1', root/'v2'
             original = workflow.execute(plan,first,runtime_home=runtime)
             first_files = hashes(first)
+            time.sleep(2.1)
             revised = workflow.execute({'expectedProjectSha256':original['files']['project.vectorcraft'],'operations':[{'command':'swatch.edit','params':{'name':{'$ref':'primary.name'},'color':'#175cce'}}]},second,runtime_home=runtime,source=first)
             a = json.loads((first/'native.json').read_text()); b = json.loads((second/'native.json').read_text())
             self.assertEqual(a['artboards'],b['artboards']); self.assertEqual(len(a['artboards']),3)
             samples = []
             for directory, manifest, primary in [(first,original,(35,102,232)),(second,revised,(23,92,206))]:
                 self.assertEqual(len(manifest['outputs']),9)
+                pdf_date=json.loads((directory/'pdf-export-date.json').read_text())
+                self.assertEqual(pdf_date,json.loads((first/'pdf-export-date.json').read_text()))
+                self.assertEqual(pdf_date['created'],a['metadata']['created'])
                 for i,(x,y,w,h,name) in enumerate(boards):
                     rect = a['artboards'][i]['rect']; self.assertEqual([rect[k] for k in ('x0','y0','x1','y1')],[x,y,x+w,y+h])
                     expected = (34,170,102) if i==1 else primary
                     for fmt in ('svg','png','pdf'):
                         filename=f'artboard-{i+1}.{fmt}'; output=next(o for o in manifest['outputs'] if o['path']==filename)
                         self.assertEqual(output['artboardId'],a['artboards'][i]['id']); self.assertEqual(hashes(directory)[filename],manifest['files'][filename])
+                        if fmt=='pdf':self.assertEqual(output['pdfCreated'],pdf_date['created']);self.assertEqual(output['pdfDateBinding'],pdf_date['binding'])
                     svg=ET.parse(directory/f'artboard-{i+1}.svg').getroot()
                     self.assertEqual(list(map(float,svg.attrib['viewBox'].split())),[0,0,w,h]); self.assertFalse(svg.findall('.//{http://www.w3.org/2000/svg}image'))
                     with Image.open(directory/f'artboard-{i+1}.png') as png:
                         image=png.convert('RGBA'); self.assertEqual(image.size,(w,h)); self.assertEqual(image.getpixel((w//2,h//2)),(*expected,255)); self.assertEqual(image.getpixel((2,2))[3],0)
                     with fitz.open(directory/f'artboard-{i+1}.pdf') as pdf:
+                        self.assertEqual(pdf.metadata['creationDate'],datetime.fromtimestamp(pdf_date['created'],timezone.utc).strftime('D:%Y%m%d%H%M%SZ'))
                         self.assertEqual(len(pdf),1); page=pdf[0]; self.assertAlmostEqual(page.rect.width,w); self.assertAlmostEqual(page.rect.height,h)
                         self.assertEqual(len(page.get_images()),0)
                         pix=page.get_pixmap(matrix=fitz.Matrix(1,1),alpha=False); decoded=Image.frombytes('RGB',(pix.width,pix.height),pix.samples)
@@ -70,7 +78,7 @@ class ArtboardExportFirstUseTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'output_exists'): workflow.execute(plan,first,runtime_home=runtime)
             self.assertEqual(hashes(first),first_files); self.assertEqual(hashes(skill),skill_before); self.assertFalse(list(skill.rglob('*.pyc')))
             if os.environ.get('CRAFT_VECTOR_ARTBOARD_EVIDENCE'):
-                proof={'schema':'vectorcraft-artboard-exports-first-use/v1','scope':'fixed installed export skill copied alone; empty default public native runtime install; distinct rectangles and global RGB token; independent Pillow/PyMuPDF output checks','samples':samples,'originalFiles':first_files,'revisedFiles':hashes(second),'artboards':a['artboards'],'unrelatedIconAllFormatsUnchanged':True,'invalidBoardRejected':True,'sourceAndSkillFilesPreserved':True,'runtimeLockSha256':hashlib.sha256((skill/'scripts/runtime.lock.json').read_bytes()).hexdigest()}
+                proof={'schema':'vectorcraft-artboard-exports-first-use/v1','scope':'fixed installed export skill copied alone; empty default public native runtime install; distinct rectangles and global RGB token; independent Pillow/PyMuPDF output checks','samples':samples,'pdfExportDate':pdf_date,'originalFiles':first_files,'revisedFiles':hashes(second),'artboards':a['artboards'],'unrelatedIconAllFormatsUnchanged':True,'invalidBoardRejected':True,'sourceAndSkillFilesPreserved':True,'runtimeLockSha256':hashlib.sha256((skill/'scripts/runtime.lock.json').read_bytes()).hexdigest()}
                 with Path(os.environ['CRAFT_VECTOR_ARTBOARD_EVIDENCE']).open('x') as stream: json.dump(proof,stream,indent=2)
 
 if __name__=='__main__': unittest.main()

@@ -60,3 +60,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 技能源 dev.8 锁定维护版运行时 `0.2.0-craft.1`，并启用单画板 SVG 隔离。当前完整原生回归 46 项全部通过、零跳过（86.570 秒）。固定插件 dev.9 宿主验收及 ArtCraft bundle 更新仍待完成。[完整原生回归](docs/evidence/maintained-full-native-suite-20261006.json)。
 
 固定公开插件 dev.9／技能源 dev.8 已通过 Codex 发现全部 58 个技能，以及实际安装后的单导出技能公开冷启动原生验收（4.985 秒）。全部 58 个安装技能摘要不变。OpenSpec 4.22 的领域验收已完成，ArtCraft bundle 更新与完整 V1 验收仍待完成。[固定安装证据](docs/evidence/codex-vectorcraft9-artboard-first-use-20261006.json).
+
+技能源 dev.9 锁定维护版 CLI craft.2，绑定 PDF 日期，并为缺少创建日期的旧工程保存摘要绑定的首次导出日期。完整原生回归 49 项全部通过、零跳过（91.950 秒）。固定插件 dev.10 与 ArtCraft bundle 验收仍待完成。[日期架构](docs/VectorCraft-PDF-Date-Architecture.zh_CN.md)、[原生回归](docs/evidence/craft2-full-native-suite-20261006.json)。
