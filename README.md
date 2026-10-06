@@ -1,5 +1,6 @@
 # VectorCraft Skills
 
+Independent source metadata: `0.1.0-dev.14`. This source includes public-workflow Session reply validation; fixed plugin/Art distribution and installed-copy acceptance are tracked separately.
 Fixed-release protocol recovery acceptance passed: 288 cases across 48 standalone source skills, 24 cases in actual installed copies, four healthy revision cases, and 58 unchanged installed skill identities. See [fixed evidence](docs/evidence/codex-protocol-fault-first-use-20261007.json). Exhaustive command/GUI acceptance and the Art domain-bundle upgrade remain open.
 
 Protocol fault repair candidate: all 12 independently copied skills pass separate empty public-runtime installation and six faulty replies after real native save (72 cases; zero skips). Requests are not replayed; unknown receipts, saved-project reopening and delivery/skill preservation are checked. [Evidence](docs/evidence/protocol-fault-first-use-20261007.json). Fixed installed release and Art bundle upgrade remain separate gates.
@@ -94,3 +95,5 @@ Registered-asset source candidate: linked PNG, embedded SVG, JPEG/SVG replacemen
 Registered assets are included in skill source dev.10: linked/embedded PNG, self-contained SVG and JPEG/SVG replacements, dependency collection and relocation. This release retains maintained CLI `0.2.0-craft.2`. Fixed plugin installation and ArtCraft integration are verified separately; the source candidate evidence is not a host receipt.
 
 Fixed plugin dev.11 / skill source dev.10 has passed actual Codex 0.153.4 public-tag installation and discovery: 58 skills, zero loading errors. Installed single asset/export skills passed two native cold-start tests without skips (4.855s and 6.743s); 12 VectorCraft skills separately cold-installed in 56.275s. Linked/embedded PNG, SVG, JPEG/SVG replacement, direct relocated native reopening and unrelated artboard preservation were checked. All 58 installed hashes stayed unchanged. [Fixed evidence](docs/evidence/codex-vectorcraft11-assets-first-use-20261006.json). ArtCraft still consumes the older Vector bundle; its distribution upgrade and mixed first use remain open.
+
+Public-workflow reply validation is synchronized in the domain source candidates and has bounded native/Art protocol evidence. Fixed updated domain and Art distributions are still pending. [Candidate architecture](docs/VectorCraft-Complete-Commands-Architecture.md) · [Evidence](docs/evidence/public-workflow-session-candidate-20261007.json).
