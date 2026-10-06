@@ -1,0 +1,21 @@
+{
+  "schema": "craft-runtime-patch/v1",
+  "upstreamRepository": "https://github.com/storytold/vectorcraft",
+  "upstreamCommit": "90e022b0c05f12171a4e9bebe0894fa62f7bc95c",
+  "upstreamVersion": "0.2.0",
+  "candidateVersion": "0.2.0-craft.2",
+  "patch": "runtime/patches/artboard-svg-pdf-date.patch",
+  "patchSha256": "48ed297dcdb292913aa5d1a15e0cb4dbde5ec6ba2a9736096ba73638850db870",
+  "status": "candidate-not-distributed",
+  "reason": "Maintained CLI craft.1 isolated SVG, but PDF encoder still used current export time; real ArtCraft mixed revision changed unrelated PDF CreationDate/ModDate.",
+  "tests": {
+    "redNative": "2 tests failed: explicit PDF creation date ignored and invalid boolean accepted",
+    "greenNative": "956 complete engine library tests passed, including date type validation and source preservation",
+    "candidateColdFirstUse": "Actual standalone export skill with explicit local candidate archive; revisions separated by 2.1 seconds; unaffected SVG/PNG/PDF bytes and decoded PDF dates pass in 3.329 seconds"
+  },
+  "limits": [
+    "Maintained craft.1 public release remains immutable",
+    "Candidate proof does not establish a public craft.2 download or fixed skill/plugin installation",
+    "ArtCraft mixed revision still fails PDF stability until consuming an updated fixed domain skill"
+  ]
+}
