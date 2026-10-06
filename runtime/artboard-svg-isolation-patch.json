@@ -6,20 +6,29 @@
   "candidateVersion": "0.2.0-craft.1",
   "patch": "runtime/patches/artboard-svg-isolation.patch",
   "patchSha256": "6852555f6177a9cd0c911517e6f33f27d61b550523922178c0c659ee69ad54e4",
-  "status": "candidate-not-distributed",
+  "status": "runtime-published-skill-plugin-integration-pending",
   "reason": "Single-artboard SVG retained unrelated off-board objects; changes to another board altered otherwise unaffected asset bytes.",
   "tests": {
     "red": "Original native implementation: 1 passed, 2 failed; remote objects leaked and empty board retained remote path.",
     "green": "954 native engine library tests passed, including 6 isolation tests; source document and selection unchanged.",
     "fullEngineLogSha256": "e6bb72e288adf43163f853199c7fcc77425df64640c6eaabc392ad6a0e317a6e",
     "localCandidate": "Three-board cold archive installation and global-token update passed in 1.207 seconds; unaffected SVG/PNG/PDF bytes, independent visible output checks, invalid-board and source/skill preservation gates passed.",
-    "cliIntegration": "12 CLI integration tests passed (command, conversion and headless MCP)."
+    "cliIntegration": "12 CLI integration tests passed (command, conversion and headless MCP).",
+    "publicRuntime": "Working-tree single export skill HTTPS cold install and three-artboard task passed in 4.970 seconds; fixed published plugin acceptance still pending."
   },
   "limits": [
-    "Official installer locks remain unchanged; published dev.8 / skills dev.7 still fail SVG isolation.",
+    "Working-tree source installer locks now pin maintained 0.2.0-craft.1; published dev.8 plugin / dev.7 skills still use official 0.2.0 until immutable releases are updated.",
     "Build and local archive installation are not evidence of a public first-use release.",
     "Dependent containers and unknown paint bounds are conservatively retained; no per-member independence claim.",
     "No desktop application or model dispatch acceptance."
   ],
-  "evidence": "docs/evidence/native-artboard-svg-candidate-20261006.json"
+  "evidence": "docs/evidence/native-artboard-svg-candidate-20261006.json",
+  "runtimeRelease": "https://github.com/full-aigc-skills/vectorcraft-skills/releases/tag/runtime-v0.2.0-craft.1",
+  "runtimeArtifact": {
+    "url": "https://github.com/full-aigc-skills/vectorcraft-skills/releases/download/runtime-v0.2.0-craft.1/vectorcraft-cli-0.2.0-craft.1-darwin-arm64.zip",
+    "archiveSha256": "c304f9df22551176767892d46e2e4742785e5cd7bac41673b7707f822a89d987",
+    "binarySha256": "bee86d46ac6295640bbfcbace42d733326f563398bf4de56d0f6966fcb08c95e",
+    "versionOutput": "vectorcraft-cli 0.2.0-craft.1",
+    "evidenceScope": "maintained native SVG isolation; headless engine and CLI integration tested"
+  }
 }

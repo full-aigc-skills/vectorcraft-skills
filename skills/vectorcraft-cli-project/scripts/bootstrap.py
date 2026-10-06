@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""仅用标准库安装锁定的官方 CLI；技能单独复制后仍可运行。"""
+"""仅用标准库安装锁定的 CLI；技能单独复制后仍可运行。"""
 import argparse
 import hashlib
 import json
@@ -153,7 +153,7 @@ def install(lock, runtime_home, archive=None, platform_key=None):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runtime-home', default=os.environ.get('CRAFT_RUNTIME_HOME', str(Path.home() / '.local/share/craft-runtimes')))
-    parser.add_argument('--archive', type=Path, help='已下载的官方 ZIP；仍强制校验锁定摘要')
+    parser.add_argument('--archive', type=Path, help='已下载的锁定 ZIP；仍强制校验锁定摘要')
     args = parser.parse_args()
     lock = json.loads(Path(__file__).with_name('runtime.lock.json').read_text())
     try:

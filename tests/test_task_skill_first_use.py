@@ -85,7 +85,12 @@ class TaskSkillFirstUseTests(unittest.TestCase):
                                 env=self.environment, capture_output=True, text=True, timeout=240)
         if success:
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-            self.assertTrue((self.runtime / 'vectorcraft/0.2.0/vectorcraft-cli').is_file())
+            lock = json.loads((self.skill / 'scripts/runtime.lock.json').read_text())
+            binary = self.runtime / 'vectorcraft' / lock['resolvedVersion'] / 'vectorcraft-cli'
+            self.assertTrue(binary.is_file())
+            self.assertEqual(digest(binary), lock['artifacts']['darwin-arm64']['binarySha256'])
+            receipt = json.loads((binary.parent / 'installation.json').read_text())
+            self.assertEqual(receipt['version'], lock['resolvedVersion'])
         else:
             self.assertNotEqual(result.returncode, 0)
         self.assertFalse(any(self.skill.rglob('*.pyc')))
