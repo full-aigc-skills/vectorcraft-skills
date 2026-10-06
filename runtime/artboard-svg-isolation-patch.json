@@ -1,0 +1,25 @@
+{
+  "schema": "craft-runtime-patch/v1",
+  "upstreamRepository": "https://github.com/storytold/vectorcraft",
+  "upstreamCommit": "90e022b0c05f12171a4e9bebe0894fa62f7bc95c",
+  "upstreamVersion": "0.2.0",
+  "candidateVersion": "0.2.0-craft.1",
+  "patch": "runtime/patches/artboard-svg-isolation.patch",
+  "patchSha256": "6852555f6177a9cd0c911517e6f33f27d61b550523922178c0c659ee69ad54e4",
+  "status": "candidate-not-distributed",
+  "reason": "Single-artboard SVG retained unrelated off-board objects; changes to another board altered otherwise unaffected asset bytes.",
+  "tests": {
+    "red": "Original native implementation: 1 passed, 2 failed; remote objects leaked and empty board retained remote path.",
+    "green": "954 native engine library tests passed, including 6 isolation tests; source document and selection unchanged.",
+    "fullEngineLogSha256": "e6bb72e288adf43163f853199c7fcc77425df64640c6eaabc392ad6a0e317a6e",
+    "localCandidate": "Three-board cold archive installation and global-token update passed in 1.207 seconds; unaffected SVG/PNG/PDF bytes, independent visible output checks, invalid-board and source/skill preservation gates passed.",
+    "cliIntegration": "12 CLI integration tests passed (command, conversion and headless MCP)."
+  },
+  "limits": [
+    "Official installer locks remain unchanged; published dev.8 / skills dev.7 still fail SVG isolation.",
+    "Build and local archive installation are not evidence of a public first-use release.",
+    "Dependent containers and unknown paint bounds are conservatively retained; no per-member independence claim.",
+    "No desktop application or model dispatch acceptance."
+  ],
+  "evidence": "docs/evidence/native-artboard-svg-candidate-20261006.json"
+}

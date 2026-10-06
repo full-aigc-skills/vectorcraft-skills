@@ -1,0 +1,242 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 6e7e9cb..4d3abec 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -4107,7 +4107,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "vectorcraft-cli"
+-version = "0.2.0"
++version = "0.2.0-craft.1"
+ dependencies = [
+  "serde_json",
+  "vectorcraft-color",
+diff --git a/apps/vectorcraft-cli/Cargo.toml b/apps/vectorcraft-cli/Cargo.toml
+index 0fcd867..c270ba6 100644
+--- a/apps/vectorcraft-cli/Cargo.toml
++++ b/apps/vectorcraft-cli/Cargo.toml
+@@ -1,6 +1,6 @@
+ [package]
+ name = "vectorcraft-cli"
+-version.workspace = true
++version = "0.2.0-craft.1"
+ edition.workspace = true
+ license.workspace = true
+ publish = false
+diff --git a/crates/engine/src/cmd/fileio/export.rs b/crates/engine/src/cmd/fileio/export.rs
+index 2110d22..d68ce31 100644
+--- a/crates/engine/src/cmd/fileio/export.rs
++++ b/crates/engine/src/cmd/fileio/export.rs
+@@ -107,6 +107,33 @@ fn source<'a>(s: &'a mut Session, f: &Format, p: &Value, cmd: &str) -> Result<Co
+     if f.id == "txt" && bool_or(p, "selectionOnly", false) {
+         return Ok(Cow::Owned(selection(s, cmd)?.0));
+     }
++    if let Some(value) = p.get("artboardContentOnly") {
++        if !value.is_boolean() {
++            return Err(bad(cmd, "artboardContentOnly must be boolean"));
++        }
++        if value == &Value::Bool(true) {
++            if !matches!(f.id, "svg" | "svgz") || bool_or(p, "selectedOnly", false) || p.get("range").is_some() || p.get("useArtboards") == Some(&Value::Bool(false)) {
++                return Err(bad(cmd, "isolated artboard requires one SVG artboard without selection or range"));
++            }
++            let index = match p.get("artboard") {
++                None => 0,
++                Some(v) => v.as_u64().and_then(|i| usize::try_from(i).ok()).ok_or_else(|| bad(cmd, "invalid isolated artboard index"))?,
++            };
++            if let Some(indices) = p.get("artboards") {
++                if indices != &json!([index]) {
++                    return Err(bad(cmd, "isolated artboard range conflicts with index"));
++                }
++            }
++            if p.get("svg").and_then(|v| v.get("useArtboards")) == Some(&Value::Bool(false)) || p.get("svg").is_some_and(|v| ["range", "artboard", "artboards"].iter().any(|k| v.get(*k).is_some())) {
++                return Err(bad(cmd, "nested artboard range conflicts with isolation"));
++            }
++            let st = s.doc()?;
++            let rect = st.doc.artboards.get(index).ok_or_else(|| bad(cmd, "no such isolated artboard"))?.rect;
++            let mut doc = Document::clone(&st.doc);
++            doc.layers = st.doc.layers.iter().filter_map(|node| artboard_part(node, rect)).map(Arc::new).collect();
++            return Ok(Cow::Owned(doc));
++        }
++    }
+     export_source(s.doc()?, p)
+ }
+ 
+@@ -162,3 +189,33 @@ pub(super) fn export_for_office(s: &mut Session, p: &Value) -> Result<Value> {
+     let side = |at: usize| bytes.get(at..at + 4).and_then(|b| b.try_into().ok()).map_or(0, u32::from_be_bytes);
+     write_or_return(path, &bytes, json!({ "width": side(16), "height": side(20) }))
+ }
++
++/// 复制单画板需要的原生绘制对象；未知范围保留，锁定不影响导出。
++/// 普通无外观图层可筛选子项；群组、裁切与非平凡容器保持完整依赖。
++fn artboard_part(node: &Node, rect: vectorcraft_geom::Rect) -> Option<Node> {
++    if matches!(node.kind, NodeKind::Layer { clip: false, .. })
++        && node.appearance == Default::default() && node.mask.is_none() && node.wrap.is_none() && node.graph.is_none()
++        && node.opacity == 1.0 && node.blend == Default::default() && node.knockout == Default::default()
++        && !node.isolate && !node.knockout_shape
++        && !node.children().is_some_and(|children| children.iter().any(|child| has_uncertain_dependency(child)))
++    {
++        let children = node.children()?;
++        let kept: Vec<Arc<Node>> = children.iter().filter_map(|child| artboard_part(child, rect)).map(Arc::new).collect();
++        if kept.is_empty() { return None; }
++        let mut result = node.clone();
++        *result.children_mut()? = kept;
++        return Some(result);
++    }
++    // 未知子项范围与文字绕排会产生跨对象依赖，保守保留容器。
++    if has_uncertain_dependency(node) { return Some(node.clone()); }
++    if vectorcraft_render::export_bounds(node).is_some_and(|bounds| bounds.intersect(rect).area() <= 0.0 && !rect.contains(bounds.center())) {
++        return None;
++    }
++    Some(node.clone())
++}
++
++/// 无法安全判断绘制范围或跨对象排版依赖时，保留整个依赖容器。
++fn has_uncertain_dependency(node: &Node) -> bool {
++    node.wrap.is_some() || vectorcraft_render::export_bounds(node).is_none()
++        || node.children().is_some_and(|children| children.iter().any(|child| has_uncertain_dependency(child)))
++}
+diff --git a/crates/engine/src/cmd/fileio/mod.rs b/crates/engine/src/cmd/fileio/mod.rs
+index 82383ca..0f19ade 100644
+--- a/crates/engine/src/cmd/fileio/mod.rs
++++ b/crates/engine/src/cmd/fileio/mod.rs
+@@ -75,7 +75,7 @@ pub fn specs() -> Vec<CommandSpec> {
+             "Serialize Document",
+             [],
+             None,
+-            "{format?: vectorcraft (default)|template|svg|svgz|pdf|png|jpg|webp|gif|png8|txt|dxf, …the format's options (see document.formats; SVG ones also as svg: {…}), selectedOnly?: false (the selected objects alone, in their layers)} → {text, warnings} for svg (plus dataBase64, the file, when its encoding isn't UTF-8), else {dataBase64, warnings}; an SVG of several artboards also gives files: [{name, text}], linked images linked: [{name, dataBase64}]",
++            "{format?: vectorcraft (default)|template|svg|svgz|pdf|png|jpg|webp|gif|png8|txt|dxf, …the format's options (see document.formats; SVG ones also as svg: {…}), selectedOnly?: false (the selected objects alone, in their layers), artboardContentOnly?: false (SVG/SVGZ: isolate one explicit artboard using native paint bounds; preserve locked content and whole dependency containers)} → {text, warnings} for svg (plus dataBase64, the file, when its encoding isn't UTF-8), else {dataBase64, warnings}; an SVG of several artboards also gives files: [{name, text}], linked images linked: [{name, dataBase64}]",
+             has_doc,
+             export::serialize
+         ),
+@@ -84,7 +84,7 @@ pub fn specs() -> Vec<CommandSpec> {
+             "Export Document",
+             [],
+             None,
+-            "{path?, format?: svg|svgz|pdf|png|jpg|webp|gif|png8|txt|dxf|vectorcraft|template (default: from the path's extension, else png; png8 writes an indexed .png), selectedOnly?: false (the selected objects alone, in their layers), artboard?: 0, artboards?: [i…], range?: \"1-3, 5\" | \"all\" (1-based; PDF writes one page per artboard, default all; SVG writes one file per artboard, {stem}-{artboard}.svg; raster formats write one artboard), useArtboards?: true (raster: one file per chosen artboard, default all, {stem}-{artboard}.{ext}; pdf: every page) | false (pdf/raster: the bounds of the visible art; SVG has it as an SVG option), raster: ppi?: 72 (pixels per inch, stored in the file; wins over scale), scale?: 1 (pixels per point), background?: transparent|white|black|\"#rrggbb\" (jpg: white when transparent), antiAlias?: none|art (default)|type (text snapped to pixels), interlaced?: false (png, Adam7), jpg: quality?: 90 (0–100), colorModel?: rgb|cmyk|gray, method?: baseline|optimized|progressive, scans?: 3 (3–5, progressive), embedIcc?: true, imageMap?: none|client|server (an HTML or NCSA map of the objects with a URL, written as <stem>.html / <stem>.map), gif/png8: colors?: 256 (2–256), reduction?: perceptual|selective (default)|adaptive|web|blackWhite|gray, dither?: none|diffusion (default)|pattern|noise, ditherAmount?: 100, transparency?: true, matte?: white|\"#rrggbb\"|none, interlaced?, webp: lossless?: true (lossy WebP isn't available yet: written lossless, with a warning), txt: the stories in stacking order (back to front; a thread once), encoding?: utf8|utf16 (with a byte order mark), lineEndings?: lf|crlf, selectionOnly?: false; SVG options flat or as svg: {styling, outlineText, images, objectIds, decimals, minify, responsive, useArtboards, preserveEditing, metadata, fewerTspans, hiddenLayers, encoding, profile, embedFonts} (see document.formats), …the PDF options of document.exportPdf, …the DXF options of document.exportDxf (useArtboards: one drawing per artboard)} → {path, format, bytes, warnings, files?: [path…] (several), linked?: [path…] (linked images, image maps)}; no path → {dataBase64, format, bytes, warnings, files?: [{name, dataBase64}], linked?: [{name, dataBase64}]}. Never changes the document's path",
++            "{path?, format?: svg|svgz|pdf|png|jpg|webp|gif|png8|txt|dxf|vectorcraft|template (default: from the path's extension, else png; png8 writes an indexed .png), selectedOnly?: false (the selected objects alone, in their layers), artboardContentOnly?: false (SVG/SVGZ: isolate one explicit artboard using native paint bounds; preserve locked content and whole dependency containers), artboard?: 0, artboards?: [i…], range?: \"1-3, 5\" | \"all\" (1-based; PDF writes one page per artboard, default all; SVG writes one file per artboard, {stem}-{artboard}.svg; raster formats write one artboard), useArtboards?: true (raster: one file per chosen artboard, default all, {stem}-{artboard}.{ext}; pdf: every page) | false (pdf/raster: the bounds of the visible art; SVG has it as an SVG option), raster: ppi?: 72 (pixels per inch, stored in the file; wins over scale), scale?: 1 (pixels per point), background?: transparent|white|black|\"#rrggbb\" (jpg: white when transparent), antiAlias?: none|art (default)|type (text snapped to pixels), interlaced?: false (png, Adam7), jpg: quality?: 90 (0–100), colorModel?: rgb|cmyk|gray, method?: baseline|optimized|progressive, scans?: 3 (3–5, progressive), embedIcc?: true, imageMap?: none|client|server (an HTML or NCSA map of the objects with a URL, written as <stem>.html / <stem>.map), gif/png8: colors?: 256 (2–256), reduction?: perceptual|selective (default)|adaptive|web|blackWhite|gray, dither?: none|diffusion (default)|pattern|noise, ditherAmount?: 100, transparency?: true, matte?: white|\"#rrggbb\"|none, interlaced?, webp: lossless?: true (lossy WebP isn't available yet: written lossless, with a warning), txt: the stories in stacking order (back to front; a thread once), encoding?: utf8|utf16 (with a byte order mark), lineEndings?: lf|crlf, selectionOnly?: false; SVG options flat or as svg: {styling, outlineText, images, objectIds, decimals, minify, responsive, useArtboards, preserveEditing, metadata, fewerTspans, hiddenLayers, encoding, profile, embedFonts} (see document.formats), …the PDF options of document.exportPdf, …the DXF options of document.exportDxf (useArtboards: one drawing per artboard)} → {path, format, bytes, warnings, files?: [path…] (several), linked?: [path…] (linked images, image maps)}; no path → {dataBase64, format, bytes, warnings, files?: [{name, dataBase64}], linked?: [{name, dataBase64}]}. Never changes the document's path",
+             has_doc,
+             export::export
+         ),
+@@ -701,3 +701,6 @@ mod tests_dxf;
+ mod tests_svgenc;
+ #[cfg(test)]
+ mod tests_svgimport;
++
++#[cfg(test)]
++mod tests_artboard_isolation;
+diff --git a/crates/engine/src/cmd/fileio/tests_artboard_isolation.rs b/crates/engine/src/cmd/fileio/tests_artboard_isolation.rs
+new file mode 100644
+index 0000000..3e5d805
+--- /dev/null
++++ b/crates/engine/src/cmd/fileio/tests_artboard_isolation.rs
+@@ -0,0 +1,93 @@
++//! 单画板 SVG 资产隔离：显式锁定对象、描边外扩、空画板与源文档保全。
++use serde_json::json;
++use std::sync::Arc;
++use vectorcraft_doc::NodeId;
++use super::*;
++
++fn scene() -> Session {
++    let mut s = Session::new();
++    s.execute("file.new", &json!({"width":80,"height":64})).unwrap();
++    s
++}
++
++fn rectangle(s: &mut Session, x:f64, y:f64, color:&str) -> NodeId {
++    let made=s.execute("shape.rectangle", &json!({"x":x,"y":y,"width":20,"height":20})).unwrap();
++    s.execute("paint.setFill", &json!({"color":color})).unwrap();
++    s.execute("paint.setStroke", &json!({"none":true})).unwrap();
++    NodeId(made["id"].as_u64().unwrap())
++}
++
++#[test]
++fn artboard_isolation_keeps_locked_visible_content_and_removes_remote_art() {
++    let mut s=scene();
++    let inside=rectangle(&mut s,20.0,16.0,"#22aa66");
++    Arc::make_mut(&mut s.doc_mut().unwrap().doc).node_mut(inside).unwrap().locked=true;
++    let remote=rectangle(&mut s,200.0,20.0,"#2366e8");
++    let before=serde_json::to_value(&*s.doc().unwrap().doc).unwrap();
++    let selection_before=format!("{:?}",s.doc().unwrap().selection);
++    let svg=tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true}));
++    assert!(svg.contains("#22aa66"),"locked visible content omitted: {svg}");
++    assert!(!svg.contains("#2366e8"),"remote art leaked: {svg}");
++    assert_eq!(before,serde_json::to_value(&*s.doc().unwrap().doc).unwrap());
++    assert_eq!(selection_before,format!("{:?}",s.doc().unwrap().selection));
++    s.execute("paint.setFill", &json!({"ids":[remote.0],"color":"#175cce"})).unwrap();
++    assert_eq!(svg,tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true})));
++}
++
++#[test]
++fn artboard_isolation_keeps_stroke_reaching_inside_from_outside_geometry() {
++    let mut s=scene();
++    rectangle(&mut s,-25.0,16.0,"#2366e8");
++    s.execute("paint.setStroke", &json!({"color":"#e96340"})).unwrap();
++    s.execute("stroke.set", &json!({"weight":16})).unwrap();
++    let svg=tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true}));
++    assert!(svg.contains("#e96340"),"stroke extent omitted: {svg}");
++}
++
++#[test]
++fn artboard_isolation_empty_board_and_bad_index_preserve_source() {
++    let mut s=scene();rectangle(&mut s,200.0,20.0,"#2366e8");
++    let svg=tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true}));
++    assert!(svg.contains("viewBox=\"0 0 80 64\""));assert!(!svg.contains("<path"));
++    assert!(s.execute("document.serialize", &json!({"format":"svg","artboard":9,"artboardContentOnly":true})).is_err());
++    assert!(s.execute("document.serialize", &json!({"format":"svg","artboard":0,"artboardContentOnly":true,"selectedOnly":true})).is_err());
++}
++
++#[test]
++fn artboard_isolation_keeps_shadow_reaching_the_board() {
++    let mut s=scene();let id=rectangle(&mut s,-50.0,16.0,"#2366e8");
++    let node=Arc::make_mut(&mut s.doc_mut().unwrap().doc).node_mut(id).unwrap();
++    node.appearance.effects.push(vectorcraft_doc::Effect { id:"stylize.dropShadow".into(),params:json!({"x":45,"y":0,"blur":2,"opacity":100}),visible:true });
++    let svg=tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true}));
++    assert!(svg.contains("#2366e8"),"shadow source omitted: {svg}");
++}
++
++#[test]
++fn artboard_isolation_retains_complete_clipping_group() {
++    let mut s=scene();let clip=rectangle(&mut s,10.0,10.0,"#22aa66");let remote=rectangle(&mut s,200.0,20.0,"#2366e8");
++    let doc=Arc::make_mut(&mut s.doc_mut().unwrap().doc);
++    let clip_node=Arc::new(doc.node(clip).unwrap().clone());let remote_node=Arc::new(doc.node(remote).unwrap().clone());
++    let group_id=doc.alloc_id();let mut group=vectorcraft_doc::Node::group(group_id,vec![clip_node,remote_node]);
++    if let vectorcraft_doc::NodeKind::Group { clip, .. } = &mut group.kind { *clip=true; }
++    *Arc::make_mut(&mut doc.layers[0]).children_mut().unwrap()=vec![Arc::new(group)];
++    let before=serde_json::to_value(&*s.doc().unwrap().doc).unwrap();
++    let svg=tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":true}));
++    assert!(svg.contains("clipPath"),"clipping container lost: {svg}");assert!(svg.contains("#2366e8"),"container children lost: {svg}");
++    assert_eq!(before,serde_json::to_value(&*s.doc().unwrap().doc).unwrap());
++}
++
++#[test]
++fn artboard_isolation_rejects_conflicting_options_and_preserves_legacy_export() {
++    let mut s=scene();rectangle(&mut s,200.0,20.0,"#2366e8");
++    let original=serde_json::to_value(&*s.doc().unwrap().doc).unwrap();
++    let legacy=tests_svg::svg(&mut s,json!({"artboard":0}));
++    assert!(legacy.contains("#2366e8"));
++    assert_eq!(legacy,tests_svg::svg(&mut s,json!({"artboard":0,"artboardContentOnly":false})));
++    for extra in [json!({"artboardContentOnly":"true"}),json!({"artboard":-1}),json!({"artboards":[0,1]}),json!({"range":"all"}),json!({"useArtboards":false}),json!({"svg":{"artboard":0}})] {
++        let mut params=json!({"format":"svg","artboard":0,"artboardContentOnly":true});
++        params.as_object_mut().unwrap().extend(extra.as_object().unwrap().clone());
++        assert!(s.execute("document.serialize", &params).is_err(),"conflict accepted: {params}");
++        assert_eq!(original,serde_json::to_value(&*s.doc().unwrap().doc).unwrap());
++    }
++    assert!(s.execute("document.serialize", &json!({"format":"png","artboard":0,"artboardContentOnly":true})).is_err());
++}
+diff --git a/crates/render/src/lib.rs b/crates/render/src/lib.rs
+index 3b4007a..4b8dc60 100644
+--- a/crates/render/src/lib.rs
++++ b/crates/render/src/lib.rs
+@@ -29,6 +29,12 @@ use vello_cpu::{Pixmap, RenderContext, Resources};
+ use group::Composite;
+ use ink::Ink;
+ 
++/// 返回与渲染器裁剪判断一致的绘制范围，包含描边、几何效果和阴影／发光。
++/// 参数 `node` 为原生对象；范围未知返回 None，调用者应保守保留对象。
++pub fn export_bounds(node: &Node) -> Option<Rect> {
++    fx::cull_bounds(node)
++}
++
+ pub use brush_fx::instance_art;
+ pub use effects::stroke::width_outline;
+ pub use live::expand_live;

@@ -85,6 +85,28 @@ class BootstrapTests(unittest.TestCase):
         self.lock['artifacts']['darwin-arm64']['versionOutput'] = 'filmcraft-cli 0.2.0 (build, date)'
         self.assertFalse(self.install()['reused'])
 
+    def test_maintained_vector_runtime_installs_with_distinct_provenance(self):
+        self.binary = b'#!/bin/sh\nprintf "vectorcraft-cli 0.2.0-craft.1\\n"\n'
+        with zipfile.ZipFile(self.archive, 'w') as archive:
+            archive.writestr('vectorcraft-cli', self.binary)
+            archive.writestr('LICENSE-MIT', 'Fixture license')
+        entry={'url':'https://github.com/full-aigc-skills/vectorcraft-skills/releases/download/runtime-v0.2.0-craft.1/fixture.zip','archiveSha256':hashlib.sha256(self.archive.read_bytes()).hexdigest(),'binarySha256':hashlib.sha256(self.binary).hexdigest(),'versionOutput':'vectorcraft-cli 0.2.0-craft.1'}
+        self.lock={'artifact':'vectorcraft-cli','resolvedVersion':'0.2.0-craft.1','artifacts':{'darwin-arm64':entry}}
+        first=self.install(); second=self.install()
+        self.assertFalse(first['reused']); self.assertTrue(second['reused'])
+        receipt=json.loads((Path(first['executable']).parent/'installation.json').read_text())
+        self.assertEqual(receipt['source'],'maintained-github-release')
+        self.assertEqual(receipt['version'],'0.2.0-craft.1')
+
+    def test_download_only_accepts_native_or_owned_runtime_release_paths(self):
+        allowed=['https://github.com/storytold/vectorcraft/releases/download/v0.2.0/a.zip','https://github.com/full-aigc-skills/vectorcraft-skills/releases/download/runtime-v0.2.0-craft.1/a.zip']
+        for url in allowed:
+            with patch.object(self.module.urllib.request,'urlopen',side_effect=RuntimeError('accepted-request')):
+                with self.assertRaisesRegex(RuntimeError,'accepted-request'): self.module.download(url,self.root/'download.zip')
+        for url in ['https://github.com/storytold/unrelated/releases/download/v1/a.zip','https://github.com/full-aigc-skills/vectorcraft-skills-evil/releases/download/v1/a.zip','https://github.com.evil/storytold/vectorcraft/releases/download/v1/a.zip','https://github.com/storytold/vectorcraft/releases/download/v1/a.zip?redirect=evil']:
+            with patch.object(self.module.urllib.request,'urlopen',side_effect=AssertionError('network')):
+                with self.assertRaisesRegex(ValueError,'untrusted_release_url'): self.module.download(url,self.root/'download.zip')
+
     def test_unknown_platform_fails_without_download(self):
         with patch.object(self.module, 'download', side_effect=AssertionError('downloaded')):
             with self.assertRaisesRegex(ValueError, 'unsupported_platform'):
