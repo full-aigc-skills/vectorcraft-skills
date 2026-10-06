@@ -64,6 +64,41 @@ class WorkflowTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'duplicate_alias'):
             self.module.validate({'operations': [{'command': 'shape.rectangle', 'as': 'logo'}, {'command': 'shape.ellipse', 'as': 'logo'}]})
 
+    def test_registered_asset_operations_and_path_rejection(self):
+        self.module.validate({'operations': [{'command': 'asset.place', 'params': {'asset': 'product', 'rect': [0, 0, 80, 50]}}, {'command': 'asset.replace', 'params': {'asset': 'product', 'replacement': 'updated'}}]})
+        for params in ({'asset': 'product', 'path': '/outside'}, {'asset': '../evil'}, {'asset': 'product', 'rect': [0, 0, -1, 5]}, {'asset': 'product', 'link': 'true'}):
+            with self.subTest(params=params), self.assertRaisesRegex(ValueError, 'invalid_asset_operation'):
+                self.module.validate({'operations': [{'command': 'asset.place', 'params': params}]})
+
+    def test_asset_digest_and_unused_input_fail_before_installation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            asset = root / 'product.png'
+            asset.write_bytes(b'synthetic invalid pixels')
+            for digest, operations, error in [('0'*64, [{'command': 'asset.place', 'params': {'asset': 'product'}}], 'asset_digest_mismatch'), (self.module.sha(asset), [], 'asset_not_consumed')]:
+                plan = {'document': {'width': 80, 'height': 50}, 'assets': {'product': {'path': str(asset), 'sha256': digest}}, 'operations': operations}
+                with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
+                    self.module.execute(plan, root/'delivery', runtime_home=root/'runtime')
+                self.assertFalse((root/'runtime').exists())
+                self.assertFalse((root/'delivery').exists())
+
+    def test_svg_external_dependency_and_inherited_asset_corruption_preflight(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            image = root/'logo.svg'
+            image.write_text('<svg xmlns="http://www.w3.org/2000/svg"><image href="file:///outside.png"/></svg>')
+            plan = {'document': {'width': 80, 'height': 50}, 'assets': {'logo': {'path': str(image), 'sha256': self.module.sha(image)}}, 'operations': [{'command': 'asset.place', 'params': {'asset': 'logo'}}]}
+            with self.assertRaisesRegex(ValueError, 'asset_svg_external_dependency'):
+                self.module.execute(plan, root/'delivery', runtime_home=root/'runtime')
+            source = root/'source';source.mkdir()
+            project = source/'project.vectorcraft';project.write_bytes(b'project fixture')
+            dependency = source/'image.png';dependency.write_bytes(b'old asset')
+            prior = {'files': {'project.vectorcraft': self.module.sha(project), 'image.png': self.module.sha(dependency)}, 'bindings': {}, 'assets': {'product': {'path': 'image.png', 'sha256': self.module.sha(dependency), 'ids': [4], 'linked': True}}}
+            (source/'manifest.json').write_text(json.dumps(prior));dependency.write_bytes(b'corrupted asset')
+            with self.assertRaisesRegex(ValueError, 'asset_digest_mismatch'):
+                self.module.execute({'expectedProjectSha256': prior['files']['project.vectorcraft'], 'operations': []}, root/'revision', source=source, runtime_home=root/'runtime')
+            self.assertFalse((root/'runtime').exists());self.assertFalse((root/'revision').exists())
+
     def test_export_range_and_format_rejected(self):
         for output in [{'format': 'exe', 'artboard': 0}, {'format': 'png', 'artboard': -1}]:
             with self.assertRaises(ValueError):
