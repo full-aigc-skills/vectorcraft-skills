@@ -134,6 +134,21 @@ class TaskSkillFirstUseTests(unittest.TestCase):
         self.assertIn('path', self.object(target, result[1]['id'])['kind'])
         self.cli('invented-subcommand', success=False)
 
+    def test_selection_targets_icon_before_move_and_preserves_brand_board(self):
+        from PIL import Image
+        self.install_only('selection')
+        target = self.root / 'selected-icon.vectorcraft'
+        before = self.object(self.project, self.icon)
+        self.execute([('select.none', {}), ('select.set', {'ids': [self.icon]}),
+                      ('object.move', {'dx': 8, 'dy': 0})], target)
+        self.assertNotEqual(self.object(target, self.icon), before)
+        self.assertEqual(self.object(target, self.logo), self.object(self.project, self.logo))
+        self.assertEqual(self.object(target, self.text), self.object(self.project, self.text))
+        self.same_board(self.project, target, 0)
+        with Image.open(self.render(self.project, 1, 'before-selection.png')) as old, \
+                Image.open(self.render(target, 1, 'after-selection.png')) as new:
+            self.assertNotEqual(old.convert('RGBA').tobytes(), new.convert('RGBA').tobytes())
+
     def test_paths_keep_control_handle_and_change_only_icon_board(self):
         from PIL import Image
         self.install_only('paths'); target = self.root / 'path.vectorcraft'
