@@ -153,3 +153,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 渐变与多重外观：12 项独立技能的源候选冷启动与原生返工验证已通过；固定安装与 Art 分发待验证。 [Architecture](docs/VectorCraft-Appearance-Gradient-Architecture.zh_CN.md).
 
 固定安装渐变／多重外观：12 项技能通过，控制对象与原交付保全；Art 更新分发仍开放。 [Evidence](docs/evidence/codex-vectorcraft-gradient-first-use-20261007.json).
+
+命令计划 JSON 源候选：重复键在安装和创建输出前被拒绝，全部 13 个领域技能的独立副本拒绝测试与有效计划校验通过，3 项专项测试通过。固定插件发布和安装后复验仍为 NOT_RUN。[证据](docs/evidence/command-plan-json-candidate-20261007.json)。
