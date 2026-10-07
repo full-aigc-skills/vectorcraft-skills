@@ -1,0 +1,12 @@
+"""对象编辑归属已有场景，保留各场景本地操作说明。"""
+from pathlib import Path
+import json,unittest
+ROOT=Path(__file__).resolve().parents[1]
+EXPECTED={'object.reflect': 'vectorcraft-cli-shapes', 'object.shear': 'vectorcraft-cli-shapes', 'object.nudge': 'vectorcraft-cli-shapes', 'object.arrange.bringToFront': 'vectorcraft-cli-shapes', 'object.arrange.bringForward': 'vectorcraft-cli-shapes', 'object.arrange.sendBackward': 'vectorcraft-cli-shapes', 'object.arrange.sendToBack': 'vectorcraft-cli-shapes', 'object.arrange.sendToCurrentLayer': 'vectorcraft-cli-shapes', 'object.setProps': 'vectorcraft-cli-shapes', 'object.align': 'vectorcraft-cli-shapes', 'object.distribute': 'vectorcraft-cli-shapes', 'object.distributeSpacing': 'vectorcraft-cli-shapes', 'object.setBounds': 'vectorcraft-cli-shapes', 'object.expandShape': 'vectorcraft-cli-shapes', 'object.setLiveShape': 'vectorcraft-cli-shapes', 'object.distort': 'vectorcraft-cli-shapes', 'object.resetBoundingBox': 'vectorcraft-cli-shapes', 'object.shape.convertToShape': 'vectorcraft-cli-shapes', 'object.lock': 'vectorcraft-cli-selection', 'object.unlockAll': 'vectorcraft-cli-selection', 'object.hide': 'vectorcraft-cli-selection', 'object.showAll': 'vectorcraft-cli-selection', 'object.isolate': 'vectorcraft-cli-selection', 'object.exitIsolation': 'vectorcraft-cli-selection', 'object.lock.above': 'vectorcraft-cli-selection', 'object.lock.otherLayers': 'vectorcraft-cli-selection', 'object.hide.above': 'vectorcraft-cli-selection', 'object.hide.otherLayers': 'vectorcraft-cli-selection', 'object.path.outlineStroke': 'vectorcraft-cli-paths', 'object.path.offsetPath': 'vectorcraft-cli-paths', 'object.path.simplify': 'vectorcraft-cli-paths', 'object.path.addAnchorPoints': 'vectorcraft-cli-paths', 'object.path.divideObjectsBelow': 'vectorcraft-cli-paths', 'object.path.splitIntoGrid': 'vectorcraft-cli-paths', 'object.path.cleanUp': 'vectorcraft-cli-paths', 'object.convertDocumentColorMode': 'vectorcraft-cli-project'}
+class ObjectSceneRouteTests(unittest.TestCase):
+ def test_object_commands_route_to_business_scenes(self):
+  rows=json.loads((ROOT/'skills/vectorcraft-use/references/command-coverage.json').read_text())['commands'];owners={x['id']:x['ownerSkill'] for x in rows};self.assertEqual(len(EXPECTED),36)
+  for command,owner in EXPECTED.items():
+   with self.subTest(command=command):self.assertEqual(owners[command],owner)
+  for name in set(EXPECTED.values()):self.assertTrue((ROOT/'skills'/name/'references/object-edit-scene.md').is_file())
+if __name__=='__main__':unittest.main()

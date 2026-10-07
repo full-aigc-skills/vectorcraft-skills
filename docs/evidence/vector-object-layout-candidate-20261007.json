@@ -1,0 +1,64 @@
+{
+  "result": "PASS",
+  "scope": "source candidate two-object top alignment and4pt geometric gap; non-target object and original preserved; native reopen object identity and exact rendered pixels; not all36 commands or full layout acceptance",
+  "runtimeSha256": "ac47d32f34b8910dd559cff59d64cafaaade066227714359d1821cb2b0e59d1b",
+  "alignedY": 8,
+  "spacingPt": 4,
+  "originalReopenedUnchanged": true,
+  "unselectedObjectUnchanged": true,
+  "reopenedRgbaSha256": "80fde92de59edb49e28deafb7edf540c01c4784b30bdc7c0278a55760879ac47",
+  "coldInstall": {
+    "result": "PASS",
+    "skills": 4,
+    "records": [
+      {
+        "domain": "vectorcraft",
+        "skill": "vectorcraft-cli-shapes",
+        "result": "PASS",
+        "version": "vectorcraft-cli 0.2.0-craft.2",
+        "commands": 585,
+        "skillSha256": "4702b0234708bf1b1a5a99ba6b5efaa885756a04e6111bead3db49578965c44b",
+        "scope": "single source candidate skill copy; initially absent runtime; public download/bootstrap/version/query; no native creative claim"
+      },
+      {
+        "domain": "vectorcraft",
+        "skill": "vectorcraft-cli-selection",
+        "result": "PASS",
+        "version": "vectorcraft-cli 0.2.0-craft.2",
+        "commands": 585,
+        "skillSha256": "0e0cfdfb6ee8b035e6a3ac0d7d5abb4cfeefcd3c3f6407032b2fe5a480683d82",
+        "scope": "single source candidate skill copy; initially absent runtime; public download/bootstrap/version/query; no native creative claim"
+      },
+      {
+        "domain": "vectorcraft",
+        "skill": "vectorcraft-cli-paths",
+        "result": "PASS",
+        "version": "vectorcraft-cli 0.2.0-craft.2",
+        "commands": 585,
+        "skillSha256": "e02c110937a24c935e44df31d7d68987a2db05f0181cd94130364378325b0ebe",
+        "scope": "single source candidate skill copy; initially absent runtime; public download/bootstrap/version/query; no native creative claim"
+      },
+      {
+        "domain": "vectorcraft",
+        "skill": "vectorcraft-cli-project",
+        "result": "PASS",
+        "version": "vectorcraft-cli 0.2.0-craft.2",
+        "commands": 585,
+        "skillSha256": "48391153f31518293fe5b45e66c49fc65c3d7ac3db8db0ed4866a07e6c21b851",
+        "scope": "single source candidate skill copy; initially absent runtime; public download/bootstrap/version/query; no native creative claim"
+      }
+    ]
+  },
+  "regression": {
+    "tests": 122,
+    "passed": 96,
+    "skipped": 26,
+    "exitCode": 0
+  },
+  "newScenarioAssignments": 36,
+  "skillValidation": "PASS",
+  "examples": {
+    "object-layout-create.json": "81d4eda918c6e4a41f41b58658a79eee1841872c49fff0a57d72beb94016127b",
+    "object-layout-reopen.json": "7ad1f4a35980a2a90198d8b140ba1b486e604f391322484452d88e110d98da5f"
+  }
+}

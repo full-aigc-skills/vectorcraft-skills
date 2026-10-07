@@ -35,32 +35,34 @@
     {
       "name": "vectorcraft-cli-project",
       "title": "矢量工程与图层",
-      "description": "建立和重开 vectorcraft，整理图层与文档属性",
+      "description": "建立、重开和保存 vectorcraft 工程，组织图层并检查文档色彩模式；首次使用安装固定 VectorCraft CLI。",
       "kind": "scenario",
-      "commandCount": 54,
+      "commandCount": 55,
       "commandPrefixes": [
         "file.",
         "document.",
-        "layer."
+        "layer.",
+        "object.convertDocumentColorMode"
       ]
     },
     {
       "name": "vectorcraft-cli-paths",
       "title": "路径编辑",
-      "description": "创建锚点、控制柄、闭合和编辑矢量路径",
+      "description": "编辑矢量锚点与控制柄，描边轮廓化、偏移、简化和清理路径；首次使用安装固定 VectorCraft CLI。",
       "kind": "scenario",
-      "commandCount": 28,
+      "commandCount": 35,
       "commandPrefixes": [
         "path.",
-        "node."
+        "node.",
+        "object.path."
       ]
     },
     {
       "name": "vectorcraft-cli-shapes",
       "title": "形状与组合",
-      "description": "建立几何形状并组合、变换品牌图形",
+      "description": "建立组合和形状，反射、斜切、对齐、分布及修改对象边界；首次使用安装固定 VectorCraft CLI。",
       "kind": "scenario",
-      "commandCount": 19,
+      "commandCount": 36,
       "commandPrefixes": [
         "shape.",
         "object.group",
@@ -68,7 +70,21 @@
         "object.transform",
         "object.move",
         "object.rotate",
-        "object.scale"
+        "object.scale",
+        "object.reflect",
+        "object.shear",
+        "object.nudge",
+        "object.arrange.",
+        "object.align",
+        "object.distribute",
+        "object.distributeSpacing",
+        "object.setBounds",
+        "object.resetBoundingBox",
+        "object.setProps",
+        "object.expandShape",
+        "object.setLiveShape",
+        "object.distort",
+        "object.shape.convertToShape"
       ]
     },
     {
@@ -149,11 +165,17 @@
     {
       "name": "vectorcraft-cli-selection",
       "title": "对象选择",
-      "description": "使用 VectorCraft 精确选择对象或按属性筛选品牌修改候选，核对画板和非目标对象；首次使用安装固定 CLI。",
+      "description": "按属性选择品牌对象，管理对象锁定、隐藏及隔离并限定修改范围；首次使用安装固定 VectorCraft CLI。",
       "kind": "scenario",
-      "commandCount": 47,
+      "commandCount": 57,
       "commandPrefixes": [
-        "select."
+        "select.",
+        "object.lock",
+        "object.unlockAll",
+        "object.hide",
+        "object.showAll",
+        "object.isolate",
+        "object.exitIsolation"
       ]
     }
   ],
