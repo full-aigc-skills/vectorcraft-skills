@@ -1,7 +1,7 @@
 {
   "schema": "craft-skill-suite/v1",
   "pluginId": "vectorcraft",
-  "version": "0.1.0-dev.25",
+  "version": "0.1.0-dev.26",
   "source": {
     "repository": "https://github.com/storytold/vectorcraft",
     "commit": "36a6a8ae49f0e2d1059361ab1f842b1ec172bc9e",
@@ -19,7 +19,7 @@
     {
       "name": "vectorcraft-cli",
       "title": "CLI 公共操作",
-      "description": "查询实际命令参数和能力，调用公开 CLI、MCP 与诊断",
+      "description": "查询 VectorCraft 原生命令和参数，或处理按属性选择品牌对象、批量变换与变体修改；首次使用安装固定 CLI。",
       "kind": "cli",
       "commandCount": 585,
       "commandPrefixes": []
@@ -68,8 +68,7 @@
         "object.transform",
         "object.move",
         "object.rotate",
-        "object.scale",
-        "select.set"
+        "object.scale"
       ]
     },
     {
@@ -81,8 +80,7 @@
       "commandPrefixes": [
         "object.pathfinder.",
         "object.compoundPath.",
-        "shapeBuilder.",
-        "select.set"
+        "shapeBuilder."
       ]
     },
     {
@@ -133,8 +131,7 @@
         "links.",
         "symbol.",
         "imageTrace.",
-        "file.place",
-        "select.set"
+        "file.place"
       ]
     },
     {
@@ -147,6 +144,16 @@
         "document.export",
         "file.export",
         "pdf."
+      ]
+    },
+    {
+      "name": "vectorcraft-cli-selection",
+      "title": "对象选择",
+      "description": "使用 VectorCraft 精确选择对象或按属性筛选品牌修改候选，核对画板和非目标对象；首次使用安装固定 CLI。",
+      "kind": "scenario",
+      "commandCount": 47,
+      "commandPrefixes": [
+        "select."
       ]
     }
   ],

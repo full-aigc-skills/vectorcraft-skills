@@ -36,3 +36,9 @@ python3 -I -B "$SKILL_DIR/scripts/commands.py" describe object.scale
 交付原生工程、适用的 SVG/PNG/PDF 和对象修改记录；检查边界、笔画、文字可编辑性、画板范围及导出像素。完整选择与对象命令逐项执行验收仍未完成。
 
 Deliver the native project, applicable exports and object revision records. Verify bounds, strokes, editable text and artboard coverage. Full per-command execution acceptance remains open.
+
+## 已执行代表实例 / Executed representative example
+
+`examples/selection-brand-create.json` 建立三对象测试工程，其中两项同填色。先按填色找到两个候选，再精确选择授权 Logo 修改颜色，保留同色装饰与第三个对象。`examples/selection-brand-reopen.json` 使用 `--input project=/absolute/project.vectorcraft` 重开并导出。两例通过本技能 `commands.py run` 执行，使用新的输出目录。已核验非目标对象结构不变、重开对象保留与导出像素一致；这些例子不代表用户 Logo 规格或全部选择命令验收。
+
+Run the local create/reopen fixtures through the public gateway. The bounded example narrows same-color candidates to the authorized object and verifies preserved unrelated objects and pixels after reopening.

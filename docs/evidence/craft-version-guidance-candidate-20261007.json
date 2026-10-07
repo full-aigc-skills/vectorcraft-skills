@@ -1,0 +1,26 @@
+{
+  "scope": "source candidate version guidance; not fixed-release acceptance",
+  "result": "PASS",
+  "skillCount": 13,
+  "versionSource": "each skill scripts/runtime.lock.json; skill package release tag",
+  "skills": {
+    "skills/vectorcraft-cli/SKILL.md": "f58562466a9874cd67d49b7403be8c47bf24b9fe1db96eb916d66b2fe7032181",
+    "skills/vectorcraft-cli-appearance/SKILL.md": "8c78b42957e93b992818ba7041c6bce6e0ad90a78b7604c834ae374ccf0c1df9",
+    "skills/vectorcraft-cli-artboards/SKILL.md": "1f0d6256bd4e3eaecdf0fc3fd7eadbdfeb5f6bf4520dcfe630f86148720efc0f",
+    "skills/vectorcraft-cli-assets/SKILL.md": "fc5e1723ce1862c0a4c89bc33e04cc165c118794ee1e9eef17d287000182da78",
+    "skills/vectorcraft-cli-boolean/SKILL.md": "a4521f1961236306a5d6eae1135291ed4b6ae6a4080a9c7110b858042ec93e8d",
+    "skills/vectorcraft-cli-export/SKILL.md": "ce433632b1347ddcbdfec55621ecc7b4d909f08cad7d17a63b6c8f59c1279463",
+    "skills/vectorcraft-cli-paths/SKILL.md": "a7de35777678f8b72e6499c011e290a94f8b5090947a914755db88ee4bc48ad5",
+    "skills/vectorcraft-cli-project/SKILL.md": "c1d43b03c755c74ce66def43cb76f7dd5c8142f6a63746e29bfb50777063c0a0",
+    "skills/vectorcraft-cli-selection/SKILL.md": "09138114cc60600fbdf1000f681be537457767bc0b22c1e89b633c3af6df682c",
+    "skills/vectorcraft-cli-setup/SKILL.md": "73f9dd0777dbc93a433b926397ea4c51b9ff340738aaa9be69549084645c0c35",
+    "skills/vectorcraft-cli-shapes/SKILL.md": "4f302833af394d06b5dac2068e1e1f588242b6d80815640a7571116479039eaf",
+    "skills/vectorcraft-cli-text/SKILL.md": "3d7f02ae36e147658e3c38d2e835ca481cad379717574431fee3026457c009a5",
+    "skills/vectorcraft-use/SKILL.md": "7395f80c56027d7cef9aa8d41f9b8283dd04360b6ad9c666b712f245b6b82be4"
+  },
+  "regression": {
+    "tests": 121,
+    "skipped": 26,
+    "exitCode": 0
+  }
+}

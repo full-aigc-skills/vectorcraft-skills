@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "scope": "source candidate selection skill, public empty-runtime install, same-fill candidates2, authorized object modification1, unchanged unrelated objects2, native save/reopen and exported pixel identity; not all selection commands",
+  "runtimeSha256": "ac47d32f34b8910dd559cff59d64cafaaade066227714359d1821cb2b0e59d1b",
+  "projectSha256": "1b578af67ad0185b6ce044c37c310207b2d7814459cb2438383100aad026a78c",
+  "pixelSha256": "5b4870dab67a352b9617295a9a8ae4801b7bb43454e58a82899adfd27b809622"
+}
