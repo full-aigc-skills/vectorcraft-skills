@@ -70,6 +70,7 @@ class SetupFailureTests(unittest.TestCase):
 
  def test_malformed_lock_shapes_return_json_before_runtime_changes(self):
   import copy
+  import platform
   import shutil
   import subprocess
   domain=json.loads((ROOT/'skill-suite.json').read_text())['pluginId']
@@ -84,7 +85,7 @@ class SetupFailureTests(unittest.TestCase):
    for field,value in [('artifacts',None),('artifacts',[]),('artifact',None),('resolvedVersion',7)]:
     changed=copy.deepcopy(original);changed[field]=value;cases.append(changed)
    for entry in [None,[],{},dict(original['artifacts']['darwin-arm64'],url=None),dict(original['artifacts']['darwin-arm64'],binarySha256=[])]:
-    changed=copy.deepcopy(original);changed['artifacts']['darwin-arm64']=entry;cases.append(changed)
+    changed=copy.deepcopy(original);changed['artifacts']={f'{platform.system().lower()}-{platform.machine().lower()}':entry};cases.append(changed)
   for payload in cases:
    with self.subTest(domain=domain,payload=payload),tempfile.TemporaryDirectory(prefix='craft malformed lock ') as temporary:
     scripts=Path(temporary)/'only skill/scripts';scripts.mkdir(parents=True)
