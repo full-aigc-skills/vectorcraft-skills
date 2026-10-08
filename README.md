@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.42`; companion published plugin: `0.1.0-dev.56`; 13 independent skills.
+Current skill source: `0.1.0-dev.43`; companion published plugin: `0.1.0-dev.56`; 13 independent skills.
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full VC-DM-004 qualification at fixed54 is complete; see the four-scenario evidence below. GUI/model/full V1 remain separate.
 
@@ -207,3 +207,6 @@ Fixed55/source41 qualifies both current VC-DM-005-P/N scenarios: automatic freef
 Source42 candidate adds registered asset variant guards: real raster/SVG identity mappings, native instance bounds correction, unrelated object/stacking/artboard preservation and verified source export inheritance. The fixed55 nonconsumer-mutation gap is reproduced natively. Nine candidate export decodes, three unchanged unrelated outputs and dependency refusals pass. Source regression:172 passed/30 skipped of202; fixed plugin and complete VC-DM-006 qualification are separate. [Candidate evidence](docs/evidence/brand-candidate42-20261009.json).
 
 Public fixed plugin56/source42 qualifies all six current VC-DM-006 scenarios:RGB swatch routes,registered raster/SVG multi-instance replacement,native bounds preservation,nine asset decodes and three unchanged unrelated outputs. Invalid dependencies,unknown swatches and tampered/linked plans refuse while preserving source/checkpoints;13 installed digests remain unchanged. Plugin tasks4.16–4.18 close:111 complete/16 open. GUI,models,other platforms,cross-file behavior,Art bundled distribution and full V1 remain separate. [Fixed evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-brand-variants-fixed56-20261009.json).
+
+
+Source43 candidate registers digest-bound artifact lineage, stable logical IDs, execution identity, parent revisions and portable package-relative dependencies. Native create/move/reopen/revise and five integrity refusals pass on macOS arm64. Default regression:177 passed/30 skipped of207. Companion fixed57 qualification remains pending. [Evidence](docs/evidence/lineage-candidate43-20261009.json).
