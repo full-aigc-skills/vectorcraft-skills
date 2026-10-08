@@ -8,7 +8,7 @@
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.43`；配套已发布插件：`0.1.0-dev.62`；13 个独立技能。
+当前技能源：`0.1.0-dev.43`；配套已发布插件：`0.1.0-dev.63`；13 个独立技能。
 
 源40支持显式稳定artboardId与创建回执ID绑定，返工旧索引身份偏移、未知ID、冲突范围和重复输出在首次导出前拒绝；清单记录画板名称、尺寸、当前顺序与PNG预览顺序。公开旧53的两类静默偏移已原生复现，候选三类成功／四类拒绝通过。固定54完整VC-DM-004验收已完成，见文末四场景证据；GUI／模型／完整V1保持独立。
 
@@ -218,3 +218,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 配套公开插件62／源43修复回执到达时预算耗尽的处理，四次共享尝试内保留更高分只读原生候选并持久停止。实际Codex隔离安装确认13技能摘要未变。122项Node、104项Python通过；6.6完整四场景验收仍开放，116/127完成、11项开放。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-revision-budget-fixed62-20261009.json).
 
 配套插件62／本技能源43补充固定安装验收：三项真实原生修订验证小幅提升停滞、降分保留最佳及轮数上限；独占签名桌面修改源工程后，陈旧建议在修订执行前被拒绝，预算与最佳副本保全。插件114项Python测试通过，含10项证据测试；13项安装技能摘要未变。本库技能字节及开发标签43保持不变。任务仍为116/127完成、11项开放，6.6完整验收继续推进。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/f9a3cc47a3b00a1806de82a6e5f7ad48880ce736/docs/evidence/vectorcraft-revision-limits-fixed62-20261009.json).
+
+配套公开插件63／本技能源43经实际Codex0.153.4 macOS arm64安装后，通过VC-QA-002当前四场景：6次原生修订、15项边界守卫、1次独占签名桌面源工程修改。修复目标变化分支的授权／可信技术来源校验及最新问题记录，保留原目标最佳候选。124项Node、129项Python通过，含15项证据测试与14项重签篡改拒绝；13技能摘要未变。6.6完成，117/127完成、10项开放。QA评分仅测试控制机制，真实创作判断、其他平台、全部命令及完整V1分别未验。本库技能与标签43保持不变。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/0418c7793f8008ff2e060efb986013713c1f5fe4/docs/evidence/vectorcraft-revision-fixed63-20261009.json).
