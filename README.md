@@ -1,5 +1,7 @@
 # VectorCraft Skills
 
+Fixed installed appearance-skill verification now includes same-RGB objects without a brand-token link. Only linked consumers change; native properties, unrelated SVG/PNG/PDF and original deliveries remain preserved. Warm runtime verification; no additional V1 task closes. [Acceptance architecture](docs/VectorCraft-Same-Color-Token-Architecture.md).
+
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
 Current source: `0.1.0-dev.30`; target plugin: `0.1.0-dev.32`; 13 independent skills.

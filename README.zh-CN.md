@@ -1,5 +1,7 @@
 # VectorCraft 独立技能
 
+固定安装外观技能新增“同色但未绑定 token”验收：仅已绑定消费者更新，非消费者原生属性、无关 SVG／PNG／PDF 与原交付保持不变。本轮复用运行时，不关闭新增 V1 任务。[验收架构](docs/VectorCraft-Same-Color-Token-Architecture.zh_CN.md)。
+
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
 当前技能源：`0.1.0-dev.30`；目标插件：`0.1.0-dev.32`；13 个独立技能。
