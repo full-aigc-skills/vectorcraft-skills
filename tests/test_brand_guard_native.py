@@ -50,7 +50,7 @@ class BrandGuardNativeTests(unittest.TestCase):
         with context as temporary:
             root = Path(temporary)
             origin = Path(os.environ.get('CRAFT_INSTALLED_BRAND_GUARD_SKILL', ROOT/'skills/vectorcraft-cli-appearance'))
-            skill = root/'.agents/skills/vectorcraft-cli-appearance'
+            skill = root/'.agents/skills'/origin.name
             shutil.copytree(origin, skill, ignore=shutil.ignore_patterns('__pycache__'))
             self.assertEqual(len(list(skill.parent.iterdir())), 1)
             baseline = os.environ.get('CRAFT_BRAND_GUARD_BASELINE_WORKFLOW')
