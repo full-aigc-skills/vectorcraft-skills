@@ -75,3 +75,11 @@ After staged failure, retain both the output recovery record and its original si
 网关操作写成 `{"command":"native.command","params":{"command":"swatch.edit","params":{"name":{"$ref":"primary.name"},"color":"#175cce"}}}`。expectedProjectSha256 取原 manifest 中 project.vectorcraft 的摘要；源目录仍由公开 --source 参数传入。旧 plan.json 摘要不符或为符号链接时，在安装与原生编辑前拒绝，不创建新交付。完成后比较所有输出路径、关联颜色及无关画板 SVG／PNG／PDF 字节，保留旧交付。
 
 Both direct swatch.edit and its native.command equivalent inherit the verified source export list when exports is omitted. An explicit empty list remains an intentional native-only delivery. Verify source-plan integrity before installation, and check affected variants plus byte-identical unrelated SVG/PNG/PDF outputs after native reopening.
+
+## 分组与布尔事务候选
+
+普通工作流、`native.command` 和完整命令计划中的 `object.group`、`object.ungroup` 与 Pathfinder 操作在当前源码候选中登记实时参与对象ID、运算、真实结果ID和修改前检查点。成功回执位于 `boolean-transactions.json`；检查点进入交付清单。素材收集改变交付根时，检查点通过原生 package 独立收集依赖，并验证重开及链接，防止丢失或保留失效路径。
+
+明确失败且原生文档已改变时，在同一仍有效的会话重开检查点并核对文档与参与ID，报告 `non_atomic_operation_defect`；不会重放运算。回复丢失、撤销、超时或恢复失败保持unknown／原位置现场，需只读核验后另行决定。未选子树、祖先属性和对象顺序变化不能由成功回执豁免。
+
+此为未发布源码增量；发布标签dev.36和固定插件dev.40的旧快照保持不变。四类布尔运算、分组／解组、带链接素材迁移与显式故障注入有候选原生证据，不代表所有Pathfinder上下文、GUI或创作验收。

@@ -1,0 +1,19 @@
+test_known_partial_delete_restores_original_objects_without_replay (test_boolean_transactions.BooleanTransactionTests.test_known_partial_delete_restores_original_objects_without_replay) ... FAIL
+
+======================================================================
+FAIL: test_known_partial_delete_restores_original_objects_without_replay (test_boolean_transactions.BooleanTransactionTests.test_known_partial_delete_restores_original_objects_without_replay)
+----------------------------------------------------------------------
+RuntimeError: semantic_error: deleted then failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<SOURCE_ROOT>/tests/test_boolean_transactions.py", line 88, in test_known_partial_delete_restores_original_objects_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'non_atomic_operation_defect'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "non_atomic_operation_defect" does not match "semantic_error: deleted then failed"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.015s
+
+FAILED (failures=1)

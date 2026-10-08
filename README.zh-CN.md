@@ -167,3 +167,7 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 当前固定协议引用发行矩阵（Film／Effect dev.37、Photo dev.36、Vector dev.34、Art dev.107）已通过隔离 Codex 安装／发现 64 项技能、16 项实际安装所有者文件摘要核对，以及五个全新领域缓存下的 64 项独立公开 CLI 探测。原生场景证据仅对字节一致的技能复用，完整首版仍开放。[固定发行证据](docs/evidence/craft-protocol-authority-fixed-first-use-20261008.json)。
 
 固定插件 dev.37／技能源 dev.33：13 个实际安装技能副本各自空缓存安装原生 CLI，直接与网关返工均继承并导出三画板九份 SVG／PNG／PDF；关联颜色改变，无关图形及原交付字节保持，显式空列表与篡改拒绝通过。其余51项复核未变身份并沿用历史首用记录。Art116 内置 Vector32 尚未升级；完整 V1 未完成。[固定验收证据](docs/evidence/craft-vector37-gateway-export-fixed-first-use-20261008.json)。
+
+## 布尔事务源码候选
+
+技能源dev.36之后的未发布增量加入原生检查点保留、实时参与／结果ID、未选对象树检查与明确部分失败后的恢复；unknown不重放。三个公开入口共用守卫，包含链接素材检查点收集。当前已发布插件dev.40仍锁定dev.36，候选需另行发布和安装验收。[候选架构](docs/VectorCraft-Boolean-Transactions.zh-CN.md)。

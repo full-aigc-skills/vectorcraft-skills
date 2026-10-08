@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.36`; companion plugin: `0.1.0-dev.38`; 13 independent skills.
+Current skill source: `0.1.0-dev.36`; companion plugin: `0.1.0-dev.40`; 13 independent skills.
 
 Verified first-use platform: macOS arm64 and Python 3.11+. Pinned runtimes install into the user data directory; skill files stay in their host-loaded directory. These are development releases; complete V1 acceptance and generic Skills CLI installation remain open.
 
@@ -173,3 +173,7 @@ Independent-install dependency boundary: current byte-identical cold-install rec
 Current fixed protocol-reference release matrix (Film/Effect dev.37, Photo dev.36, Vector dev.34, Art dev.107) passes actual isolated Codex installation/discovery of 64 skills, 16 installed authority-file digest checks, and 64 independent public CLI probes using five fresh domain caches. Historical native scene proof is reused only for byte-identical skills; full V1 remains open. [Fixed release evidence](docs/evidence/craft-protocol-authority-fixed-first-use-20261008.json).
 
 Fixed plugin dev.37/source dev.33: all13 actual installed skills independently cold-install the native CLI. Direct and gateway revisions inherit nine SVG/PNG/PDF variants over three artboards; bound colors change, unrelated and source files stay intact, and explicit-empty/tampered-plan cases pass. The other51 skills reuse historical cold records after unchanged identity verification. Art116 still bundles Vector32; full V1 remains incomplete. [Fixed acceptance evidence](docs/evidence/craft-vector37-gateway-export-fixed-first-use-20261008.json).
+
+## Boolean transaction source candidate
+
+The unpublished increment after source dev.36 adds retained native checkpoints, live participant/result IDs, unselected-tree checks and restoration after known partial failures. Unknown outcomes never replay. Three public entries share the guard, including linked-asset checkpoint collection. Current published plugin dev.40 continues pinning source dev.36 until a separate release. [Candidate architecture](docs/VectorCraft-Boolean-Transactions.md).
