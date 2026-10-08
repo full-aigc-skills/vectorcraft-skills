@@ -51,7 +51,7 @@ class ExecutionControlTests(unittest.TestCase):
             self.assertEqual(records[0]['inode'],stage.stat().st_ino)
             self.assertEqual(records[1]['params']['arguments']['params']['path'],str(stage/'project.vectorcraft'))
             self.assertEqual(m.ExecutionControl(path).profile['task'],'test-task')
-            events.unlink();events.write_text('replaced')
+            events.rename(events.with_suffix('.original'));events.write_text('replaced')
             with self.assertRaisesRegex(RuntimeError,'execution_event_identity_mismatch'):control.before_request('tools/call',{},4,313)
 
     def test_revision_checks_actual_object_fields_and_all_global_swatch_consumers(self):

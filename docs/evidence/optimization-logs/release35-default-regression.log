@@ -162,6 +162,6 @@ test_bad_tool_results_are_unknown_without_python_type_errors (test_workflow_tool
 test_valid_semantic_error_remains_a_known_reply (test_workflow_tool_reply.WorkflowToolReplyTests.test_valid_semantic_error_remains_a_known_reply) ... ok
 
 ----------------------------------------------------------------------
-Ran 162 tests in 22.087s
+Ran 162 tests in 21.968s
 
 OK (skipped=30)
