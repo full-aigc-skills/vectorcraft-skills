@@ -18,7 +18,7 @@
     "vectorcraft-use": "c32d6ac4160f535e24d89d8f20610667789df9b29015f2508d86248c41c8e708"
   },
   "fingerprints": {
-    "docs/evidence/lineage43/red.log.txt": "200d922caf0187205b46e9617560d8d97ac1a3a632acfd45badb76d235bede8e",
+    "docs/evidence/lineage43/red.log.txt": "7cf5e4ad9265515c89d75a21ff272fb6fb88a0f862a82f12d9b1d136c8ba70e6",
     "docs/evidence/lineage43/green.log.txt": "6a22c6e34f7d049e1616582b88ef0c0f7b24ff3f0572a3459ef27e9655330c7f",
     "docs/evidence/lineage43/regression.log.txt": "f222075878325af4537d98b5bd37ddd71cb0b2ba72c757e8b8d96c4cb4cb9067",
     "docs/evidence/lineage43/native-candidate.json": "0c11d0d1eb54500c22a195b504ecdb28f739d9c5a4199bfefce0f872eb950e83",
@@ -45,5 +45,6 @@
     "creative quality",
     "other platforms",
     "full V1"
-  ]
+  ],
+  "logSanitization": "repository and OS temporary paths replaced; raw local logs retained privately"
 }
