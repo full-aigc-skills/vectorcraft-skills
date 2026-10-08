@@ -1,0 +1,36 @@
+diff --git a/skills/vectorcraft-use/scripts/commands.py b/skills/vectorcraft-use/scripts/commands.py
+index aaa2db3..be7a112 100644
+--- a/skills/vectorcraft-use/scripts/commands.py
++++ b/skills/vectorcraft-use/scripts/commands.py
+@@ -277,7 +277,9 @@ def execute(plan, output, runtime_home=None, mode="headless", connect=None, toke
+         installed = installer(lock, runtime_home or os.environ.get("CRAFT_RUNTIME_HOME",
+                                str(Path.home() / ".local/share/craft-runtimes")))
+         receipt["runtimeSha256"] = installed["binarySha256"]
+-        session_factory = session_factory or load("mcp_session").Session
++        if session_factory is None:
++            session_type=load("mcp_session").Session
++            session_factory=lambda argv:session_type(argv,filesystem={"readRoots":[str(output)],"writeRoots":[str(output)]})
+         bindings = {"output": "" if DOMAIN == "photocraft" else str(output)}
+         receipt["inputs"] = {}
+         if sources:
+diff --git a/skills/vectorcraft-use/scripts/mcp_session.py b/skills/vectorcraft-use/scripts/mcp_session.py
+index 9a6eb9a..0b7d579 100644
+--- a/skills/vectorcraft-use/scripts/mcp_session.py
++++ b/skills/vectorcraft-use/scripts/mcp_session.py
+@@ -15,13 +15,14 @@ _spec.loader.exec_module(_commands)
+ 
+ 
+ class Session:
+-    def __init__(self, argv, timeout=120, control=None):
++    def __init__(self, argv, timeout=120, control=None, filesystem=None):
+         self.control = control
+         self.timeout = timeout
+         self.buffer = b''
+         self.sequence = 0
+         self.stderr = tempfile.TemporaryFile()
+-        self.process = subprocess.Popen(argv, env=_commands.load('input_security').native_environment(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, preexec_fn=control.apply_limits if control else None)
++        launch = _commands.load('filesystem_scope').launch(argv,filesystem) if filesystem is not None else argv
++        self.process = subprocess.Popen(launch, env=_commands.load('input_security').native_environment(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=self.stderr, preexec_fn=control.apply_limits if control else None)
+         try:
+             if self.control:
+                 self.control.emit('session_created', pid=self.process.pid)

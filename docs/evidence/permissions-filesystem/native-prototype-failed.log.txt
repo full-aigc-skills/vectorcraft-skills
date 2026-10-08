@@ -1,0 +1,34 @@
+test_inside_symlink_cannot_grant_outside_native_read (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_inside_symlink_cannot_grant_outside_native_read) ... ok
+test_output_placeholder_native_write_is_allowed (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_output_placeholder_native_write_is_allowed) ... FAIL
+test_raw_outside_native_write_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_raw_outside_native_write_is_denied) ... ok
+test_registered_native_input_is_copied_and_readable (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_registered_native_input_is_copied_and_readable) ... FAIL
+test_unregistered_outside_native_input_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_unregistered_outside_native_input_is_denied) ... ok
+
+======================================================================
+FAIL: test_output_placeholder_native_write_is_allowed (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_output_placeholder_native_write_is_allowed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_filesystem_boundary.py", line 25, in test_output_placeholder_native_write_is_allowed
+    r,o=self.run_plan([{'command':'file.new','params':{'width':64,'height':64,'units':'Pixels'}},{'command':'file.save','params':{'path':{'$output':'authorized.vectorcraft'}}}]);self.assertEqual(r['result'],'PASS',r.get('error'));self.assertTrue((o/'authorized.vectorcraft').is_file())
+                                                                                                                                                                                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unknown' != 'PASS'
+- unknown
++ PASS
+ : mcp_disconnected: outcome may be unknown
+
+======================================================================
+FAIL: test_registered_native_input_is_copied_and_readable (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_registered_native_input_is_copied_and_readable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_filesystem_boundary.py", line 21, in test_registered_native_input_is_copied_and_readable
+    r,o=self.run_plan([{'command':'file.open','params':{'path':{'$ref':'source.path'}}}],{'source':self.seed});self.assertEqual(r['result'],'PASS',r.get('error'));self.assertTrue((o/'inputs/source.vectorcraft').is_file())
+                                                                                                               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'unknown' != 'PASS'
+- unknown
++ PASS
+ : mcp_disconnected: outcome may be unknown
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.268s
+
+FAILED (failures=2)

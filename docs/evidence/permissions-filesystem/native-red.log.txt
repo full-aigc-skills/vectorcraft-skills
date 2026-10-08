@@ -1,0 +1,37 @@
+test_inside_symlink_cannot_grant_outside_native_read (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_inside_symlink_cannot_grant_outside_native_read) ... FAIL
+test_output_placeholder_native_write_is_allowed (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_output_placeholder_native_write_is_allowed) ... ok
+test_raw_outside_native_write_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_raw_outside_native_write_is_denied) ... FAIL
+test_registered_native_input_is_copied_and_readable (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_registered_native_input_is_copied_and_readable) ... ok
+test_unregistered_outside_native_input_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_unregistered_outside_native_input_is_denied) ... FAIL
+
+======================================================================
+FAIL: test_inside_symlink_cannot_grant_outside_native_read (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_inside_symlink_cannot_grant_outside_native_read)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_filesystem_boundary.py", line 29, in test_inside_symlink_cannot_grant_outside_native_read
+    r,o=self.run_plan([{'command':'file.open','params':{'path':str(self.project/'delivery/alias.vectorcraft')}}],alias=True);self.assertNotEqual(r['result'],'PASS','inside symlink exposed an undeclared outside project')
+                                                                                                                             ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS' : inside symlink exposed an undeclared outside project
+
+======================================================================
+FAIL: test_raw_outside_native_write_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_raw_outside_native_write_is_denied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_filesystem_boundary.py", line 27, in test_raw_outside_native_write_is_denied
+    escaped=self.outside/'escaped.vectorcraft';r,o=self.run_plan([{'command':'file.new','params':{'width':64,'height':64,'units':'Pixels'}},{'command':'file.save','params':{'path':str(escaped)}}]);self.assertFalse(escaped.exists(),'native wrote outside the authorized output root');self.assertNotEqual(r['result'],'PASS')
+                                                                                                                                                                                                     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : native wrote outside the authorized output root
+
+======================================================================
+FAIL: test_unregistered_outside_native_input_is_denied (test_native_filesystem_boundary.NativeFilesystemBoundaryTests.test_unregistered_outside_native_input_is_denied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_filesystem_boundary.py", line 23, in test_unregistered_outside_native_input_is_denied
+    before=hashlib.sha256(self.seed.read_bytes()).hexdigest();r,o=self.run_plan([{'command':'file.open','params':{'path':str(self.seed)}}]);self.assertNotEqual(r['result'],'PASS','native opened an undeclared outside project');self.assertEqual(hashlib.sha256(self.seed.read_bytes()).hexdigest(),before)
+                                                                                                                                            ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' == 'PASS' : native opened an undeclared outside project
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.288s
+
+FAILED (failures=3)
