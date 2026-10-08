@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""外部QA：真实矢量、实时滤镜、展开栅格的三格式解码及原生重开。"""
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+config=json.loads(Path(sys.argv[1]).read_text())
+root=Path(config['output']).resolve();root.mkdir(exist_ok=False)
+skill=Path(config['skill']).resolve();runtime=Path(config['runtime']).resolve()
+def load(name,path):
+    spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def tree(path):return {p.relative_to(path).as_posix():sha(p) for p in sorted(path.rglob('*')) if p.is_file() and '__pycache__' not in p.parts}
+w=load('exchange_workflow',skill/'scripts/workflow.py');session=load('exchange_session',skill/'scripts/mcp_session.py')
+identity=tree(skill);cases=[]
+import fitz
+from PIL import Image
+for name in ['vector','live-filter','expanded-raster']:
+    ops=[{'command':'shape.rectangle','params':{'x':20,'y':20,'width':30,'height':20}},
+         {'command':'paint.setFill','params':{'color':'#2366e8'}},{'command':'paint.setStroke','params':{'none':True}}]
+    if name!='vector':ops.append({'command':'native.command','params':{'command':'effect.apply','params':{'effect':'blur.gaussian','params':{'radius':3}}}})
+    if name=='expanded-raster':ops.append({'command':'native.command','params':{'command':'effect.expandAppearance','params':{}}})
+    plan={'document':{'name':name,'width':80,'height':64,'units':'Pixels'},'operations':ops,'exports':[{'format':fmt,'artboard':0} for fmt in ['svg','pdf','png']]}
+    out=root/name;manifest=w.execute(plan,out,runtime_home=runtime);before=tree(out)
+    binary=runtime/'vectorcraft/0.2.0-craft.2/vectorcraft-cli'
+    with session.Session([str(binary),'mcp','--headless']) as native:
+        native.command('document.open',{'path':str(out/'project.vectorcraft')})
+        reopened=native.command('document.json',{})
+    assert reopened==json.loads((out/'native.json').read_text())
+    loss=json.loads((out/'exchange-loss.json').read_text());row=next(row for row in loss['outputs'] if row['format']=='svg')
+    scope=row['observations']['rasterizationScope'];assert scope['losslessVectorClaimAllowed'] is False
+    assert len(scope['elements'])==(1 if name=='expanded-raster' else 0)
+    if name=='expanded-raster':assert scope['elements'][0]['classification']=='embedded-raster'
+    decoded=[]
+    for fmt in ['svg','pdf']:
+        with fitz.open(out/('artboard-1.'+fmt)) as doc:
+            assert len(doc)==1 and doc[0].rect.width==80 and doc[0].rect.height==64
+            assert doc[0].get_pixmap().width==80
+            decoded.append({'format':fmt,'size':[80,64],'decoder':'PyMuPDF','result':'PASS'})
+    with Image.open(out/'artboard-1.png') as im:
+        assert im.size==(80,64);im.verify()
+        decoded.append({'format':'png','size':[80,64],'decoder':'Pillow','result':'PASS'})
+    assert before==tree(out)
+    cases.append({'name':name,'result':'PASS','plan':plan,'nativeReopenEqual':True,'sourcePreserved':True,'nativeJsonSha256':sha(out/'native.json'),
+                  'projectSha256':sha(out/'project.vectorcraft'),'manifest':manifest,'lossReport':loss,'decoded':decoded})
+assert tree(skill)==identity
+proof={'schema':'vectorcraft-exchange-native/v1','result':'PASS','level':config['level'],'cases':cases,'skillPreserved':True,
+       'skillFiles':identity,'driverSha256':sha(__file__),'runtimeSha256':sha(binary),
+       'scope':'three native source/export cases, nine independently decoded outputs, editable project separately reopened; no GUI/creative/other-platform acceptance'}
+(root/'proof.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'result':'PASS','cases':3,'decoded':9}))
