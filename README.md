@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.40`; companion target plugin: `0.1.0-dev.54`; 13 independent skills.
+Current skill source: `0.1.0-dev.40`; companion plugin: `0.1.0-dev.54`; 13 independent skills.
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full artboard isolation4.12 and fixed54 qualification remain separate.
 
@@ -193,3 +193,5 @@ The unpublished increment after source dev.36 adds retained native checkpoints, 
 Explicit `structure` authorization enables managed group/ungroup/boolean revisions and precise selection. Subtree IDs, actual selection, result IDs and unselected model properties remain checked. Source dev.37 includes the earlier boolean transaction increment; fixed plugin acceptance is recorded separately.
 
 Source39 adds observed SVG text modes and outlined-text editing loss, plus one explicit-ID contract for direct,gateway and complete text edits. All13 standalone resources synchronize. Native candidate mode,Chinese revision and brand non-consumer evidence are recorded separately; fixed plugin52/source39 acceptance remains a separate gate and full V1 is open.
+
+Public fixed plugin54/source40 passes actual isolated Codex installation/discovery of13 skills, three stable-artboard mappings/four refusals and14 decoded outputs;13 skill digests unchanged. Plugin minimum implementation tasks4.10/4.11 complete; full artboard isolation/PDF acceptance4.12 remains open. [Fixed subset](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-artboard-mapping-fixed54-20261009.json).
