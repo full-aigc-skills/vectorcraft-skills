@@ -50,3 +50,7 @@ VectorCraft 技能源dev.29候选在原生会话前保护公开工作流目标�
 
 Historical source-candidate note: Source candidate: complete native workflow gateway; immutable installed acceptance and full DAG gate6.51 remain pending. [Architecture](docs/Craft-Native-Workflow-Gateway-Architecture.md).
 
+
+## 0.1.0-dev.32
+
+公开色板工作流增加显式依赖检查，失败保留原生修改前检查点，成功绑定依赖报告。13项独立技能均自包含守卫。固定插件和安装后验收单独记录；Art领域包未升级。

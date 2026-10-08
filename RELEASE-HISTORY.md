@@ -50,3 +50,7 @@ Fixed native gateway first use passes:48 independently installed domain skills a
 
 Historical source-candidate note: Source candidate: complete native workflow gateway; immutable installed acceptance and full DAG gate6.51 remain pending. [Architecture](docs/Craft-Native-Workflow-Gateway-Architecture.md).
 
+
+## 0.1.0-dev.32
+
+Public swatch workflows enforce explicit dependency checks, retain native pre-edit checkpoints on failure and bind successful reports. Thirteen independent skills carry the same self-contained guard. Fixed plugin/installed acceptance is recorded separately; Art bundles are unchanged.
