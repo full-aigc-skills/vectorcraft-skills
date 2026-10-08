@@ -39,7 +39,7 @@ def build(check=False):
             'examples': {} if entry['kind']=='setup' else {
                 'create': {'path':'examples/'+create, 'format': 'craft-command-plan/v1' if 'reopen' in create or 'layout' in create or 'selection' in create else 'vectorcraft-workflow'},
                 'revise': {'path':'examples/'+revise, 'format': 'craft-command-plan/v1' if revise in ('object-layout-revise.json','selection-brand-revise.json') else 'vectorcraft-workflow',
-                           'requires': '来自当前创建回执的源工程摘要；完整命令返工用 --input project=工程路径 --input target=对象JSON，其中target.id必须来自当前原生回执；不能把示例当作真实对象身份'},
+                           'requires': '来自当前创建回执的源工程摘要；完整命令示例中的 target.id 是待绑定模板：先从当前原生创建或检查回执取得真实 id，将对应引用替换为该整数后另存计划，再用 --input project=工程路径 执行；--input target=对象JSON仅登记文件路径和摘要，不解析对象字段，不能直接提供 target.id；不能把示例当作真实对象身份'},
             },
             'hostPolicy': {'allowImplicitInvocation': entry['kind']=='router', 'scope':'支持agents/openai.yaml的宿主；其他宿主记录不适用，显式调用始终可用'},
         }

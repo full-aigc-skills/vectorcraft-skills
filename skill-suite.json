@@ -1,7 +1,7 @@
 {
   "schema": "craft-skill-suite/v1",
   "pluginId": "vectorcraft",
-  "version": "0.1.0-dev.35",
+  "version": "0.1.0-dev.36",
   "source": {
     "repository": "https://github.com/storytold/vectorcraft",
     "commit": "36a6a8ae49f0e2d1059361ab1f842b1ec172bc9e",
