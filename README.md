@@ -8,7 +8,9 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.39`; companion plugin: `0.1.0-dev.53`; 13 independent skills.
+Current skill source: `0.1.0-dev.40`; companion target plugin: `0.1.0-dev.54`; 13 independent skills.
+
+Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full artboard isolation4.12 and fixed54 qualification remain separate.
 
 Companion public fixed plugin53/source39 qualifies all four VC-DM-003 scenarios and completes plugin tasks4.7–4.9: real injected brand faults, same-RGB nonconsumer isolation, Chinese revision/reopen, two SVG text modes and18 route refusals;13 skill digests unchanged. Source39 remains immutable; full V1 remains open. [Scenario evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-brand-text-fixed53-20261009.json).
 
