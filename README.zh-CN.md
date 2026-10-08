@@ -10,6 +10,8 @@ Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SV
 
 当前技能源：`0.1.0-dev.38`；配套插件：`0.1.0-dev.51`；13 个独立技能。
 
+配套公开插件51／源38已完成路径几何4.3与组合／布尔4.6固定验收：六组原生几何保存／重开与18份导出，24组布尔工作流／Harness／SDK边界；七项几何与17项目标源测试通过。已知／未知失败为真实原生成功后的显式注入，不代表引擎缺陷。独立技能快照未改，完整V1仍开放。 [Geometry](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-geometry-fixed51-20261009.json) · [Boolean](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-boolean-fixed51-20261009.json).
+
 配套公开插件51／技能源38已完成VC-TX-003全部五场景：五组真实原生验收、115项Node与43项Python回归通过，13技能摘要保持、13个登记进程组停止；插件任务3.9完成。独立技能源38与快照未改，不重发标签。完整V1仍开放。[固定取消与预算证据](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-budget-cancel-fixed51-20261009.json)。
 
 源38在重命名前持久登记真实交付目录inode、device和清单摘要，覆盖链接素材打包子目录；公开固定插件50／实际宿主源38已通过全部七个VC-TX-002场景，插件任务3.6完成，完整V1仍开放。[固定逐场景证据](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-task-recovery-fixed50-20261009.json)。仅增加可选Harness控制记录，独立工作流不依赖插件。
