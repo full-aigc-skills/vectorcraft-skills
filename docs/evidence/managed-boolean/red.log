@@ -1,0 +1,21 @@
+test_cancel_deadline_epoch_and_source_change_block_next_native_request (test_execution_control.ExecutionControlTests.test_cancel_deadline_epoch_and_source_change_block_next_native_request) ... ok
+test_original_stage_identity_and_submitted_request_survive_reopen (test_execution_control.ExecutionControlTests.test_original_stage_identity_and_submitted_request_survive_reopen) ... ok
+test_revision_checks_actual_object_fields_and_all_global_swatch_consumers (test_execution_control.ExecutionControlTests.test_revision_checks_actual_object_fields_and_all_global_swatch_consumers) ... ok
+test_structural_selection_requires_explicit_structure_authorization (test_execution_control.ExecutionControlTests.test_structural_selection_requires_explicit_structure_authorization) ... ERROR
+
+======================================================================
+ERROR: test_structural_selection_requires_explicit_structure_authorization (test_execution_control.ExecutionControlTests.test_structural_selection_requires_explicit_structure_authorization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<SOURCE_ROOT>/tests/test_execution_control.py", line 87, in test_structural_selection_requires_explicit_structure_authorization
+    control.authorize_operation('select.set',{'ids':[2,3]},before)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<SOURCE_ROOT>/skills/vectorcraft-use/scripts/execution_control.py", line 102, in authorize_operation
+    else:raise RuntimeError('managed_revision_command_unclassified')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: managed_revision_command_unclassified
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.035s
+
+FAILED (errors=1)

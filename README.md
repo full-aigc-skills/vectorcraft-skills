@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.36`; companion plugin: `0.1.0-dev.40`; 13 independent skills.
+Current skill source: `0.1.0-dev.37`; companion plugin: `0.1.0-dev.41`; 13 independent skills.
 
 Verified first-use platform: macOS arm64 and Python 3.11+. Pinned runtimes install into the user data directory; skill files stay in their host-loaded directory. These are development releases; complete V1 acceptance and generic Skills CLI installation remain open.
 
@@ -177,3 +177,7 @@ Fixed plugin dev.37/source dev.33: all13 actual installed skills independently c
 ## Boolean transaction source candidate
 
 The unpublished increment after source dev.36 adds retained native checkpoints, live participant/result IDs, unselected-tree checks and restoration after known partial failures. Unknown outcomes never replay. Three public entries share the guard, including linked-asset checkpoint collection. Current published plugin dev.40 continues pinning source dev.36 until a separate release. [Candidate architecture](docs/VectorCraft-Boolean-Transactions.md).
+
+## Development release37 structural authorization
+
+Explicit `structure` authorization enables managed group/ungroup/boolean revisions and precise selection. Subtree IDs, actual selection, result IDs and unselected model properties remain checked. Source dev.37 includes the earlier boolean transaction increment; fixed plugin acceptance is recorded separately.

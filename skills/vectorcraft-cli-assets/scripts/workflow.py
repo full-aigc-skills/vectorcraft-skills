@@ -252,9 +252,12 @@ def execute(plan, output, runtime_home=None, source=None, control=None):
             managed_command = params.get('command') if operation['command']=='native.command' else operation['command']
             managed_params = params.get('params',{}) if operation['command']=='native.command' else params
             managed_checkpoint = None
+            managed_selection = None
             if control and source_project:
                 managed_before = command('document.json', {}, save=False)
-                control.authorize_operation(managed_command,managed_params,managed_before)
+                if managed_command in control.structural_module().COMMANDS:
+                    managed_selection = command('document.inspect', {}, save=False).get('selection')
+                control.authorize_operation(managed_command,managed_params,managed_before,managed_selection)
                 managed_checkpoint = stage / ('managed-checkpoint-' + str(len(receipts)) + '.vectorcraft')
                 command('document.save', {'path':str(managed_checkpoint)}, save=False)
                 managed_checkpoints.append(managed_checkpoint)
@@ -306,7 +309,10 @@ def execute(plan, output, runtime_home=None, source=None, control=None):
                 value = guard.execute(session, operation['command'], params,
                                       lambda: command(operation['command'], params), stage)
             if managed_checkpoint:
-                control.verify_revision(managed_before,command('document.json',{},save=False),managed_command,managed_params)
+                after_selection = (command('document.inspect', {}, save=False).get('selection')
+                                   if managed_command in ('object.ungroup','select.set') else None)
+                control.verify_revision(managed_before,command('document.json',{},save=False),managed_command,managed_params,
+                                        result=value,selection=managed_selection,after_selection=after_selection)
             if brand_params is not None:
                 check = brand_module().inspect_update(brand_before, command('document.json', {}),
                     brand_params.get('name'), brand_params.get('color', brand_params.get('paint', {}).get('color')))

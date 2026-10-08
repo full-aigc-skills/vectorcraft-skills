@@ -24,8 +24,8 @@ def module(skill, name):
 
 def run(destination, runtime):
     dependencies = ['skills/vectorcraft-use/scripts/'+name+'.py' for name in
-                    ['boolean_transactions','workflow','native_workflow','commands','mcp_session','preserved_stage']]
-    dependencies += ['tests/test_boolean_transactions.py','scripts/acceptance_boolean_transactions.py']
+                    ['boolean_transactions','workflow','native_workflow','commands','mcp_session','preserved_stage','execution_control']]
+    dependencies += ['tests/test_boolean_transactions.py','tests/test_execution_control.py','scripts/acceptance_boolean_transactions.py','skill-suite.json','.claude-plugin/plugin.json']
     dependencies += ['scripts/verify_optimization_evidence.py']
     fingerprints = {p:digest(ROOT/p) for p in dependencies}
     def skill_digest(folder):

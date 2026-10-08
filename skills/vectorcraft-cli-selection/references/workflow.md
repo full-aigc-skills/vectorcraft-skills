@@ -83,3 +83,7 @@ Both direct swatch.edit and its native.command equivalent inherit the verified s
 明确失败且原生文档已改变时，在同一仍有效的会话重开检查点并核对文档与参与ID，报告 `non_atomic_operation_defect`；不会重放运算。回复丢失、撤销、超时或恢复失败保持unknown／原位置现场，需只读核验后另行决定。未选子树、祖先属性和对象顺序变化不能由成功回执豁免。
 
 此为未发布源码增量；发布标签dev.36和固定插件dev.40的旧快照保持不变。四类布尔运算、分组／解组、带链接素材迁移与显式故障注入有候选原生证据，不代表所有Pathfinder上下文、GUI或创作验收。
+
+### Harness 结构修改授权
+
+受控源修订的分组／解组／布尔操作要求授权 `fields:["structure"]`。`select.set` 仅能选择已授权ID，且实际选择必须一致；结构操作使用同会话实时选择，整个参与子树的ID均须在objects中。`kind`或路径字段授权不能替代structure。结果ID、未选子树、祖先／堆叠和文档属性仍由统一守卫核验。未知、撤销、截止时间和版本冲突的原有停止语义不变。该能力纳入技能源开发版37，旧dev.36标签不变。

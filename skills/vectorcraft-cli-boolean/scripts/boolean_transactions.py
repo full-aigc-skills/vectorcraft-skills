@@ -68,6 +68,43 @@ def write_report(path, data):
     os.replace(temporary, path)
 
 
+def verify_result(before, after, identifier, ids, result, selection=None):
+    """独立复核结构结果与未选对象；供事务和受控执行复用同一规则。"""
+    objects = nodes(before)
+    current = nodes(after)
+    if identifier == 'object.ungroup':
+        result_ids = selection
+    else:
+        result_ids = ([result['id']] if isinstance(result, dict) and 'id' in result else
+                      result.get('ids') if isinstance(result, dict) else None)
+    if (not isinstance(result_ids, list)
+            or any(type(i) is not int or i not in current for i in result_ids) or len(set(result_ids)) != len(result_ids)):
+        raise RuntimeError('boolean_result_identity_mismatch')
+    if identifier == 'object.group':
+        if len(result_ids) != 1 or current[result_ids[0]]['kind'].get('type') != 'group':
+            raise RuntimeError('boolean_group_identity_mismatch')
+        group_nodes = nodes({'layers':current[result_ids[0]]['kind'].get('children')})
+        if any(i not in group_nodes or group_nodes[i] != objects[i] for i in ids):
+            raise RuntimeError('boolean_group_source_violation')
+    elif identifier == 'object.ungroup':
+        expected = []
+        for i in ids:
+            if objects[i]['kind'].get('type') != 'group':
+                raise RuntimeError('boolean_ungroup_source_violation')
+            expected.extend(objects[i]['kind'].get('children', []))
+        if set(result_ids) != {v['id'] for v in expected} or any(current.get(v['id']) != v for v in expected):
+            raise RuntimeError('boolean_ungroup_result_violation')
+    else:
+        if any(i in objects and i not in ids for i in result_ids):
+            raise RuntimeError('boolean_result_identity_reused')
+        result_tree = nodes({'layers':[current[i] for i in result_ids]})
+        if any(i in current and i not in result_tree for i in ids):
+            raise RuntimeError('boolean_sources_not_consumed')
+    if pruned(before, set(ids)) != pruned(after, set(result_ids)):
+        raise RuntimeError('boolean_unselected_violation')
+    return result_ids
+
+
 def execute(session, identifier, params, invoke, stage):
     """执行一次已分类操作；不明确回复不恢复、不重放，保留原位置检查点。"""
     if identifier not in COMMANDS:
@@ -103,37 +140,8 @@ def execute(session, identifier, params, invoke, stage):
     try:
         result = invoke()
         after = session.command('document.json', {})
-        current = nodes(after)
-        if identifier == 'object.ungroup':
-            result_ids = session.command('document.inspect', {}).get('selection')
-        else:
-            result_ids = ([result['id']] if isinstance(result, dict) and 'id' in result else
-                          result.get('ids') if isinstance(result, dict) else None)
-        if (not isinstance(result_ids, list)
-                or any(type(i) is not int or i not in current for i in result_ids) or len(set(result_ids)) != len(result_ids)):
-            raise RuntimeError('boolean_result_identity_mismatch')
-        if identifier == 'object.group':
-            if len(result_ids) != 1 or current[result_ids[0]]['kind'].get('type') != 'group':
-                raise RuntimeError('boolean_group_identity_mismatch')
-            group_nodes = nodes({'layers':current[result_ids[0]]['kind'].get('children')})
-            if any(i not in group_nodes or group_nodes[i] != objects[i] for i in ids):
-                raise RuntimeError('boolean_group_source_violation')
-        elif identifier == 'object.ungroup':
-            expected = []
-            for i in ids:
-                if objects[i]['kind'].get('type') != 'group':
-                    raise RuntimeError('boolean_ungroup_source_violation')
-                expected.extend(objects[i]['kind'].get('children', []))
-            if set(result_ids) != {v['id'] for v in expected} or any(current.get(v['id']) != v for v in expected):
-                raise RuntimeError('boolean_ungroup_result_violation')
-        else:
-            if any(i in objects and i not in ids for i in result_ids):
-                raise RuntimeError('boolean_result_identity_reused')
-            result_tree = nodes({'layers':[current[i] for i in result_ids]})
-            if any(i in current and i not in result_tree for i in ids):
-                raise RuntimeError('boolean_sources_not_consumed')
-        if pruned(before, set(ids)) != pruned(after, set(result_ids)):
-            raise RuntimeError('boolean_unselected_violation')
+        selection = session.command('document.inspect', {}).get('selection') if identifier == 'object.ungroup' else None
+        result_ids = verify_result(before, after, identifier, ids, result, selection)
         if digest(checkpoint) != entry['checkpointSha256']:
             raise RuntimeError('boolean_checkpoint_changed')
         entry.update(status='verified', resultIds=result_ids)

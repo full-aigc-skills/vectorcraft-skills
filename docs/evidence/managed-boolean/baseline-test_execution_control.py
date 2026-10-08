@@ -85,49 +85,6 @@ class ExecutionControlTests(unittest.TestCase):
             before={'artboards':[],'layers':[{'id':1,'kind':{'type':'layer','children':[
                 {'id':i,'kind':{'type':'path','path':{'subpaths':[]}}} for i in [2,3,4]]}}]}
             control.authorize_operation('select.set',{'ids':[2,3]},before)
-            control.verify_revision(before,before,'select.set',{'ids':[2,3]},after_selection=[2,3])
+            control.verify_revision(before,before,'select.set',{'ids':[2,3]})
             with self.assertRaisesRegex(RuntimeError,'revision_outside_authorization'):
                 control.authorize_operation('select.set',{'ids':[4]},before)
-
-    def test_structural_permission_cannot_be_inferred_from_kind_field_or_parent(self):
-        with tempfile.TemporaryDirectory() as temporary:
-            root=Path(temporary);path,p,state,events,source=self.fixture(root)
-            before={'layers':[{'id':1,'kind':{'type':'layer','children':[
-                {'id':2,'kind':{'type':'group','children':[{'id':3,'kind':{'type':'path'}}]}}]}}]}
-            for objects,fields,selection in [([2,3],['kind'],[2]),([2],['structure'],[2]),([2,3],['structure'],[99])]:
-                with self.subTest(objects=objects,fields=fields):
-                    p['authorization']={'objects':objects,'fields':fields};path.write_text(json.dumps(p))
-                    control=self.load().ExecutionControl(path)
-                    with self.assertRaisesRegex(RuntimeError,'revision_outside_authorization'):
-                        control.authorize_operation('object.ungroup',{},before,selection=selection)
-            p['authorization']={'objects':[2,3],'fields':['structure']};path.write_text(json.dumps(p))
-            self.load().ExecutionControl(path).authorize_operation('object.ungroup',{},before,selection=[2])
-
-    def test_boolean_verification_still_protects_unselected_tree_and_document(self):
-        import copy
-        with tempfile.TemporaryDirectory() as temporary:
-            root=Path(temporary);path,p,state,events,source=self.fixture(root)
-            p['authorization']={'objects':[2,3],'fields':['structure']};path.write_text(json.dumps(p))
-            control=self.load().ExecutionControl(path)
-            before={'units':'Points','layers':[{'id':1,'kind':{'type':'layer','children':[
-                {'id':i,'name':str(i),'kind':{'type':'path'}} for i in [2,3,4]]}}]}
-            after=copy.deepcopy(before);after['layers'][0]['kind']['children']=[{'id':5,'kind':{'type':'path'}},before['layers'][0]['kind']['children'][2]]
-            control.authorize_operation('object.pathfinder.unite',{},before,selection=[2,3])
-            control.verify_revision(before,after,'object.pathfinder.unite',{},result={'ids':[5]},selection=[2,3])
-            for variant in ['unselected','units']:
-                changed=copy.deepcopy(after)
-                if variant=='unselected':changed['layers'][0]['kind']['children'][1]['name']='corrupt'
-                else:changed['units']='Pixels'
-                with self.assertRaisesRegex(RuntimeError,'boolean_unselected_violation'):
-                    control.verify_revision(before,changed,'object.pathfinder.unite',{},result={'ids':[5]},selection=[2,3])
-            with self.assertRaisesRegex(RuntimeError,'boolean_result_identity_mismatch'):
-                control.verify_revision(before,after,'object.pathfinder.unite',{},result={'ids':[999]},selection=[2,3])
-
-    def test_structural_selection_receipt_must_match_actual_selection(self):
-        with tempfile.TemporaryDirectory() as temporary:
-            root=Path(temporary);path,p,state,events,source=self.fixture(root)
-            p['authorization']={'objects':[2,3],'fields':['structure']};path.write_text(json.dumps(p))
-            control=self.load().ExecutionControl(path)
-            before={'layers':[{'id':i,'kind':{'type':'path'}} for i in [2,3]]}
-            with self.assertRaisesRegex(RuntimeError,'revision_selection_identity_mismatch'):
-                control.verify_revision(before,before,'select.set',{'ids':[2,3]},after_selection=[2])
