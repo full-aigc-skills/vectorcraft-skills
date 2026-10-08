@@ -1,0 +1,25 @@
+{
+  "schema": "craft-failed-stage/v1",
+  "status": "failed",
+  "outcome": "failed",
+  "error": "command_failed: [{\"text\": \"run_command: invalid parameters for `text.setText`: no text objects selected\", \"type\": \"text\"}]",
+  "stage": "../.vectorcraft-4ub_flu0",
+  "files": {
+    "recovery-operations.json": {
+      "sha256": "7d7d237e1413496f779cdfe0f1b8681f0d8301190b6c735c00c1600db038a4fd",
+      "bytes": 409
+    }
+  },
+  "completedOperations": 1,
+  "lastAttempt": {
+    "command": "text.setText",
+    "params": {
+      "id": 999999999,
+      "text": "其他标题"
+    },
+    "phase": "submitted"
+  },
+  "replayAllowed": false,
+  "acceptance": "not-a-successful-delivery",
+  "recovery": "verify hashes and reopen original project in a new read-only session before any explicit revision"
+}

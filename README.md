@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.38`; companion plugin: `0.1.0-dev.51`; 13 independent skills.
+Current skill source: `0.1.0-dev.39`; companion target plugin: `0.1.0-dev.52`; 13 independent skills.
 
 Companion public plugin51/source38 completed fixed acceptance for geometry4.3 and grouping/boolean4.6: six native geometry save/reopen cases with18 exports and24 boolean workflow/Harness/SDK boundary cases; seven geometry and17 targeted source tests passed. Known/unknown faults were explicitly injected after native success, not engine defect reports. Independent skill snapshots are unchanged; full V1 remains open. [Geometry](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-geometry-fixed51-20261009.json) · [Boolean](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-boolean-fixed51-20261009.json).
 
@@ -187,3 +187,5 @@ The unpublished increment after source dev.36 adds retained native checkpoints, 
 ## Development release37 structural authorization
 
 Explicit `structure` authorization enables managed group/ungroup/boolean revisions and precise selection. Subtree IDs, actual selection, result IDs and unselected model properties remain checked. Source dev.37 includes the earlier boolean transaction increment; fixed plugin acceptance is recorded separately.
+
+Source39 adds observed SVG text modes and outlined-text editing loss, plus one explicit-ID contract for direct,gateway and complete text edits. All13 standalone resources synchronize. Native candidate mode,Chinese revision and brand non-consumer evidence are recorded separately; fixed plugin52/source39 acceptance remains a separate gate and full V1 is open.

@@ -8,7 +8,7 @@
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.38`；配套插件：`0.1.0-dev.51`；13 个独立技能。
+当前技能源：`0.1.0-dev.39`；目标配套插件：`0.1.0-dev.52`；13 个独立技能。
 
 配套公开插件51／源38已完成路径几何4.3与组合／布尔4.6固定验收：六组原生几何保存／重开与18份导出，24组布尔工作流／Harness／SDK边界；七项几何与17项目标源测试通过。已知／未知失败为真实原生成功后的显式注入，不代表引擎缺陷。独立技能快照未改，完整V1仍开放。 [Geometry](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-geometry-fixed51-20261009.json) · [Boolean](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-boolean-fixed51-20261009.json).
 
@@ -181,3 +181,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 ## 开发版37结构授权
 
 显式structure授权支持受控分组／解组／布尔返工和精确选择，逐项核对参与子树ID、实际选择、结果ID及未选模型属性。dev.37包含此前布尔事务增量，固定插件安装验收另行记录。
+
+源39候选新增实际SVG文字模式与轮廓文字编辑性损失记录；普通、native.command、完整入口统一显式文字ID约束。13单技能资源同步。候选真实模式、中文定点修订及品牌非消费者边界验证分别记录；固定插件52／源39复验单独执行，完整V1仍开放。

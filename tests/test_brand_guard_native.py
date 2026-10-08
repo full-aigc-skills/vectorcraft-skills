@@ -50,6 +50,14 @@ class BrandGuardNativeTests(unittest.TestCase):
         with context as temporary:
             root = Path(temporary).resolve()
             origin = Path(os.environ.get('CRAFT_INSTALLED_BRAND_GUARD_SKILL', ROOT/'skills/vectorcraft-cli-appearance'))
+            fixed_installed = False
+            if os.environ.get('CRAFT_BRAND_GUARD_HOST_PROOF'):
+                host=json.loads(Path(os.environ['CRAFT_BRAND_GUARD_HOST_PROOF']).read_text())
+                entry=next(row for row in host['skills'] if row['name']=='vectorcraft-cli-appearance')
+                self.assertEqual(host['result'],'PASS');self.assertEqual(origin.resolve(),Path(entry['path']).resolve())
+                actual=hashes(origin)
+                identity=hashlib.sha256(''.join(name+'\0'+actual[name]+'\n' for name in sorted(actual)).encode()).hexdigest()
+                self.assertEqual(identity,entry['sha256']);fixed_installed=True
             skill = root/'.agents/skills'/origin.name
             shutil.copytree(origin, skill, ignore=shutil.ignore_patterns('__pycache__'))
             self.assertEqual(len(list(skill.parent.iterdir())), 1)
@@ -173,7 +181,7 @@ class BrandGuardNativeTests(unittest.TestCase):
             self.assertEqual(hashes(source), original)
             self.assertFalse(list(skill.rglob('*.pyc')))
             (root/'acceptance.json').write_text(json.dumps({'schema': 'vectorcraft-brand-guard-native/v1',
-                'status': 'passed', 'fixedInstalled': bool(os.environ.get('CRAFT_INSTALLED_BRAND_GUARD_SKILL')),
+                'status': 'passed', 'fixedInstalled': fixed_installed,
                 'runtimeReused': True, 'nativeRuntimeSha256': manifest['runtimeSha256'],
                 'faultInjection': 'QA-only extra real native consumer text/geometry/stroke and non-consumer fill after swatch.edit reply',
                 'failures': failures, 'healthyReport': report, 'sourceFiles': original,

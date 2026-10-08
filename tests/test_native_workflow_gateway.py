@@ -8,7 +8,7 @@ def load():
 class NativeWorkflowTests(unittest.TestCase):
  def test_complete_fixed_catalog_validation(self):
   m=load();rows=m.commands.catalog()['commands']
-  for row in rows:m.validate({'command':row['id'],'params':{}})
+  for row in rows:m.validate({'command':row['id'],'params':{'id':1,'text':'fixture'} if row['id']=='text.setText' else {}})
   for p in [{'command':'invented','params':{}},{'command':rows[0]['id'],'params':{},'executor':'bad'},{'command':rows[0]['id'],'params':{'x':float('inf')}}]:
    with self.assertRaises(ValueError):m.validate(p)
  def test_live_context_and_semantic_reply(self):

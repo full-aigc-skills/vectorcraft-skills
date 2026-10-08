@@ -1,0 +1,22 @@
+{
+  "schema": "craft-failed-stage/v1",
+  "status": "failed",
+  "outcome": "failed",
+  "error": "missing_fonts: [{\"family\": \"Craft Missing CJK Family 72625\", \"missing\": true, \"objects\": 1, \"runs\": 1, \"style\": \"Regular\"}]",
+  "stage": "../.vectorcraft-olwrnr8v",
+  "files": {
+    "recovery-operations.json": {
+      "sha256": "66c8cb7312b7dd88f8846482048926ffc49fb7ccedb825e9dc81a6ed78b9d60e",
+      "bytes": 1081
+    }
+  },
+  "completedOperations": 4,
+  "lastAttempt": {
+    "command": "text.fonts",
+    "params": {},
+    "phase": "reply_received"
+  },
+  "replayAllowed": false,
+  "acceptance": "not-a-successful-delivery",
+  "recovery": "verify hashes and reopen original project in a new read-only session before any explicit revision"
+}

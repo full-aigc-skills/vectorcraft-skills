@@ -73,7 +73,7 @@ class CommandsTests(unittest.TestCase):
             self.assertEqual(rows[old["id"]]["params"], old["params"])
             self.assertIn(rows[old["id"]]["ownerSkill"], names)
             self.assertEqual(rows[old["id"]]["executionAcceptance"], "NOT_RUN")
-            m.validate({"schema":"craft-command-plan/v1","operations":[{"command":old["id"],"params":{}}]})
+            m.validate({"schema":"craft-command-plan/v1","operations":[{"command":old["id"],"params":({"id":1,"text":"fixture"} if old["id"]=="text.setText" else {})}]})
 
     def test_later_unknown_command_fails_before_install_and_output(self):
         m = module()

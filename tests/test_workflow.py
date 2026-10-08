@@ -60,6 +60,17 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(params=params), self.assertRaisesRegex(ValueError, 'invalid_text_edit'):
                 self.module.validate({'operations': [{'command': 'text.setText', 'params': params}]})
 
+    def test_text_edit_gateway_and_complete_entry_require_explicit_targets(self):
+        invalid = [{'text':'新标题'}, {'id':1,'ids':[2],'text':'新标题'}, {'ids':[],'text':'新标题'}, {'id':True,'text':'新标题'}, {'id':1,'text':42}, {'id':1,'text':'新标题','font':'Other'}]
+        commands=self.module.native_module().commands
+        for params in invalid:
+            with self.subTest(route='gateway',params=params), self.assertRaisesRegex(ValueError,'invalid_text_edit'):
+                self.module.validate({'operations':[{'command':'native.command','params':{'command':'text.setText','params':params}}]})
+            with self.subTest(route='complete',params=params), self.assertRaisesRegex(ValueError,'invalid_text_edit'):
+                commands.validate({'schema':'craft-command-plan/v1','operations':[{'command':'text.setText','params':params}]})
+        self.module.validate({'operations':[{'command':'native.command','params':{'command':'text.setText','params':{'id':1,'text':'新标题'}}}]})
+        commands.validate({'schema':'craft-command-plan/v1','operations':[{'command':'text.setText','params':{'id':1,'text':'新标题'}}]})
+
     def test_duplicate_alias_rejected(self):
         with self.assertRaisesRegex(ValueError, 'duplicate_alias'):
             self.module.validate({'operations': [{'command': 'shape.rectangle', 'as': 'logo'}, {'command': 'shape.ellipse', 'as': 'logo'}]})

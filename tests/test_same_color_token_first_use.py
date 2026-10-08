@@ -121,7 +121,7 @@ class SameColorTokenFirstUseTests(unittest.TestCase):
             self.assertEqual(identity, hashes(skill))
             self.assertFalse(list(skill.rglob('*.pyc')))
             proof = {'schema': 'vectorcraft-same-color-token-acceptance/v1', 'result': 'passed',
-                     'scope': 'single fixed installed skill; public workflow create/revision; RGB token only',
+                     'scope': 'single supplied skill; fixed host installation recorded separately; public workflow create/revision; RGB token only',
                      'runtimeInitiallyPresent': reused, 'coldInstallClaimed': not reused,
                      'runtimeBinarySha256': original['runtimeSha256'],
                      'skillFiles': identity, 'sourceFiles': source_hashes, 'revisedFiles': hashes(revised),

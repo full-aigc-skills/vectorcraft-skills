@@ -45,8 +45,15 @@ class ChineseTextNativeTests(unittest.TestCase):
    self.assertEqual(m.sha(first/'project.vectorcraft'),a['files']['project.vectorcraft']);self.assertEqual(b['sourceProjectSha256'],a['files']['project.vectorcraft'])
    bad={**revision,'operations':[{'command':'text.setText','params':{'id':999999999,'text':'其他标题'}}]}
    with self.assertRaises(RuntimeError):m.execute(bad,root/'missing-text',source=first,runtime_home=runtime)
-   self.assertFalse((root/'missing-text').exists());self.assertFalse(any(skill.rglob('*.pyc')))
+   # VC-TX-004：原生执行已开始的失败保留现场，但不得发布成功清单。
+   self.assertFalse((root/'missing-text/manifest.json').exists())
+   text_failure=json.loads((root/'missing-text/failure.json').read_text());self.assertFalse(text_failure['replayAllowed'])
+   self.assertFalse(any(skill.rglob('*.pyc')))
+   if os.environ.get('CRAFT_TEXT_EVIDENCE_DIR'):shutil.copytree(root/'missing-text',evidence/'unknown-target-failure')
    invalid_font=json.loads(json.dumps(plan));invalid_font['operations'][0]['params']['font']='Craft Missing CJK Family 72625'
    with self.assertRaisesRegex(ValueError,'missing_fonts'):m.execute(invalid_font,root/'missing-font',runtime_home=runtime)
-   self.assertFalse((root/'missing-font').exists())
+   self.assertFalse((root/'missing-font/manifest.json').exists())
+   font_failure=json.loads((root/'missing-font/failure.json').read_text());self.assertFalse(font_failure['replayAllowed'])
+   self.assertIn('missing_fonts',json.dumps(font_failure));self.assertEqual(m.sha(first/'project.vectorcraft'),a['files']['project.vectorcraft'])
+   if os.environ.get('CRAFT_TEXT_EVIDENCE_DIR'):shutil.copytree(root/'missing-font',evidence/'missing-font-failure')
    if os.environ.get('CRAFT_TEXT_EVIDENCE_DIR'):shutil.copytree(second,evidence/'v2')

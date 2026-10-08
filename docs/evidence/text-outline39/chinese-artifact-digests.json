@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "files": {
+    "v1/plan.json": "a5f1310bfba6102606079b62712096ae9e4298dffe860dcbab64448619613762",
+    "v1/project.vectorcraft": "a93dc3f838fa3fe9be74131942a037809f30f00ee73f8c08ef4fc4f121390aee",
+    "v1/exchange-loss.json": "4f64b9923993f90f1b4dd3843f51dc80539f85b063ea03667cfa187f274e3b33",
+    "v1/native.json": "4d44e825e864272967b1b5b1787048266e3443ba07b18dc26d162572a9978984",
+    "v1/manifest.json": "da4a117e54263ee99d572760af81a5ca6df0f66b1e2434e2e27f990eb860341b",
+    "v1/artboard-1.png": "89b29b8af1a1898aa656f9910e758edb01e2c81b84a3b828111d6370f6084959",
+    "v1/artboard-1.svg": "368f26f69af45b99de756734e679830f7dfa0f23b4e5851454b474830d428c4d",
+    "v1/operations.json": "7892fab4e08a1ace9cb40facc2ef508bbda032f93259bc5047a330baa3a53b50",
+    "unknown-target-failure/failure.json": "db8fccfa475dc3fbd295b64df2fb2944320d027370a0667bf07236c440d9dc63",
+    "v2/plan.json": "6978487962a14beb638cb635e0284f7c5e5b0caa316e64078893cfd3bb3badb7",
+    "v2/project.vectorcraft": "f05642a3bff9b837414f616ea254baac8ed933556220e8d71e5560ca1b1dcef4",
+    "v2/exchange-loss.json": "590cbbf08fde4948f2906347e7af2cff3aa6d073b07f3e8800212123a0c6d472",
+    "v2/native.json": "c40327fce19a3cbad328c9a3ddcfbafb50bcaadfb8425699e3352fd0b450cc99",
+    "v2/manifest.json": "982ffede29a5bac6e6e0c86acf194fa55603fe63ca551f8d31e1d7c8eadbb5ba",
+    "v2/artboard-1.png": "aa329f21a8aeb9dc843cd7f43ab93e587333189ad9c5ed8e268337167fef83b9",
+    "v2/artboard-1.svg": "3a42068bf64d27df7ba4bf1f86847cfa4d11b0530c4e7c521157315c8a23dcd2",
+    "v2/operations.json": "05f377166dc14a75e51d4cd233b020250f6dfb8fb174cdb3a1223359537e9f63",
+    "missing-font-failure/failure.json": "20b37b9f6ee75756491616812aa6a8c96e9f281f4fab7c470b3623c6ac19b87f"
+  },
+  "scope": "actual native positive and retained failure bytes; media retained privately"
+}
