@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.43`; companion published plugin: `0.1.0-dev.56`; 13 independent skills.
+Current skill source: `0.1.0-dev.43`; companion published plugin: `0.1.0-dev.58`; 13 independent skills.
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full VC-DM-004 qualification at fixed54 is complete; see the four-scenario evidence below. GUI/model/full V1 remain separate.
 
@@ -210,3 +210,6 @@ Public fixed plugin56/source42 qualifies all six current VC-DM-006 scenarios:RGB
 
 
 Source43 candidate registers digest-bound artifact lineage, stable logical IDs, execution identity, parent revisions and portable package-relative dependencies. Native create/move/reopen/revise and five integrity refusals pass on macOS arm64. Default regression:177 passed/30 skipped of207. Companion fixed57 qualification remains pending. [Evidence](docs/evidence/lineage-candidate43-20261009.json).
+
+
+Companion public58/source43 passed all three artifact-lineage scenarios on actual Codex0.153.4 macOS arm64 installation. Native movement/reopen, parent-bound revisions and public seven-case integrity checks pass;13 installed skill digests remain unchanged. Tasks5.1–5.3 complete;114/127 total complete,13 open. [Fixed qualification](https://github.com/full-aigc-plugins/vectorcraft-plugin/releases/tag/v0.1.0-dev.58).
