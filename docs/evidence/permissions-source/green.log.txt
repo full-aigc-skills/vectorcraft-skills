@@ -1,0 +1,11 @@
+test_complete_gateway_rejects_literal_credential (test_input_security.InputSecurityTests.test_complete_gateway_rejects_literal_credential) ... ok
+test_session_does_not_inherit_host_secret (test_input_security.InputSecurityTests.test_session_does_not_inherit_host_secret) ... ok
+test_successful_reply_with_literal_credentials_is_not_retained (test_input_security.InputSecurityTests.test_successful_reply_with_literal_credentials_is_not_retained) ... ok
+test_tool_error_and_semantic_error_hide_untrusted_diagnostics (test_input_security.InputSecurityTests.test_tool_error_and_semantic_error_hide_untrusted_diagnostics) ... ok
+test_untrusted_protocol_error_is_not_echoed (test_input_security.InputSecurityTests.test_untrusted_protocol_error_is_not_echoed) ... ok
+test_workflow_rejects_literal_credential (test_input_security.InputSecurityTests.test_workflow_rejects_literal_credential) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.067s
+
+OK

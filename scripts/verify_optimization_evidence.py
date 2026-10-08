@@ -33,6 +33,6 @@ def verify(root,report):
     return errors
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--check',action='store_true',required=True);parser.add_argument('--report',default='docs/evidence/lineage-candidate43-20261009.json');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--check',action='store_true',required=True);parser.add_argument('--report',default='docs/evidence/permissions-candidate44-20261009.json');args=parser.parse_args()
     report=json.loads((ROOT/args.report).read_text())
     errors=verify(ROOT,report);print(json.dumps({'result':'FAIL' if errors else 'PASS','scope':'current candidate source and skill fingerprint integrity only','errors':errors}));raise SystemExit(bool(errors))

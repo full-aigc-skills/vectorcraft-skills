@@ -1,0 +1,59 @@
+test_complete_gateway_rejects_literal_credential (test_input_security.InputSecurityTests.test_complete_gateway_rejects_literal_credential) ... FAIL
+test_session_does_not_inherit_host_secret (test_input_security.InputSecurityTests.test_session_does_not_inherit_host_secret) ... FAIL
+test_tool_error_and_semantic_error_hide_untrusted_diagnostics (test_input_security.InputSecurityTests.test_tool_error_and_semantic_error_hide_untrusted_diagnostics) ... FAIL
+test_untrusted_protocol_error_is_not_echoed (test_input_security.InputSecurityTests.test_untrusted_protocol_error_is_not_echoed) ... FAIL
+test_workflow_rejects_literal_credential (test_input_security.InputSecurityTests.test_workflow_rejects_literal_credential) ... FAIL
+
+======================================================================
+FAIL: test_complete_gateway_rejects_literal_credential (test_input_security.InputSecurityTests.test_complete_gateway_rejects_literal_credential)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "SOURCE_ROOT/tests/test_input_security.py", line 29, in test_complete_gateway_rejects_literal_credential
+    with self.assertRaisesRegex(ValueError,'literal_secret_forbidden'):load('commands').validate({'schema':'craft-command-plan/v1','operations':[{'command':'document.json','params':{'clientSecret':'synthetic'}}]})
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_session_does_not_inherit_host_secret (test_input_security.InputSecurityTests.test_session_does_not_inherit_host_secret)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "SOURCE_ROOT/tests/test_input_security.py", line 21, in test_session_does_not_inherit_host_secret
+    r=json.loads(s.request('inspect',{})['content'][0]['text']);self.assertTrue(r['pathPresent']);self.assertFalse(r['secretPresent'],'actual MCP process inherited host secret')
+                                                                                                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : actual MCP process inherited host secret
+
+======================================================================
+FAIL: test_tool_error_and_semantic_error_hide_untrusted_diagnostics (test_input_security.InputSecurityTests.test_tool_error_and_semantic_error_hide_untrusted_diagnostics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "SOURCE_ROOT/tests/test_input_security.py", line 34, in test_tool_error_and_semantic_error_hide_untrusted_diagnostics
+    self.assertNotIn('synthetic-native-error-secret',str(caught.exception))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'synthetic-native-error-secret' unexpectedly found in 'command_failed: [{"type": "text", "text": "synthetic-native-error-secret"}]'
+
+======================================================================
+FAIL: test_untrusted_protocol_error_is_not_echoed (test_input_security.InputSecurityTests.test_untrusted_protocol_error_is_not_echoed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "SOURCE_ROOT/tests/test_input_security.py", line 25, in test_untrusted_protocol_error_is_not_echoed
+    self.assertNotIn('synthetic-native-error-secret',str(caught.exception))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'synthetic-native-error-secret' unexpectedly found in 'mcp_error: {"code": -32000, "message": "synthetic-native-error-secret"}'
+
+======================================================================
+FAIL: test_workflow_rejects_literal_credential (test_input_security.InputSecurityTests.test_workflow_rejects_literal_credential)
+----------------------------------------------------------------------
+ValueError: invalid_text_edit: explicit id or ids and string text required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "SOURCE_ROOT/tests/test_input_security.py", line 27, in test_workflow_rejects_literal_credential
+    with self.assertRaisesRegex(ValueError,'literal_secret_forbidden'):load('workflow').validate({'operations':[{'command':'text.setText','params':{'ids':[2],'text':'ordinary text','apiKey':'synthetic'}}]})
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "literal_secret_forbidden" does not match "invalid_text_edit: explicit id or ids and string text required"
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.071s
+
+FAILED (failures=5)

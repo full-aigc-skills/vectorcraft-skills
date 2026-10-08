@@ -1,5 +1,9 @@
 # Version-bound release records
 
+## dev.44 (2026-10-09)
+
+Environment and protocol-diagnostic boundaries:6 targeted tests and183 default regressions pass,30 skip;13 independent cold installs,native revision,three exports and reopen pass. Source44 does not replace source43 inside plugin63;full permission qualification and V1 remain open. [Evidence](docs/evidence/permissions-candidate44-20261009.json).
+
 ## dev.38 (2026-10-09)
 
 Fsync the actual delivery directory inode, device, target path and manifest digest before final rename, including packaged linked assets. Two failures pass after the fix;146 of176 source tests pass and30 native/host gates skip. Four actual plain/linked candidate coordinator crashes before/after receipt pass. Plugin49 fixed-install acceptance is separate; fullV1 remains open. [Candidate evidence](docs/evidence/delivery-identity-candidate-20261009.json).
