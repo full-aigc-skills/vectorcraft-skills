@@ -1,0 +1,114 @@
+{
+  "schema": "vectorcraft-delivery-identity-source-candidate/v1",
+  "result": "PASS",
+  "version": "0.1.0-dev.38",
+  "scope": "durable actual delivery directory identity before rename, including packaged linked assets; current candidate source in external plugin coordinator QA, not fixed installed source38 or full V1 acceptance",
+  "tests": {
+    "total": 176,
+    "passed": 146,
+    "skipped": 30,
+    "sourceControlRedErrors": 2,
+    "sourceControlPassed": 9
+  },
+  "nativeCoordinatorCases": [
+    {
+      "name": "plain-before-source38",
+      "result": "PASS",
+      "receiptPersisted": false,
+      "preparedManifestBound": true,
+      "projectSha256": "437ab73b4916ed6a60efbbeb63d59c6c58f71ca1fc04fb94d842a9be9f27ae80",
+      "manifestSha256": "d01fc663d1d528117699c4336b0360faf1b94c7a1ac2d658205d70ce9dd249d9",
+      "nonemptyLinks": false
+    },
+    {
+      "name": "plain-after-source38",
+      "result": "PASS",
+      "receiptPersisted": true,
+      "preparedManifestBound": true,
+      "projectSha256": "9ce8a5583ca30c0308421b50ddcd5f0d340ebbe2d9c61bacfdf76f1416864940",
+      "manifestSha256": "1ce39a16ae85c2ed432ce38008d61be556d0604aeb072886bcbf76731149cc22",
+      "nonemptyLinks": false
+    },
+    {
+      "name": "linked-before-source38",
+      "result": "PASS",
+      "receiptPersisted": false,
+      "preparedManifestBound": true,
+      "projectSha256": "1a8b62d92740935b3f22cf1ece040393cf9c3c417b0bfe087c0ea041f0c14706",
+      "manifestSha256": "81b69d67da3981f8123b58e8d6311b6cb3ef919c30ee9d2330d144dfdeccdac6",
+      "nonemptyLinks": true
+    },
+    {
+      "name": "linked-after-source38",
+      "result": "PASS",
+      "receiptPersisted": true,
+      "preparedManifestBound": true,
+      "projectSha256": "1fa587e5c34ff8ebdc46e543ded468c4e2210bd0275a6d5408fb1de40f7666b8",
+      "manifestSha256": "960c0f5afdad6cd491bd9f4e048d106a3939baea369cf4fde31248d983efc2ab",
+      "nonemptyLinks": true
+    }
+  ],
+  "fingerprints": {
+    ".claude-plugin/plugin.json": "f6d821abfbbe89e00af831dabce3416e4d1e015201f1c8a261b1de1d7936a371",
+    "skill-suite.json": "5901c1e0617803ae438d4b1f621880f0442a1f09170667f93b381da586999afd",
+    "tests/test_execution_control.py": "8422ad3dea3f552a5d3936f53344568351f9324aa98ca0d82a6828932bfab47c",
+    "scripts/sync_skill_suite.py": "3dd2ec37f3465dc536d8d4180a7e5cb3d4651058f44b8ce1bd75c896700efa5d",
+    "scripts/verify_optimization_evidence.py": "08afeba575e1a8c73a71ef1e6968953dd47d64871d05b22961f797037a26e808",
+    "skills/vectorcraft-cli-setup/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-setup/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-export/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-export/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-appearance/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-appearance/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-artboards/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-artboards/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-use/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-use/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-paths/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-paths/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-assets/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-assets/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-text/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-text/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-shapes/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-shapes/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-boolean/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-boolean/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-project/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-project/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "skills/vectorcraft-cli-selection/scripts/execution_control.py": "0acaa8fa01aae3689bb8c460efdd9bb19578d33e1572e24dc8dea00ef38ec008",
+    "skills/vectorcraft-cli-selection/scripts/workflow.py": "412cd5ef739d138f9fa43babe630be612b6b336918680a79e1555d5ddd6ea0c0",
+    "docs/evidence/delivery-identity38/linked-after-source38.json": "cd415c7b7235b4cee8d53dea7aaefe140a8e21a1d425ca15e5365672afe733d1",
+    "docs/evidence/delivery-identity38/red.log": "b07f6026d8cb8e3aea73597cd7cbf1deadf6a2a94e5607dd717f54c87e35f481",
+    "docs/evidence/delivery-identity38/green.log": "72863b619ecfb70cadb8025cd7b40b0e766fa8d7d97303256c2e7ec510470215",
+    "docs/evidence/delivery-identity38/linked-before-source38.json": "5f0396cca5163ffcdac4e8feea06d5192583ca09471e142d64269cd63fca0465",
+    "docs/evidence/delivery-identity38/plain-after-source38.json": "509cefe32bd6e1f32b0e42ca111f6be5fbebfdea0c09f4b49c734e6f04f61889",
+    "docs/evidence/delivery-identity38/tests.log": "0671d5fafb4d1470400681078c22fe00e9036a6821e9c02218f78b2cea75cff8",
+    "docs/evidence/delivery-identity38/plain-before-source38.json": "2dccf69a11310e8d48854be07b36494e8933682d0f5295e957e99c4374fa2902"
+  },
+  "skills": {
+    "vectorcraft-cli": "bbadce2cefd040e8c1e143c84cf74f4efab0a03e768440e1b38ce73d10c2efb4",
+    "vectorcraft-cli-appearance": "fb9a966b0f082fb216a5d26738052afc4578a032fd43880dee14f51657545be0",
+    "vectorcraft-cli-artboards": "5a11d4415ad514cf3691e0f0d82254eb6f005810712e7cf2a47071d400a59f60",
+    "vectorcraft-cli-assets": "4c120487365a4d23e689359cfec1d5c9b09d99909e07caefae868da4e28fe75a",
+    "vectorcraft-cli-boolean": "8e14ba7eb0b24ce01c2cf227afb8913473b06636f593e9b6fa28147aa001ba00",
+    "vectorcraft-cli-export": "edac0db2760f244b0f820b5ca4c154fc49a2c16cb070ce485ea8a15c358e4953",
+    "vectorcraft-cli-paths": "5d67ad22e0b8a474b0ad4f125803a2d31a1d147272f8ffd534949e298d4d485c",
+    "vectorcraft-cli-project": "d516720b6da5cfcfeafa484ee50d67f75ec9c6cf5f685d2958be7e9f90719cb8",
+    "vectorcraft-cli-selection": "14fdf505ffedcec15c762b69891cec6aa58ec53196dd0dbc794818791a3467f9",
+    "vectorcraft-cli-setup": "e0bd59ddb23cf69d662c21dbef5324d708d20267638869d1813bef244e7cd3b3",
+    "vectorcraft-cli-shapes": "b8ae3dbeb2fdcd731a51d262b6f0fe16e2675a3b02bd904ab293191dcffa2d53",
+    "vectorcraft-cli-text": "f42e0a496a25530fa8014721599108659be5064ee311044312dac09416004fe7",
+    "vectorcraft-use": "e7d84d441d0628269801918ced6f2f47abc31e461095dd805cc7634436757875"
+  },
+  "historicalEvidence": [
+    "boolean-transactions-candidate-20261008.json retains source37 execution identity; not rebound to source38"
+  ],
+  "remaining": [
+    "public source38 install acceptance",
+    "pre-native-call restart recovery",
+    "full VC-TX-002 and V1"
+  ]
+}

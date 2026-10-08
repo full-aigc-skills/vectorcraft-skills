@@ -54,6 +54,36 @@ class ExecutionControlTests(unittest.TestCase):
             events.rename(events.with_suffix('.original'));events.write_text('replaced')
             with self.assertRaisesRegex(RuntimeError,'execution_event_identity_mismatch'):control.before_request('tools/call',{},4,313)
 
+    def test_delivery_identity_is_durable_before_nested_stage_rename(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);path,profile,state,events,source=self.fixture(root)
+            control=self.load().ExecutionControl(path)
+            stage=root/'stage';stage.mkdir();control.attach_stage(stage)
+            delivery=stage/'delivery';delivery.mkdir();manifest=delivery/'manifest.json';manifest.write_text('{"fixture":true}')
+            output=root/'output';control.prepare_delivery(delivery,output)
+            record=json.loads(events.read_text().splitlines()[-1])
+            self.assertEqual(record['event'],'delivery_prepared')
+            self.assertEqual(record['path'],str(delivery.resolve()))
+            self.assertEqual(record['output'],str(output.absolute()))
+            self.assertEqual(record['inode'],delivery.stat().st_ino)
+            self.assertEqual(record['manifestSha256'],hashlib.sha256(manifest.read_bytes()).hexdigest())
+            self.assertFalse(output.exists())
+            delivery.rename(output)
+            self.assertEqual(output.stat().st_ino,record['inode'])
+
+    def test_delivery_identity_refuses_unowned_stage_and_output_parent(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);path,profile,state,events,source=self.fixture(root)
+            control=self.load().ExecutionControl(path)
+            stage=root/'stage';stage.mkdir();control.attach_stage(stage)
+            external=root/'other';external.mkdir();(external/'manifest.json').write_text('{}')
+            with self.assertRaisesRegex(RuntimeError,'delivery_outside_stage'):
+                control.prepare_delivery(external,root/'output')
+            (stage/'manifest.json').write_text('{}')
+            with self.assertRaisesRegex(RuntimeError,'delivery_outside_stage'):
+                control.prepare_delivery(stage,external/'output')
+            self.assertEqual(len(events.read_text().splitlines()),1)
+
     def test_revision_checks_actual_object_fields_and_all_global_swatch_consumers(self):
         import copy
         with tempfile.TemporaryDirectory() as temporary:

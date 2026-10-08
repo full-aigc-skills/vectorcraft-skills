@@ -1,5 +1,9 @@
 # Version-bound release records
 
+## dev.38 (2026-10-09)
+
+Fsync the actual delivery directory inode, device, target path and manifest digest before final rename, including packaged linked assets. Two failures pass after the fix;146 of176 source tests pass and30 native/host gates skip. Four actual plain/linked candidate coordinator crashes before/after receipt pass. Plugin49 fixed-install acceptance is separate; fullV1 remains open. [Candidate evidence](docs/evidence/delivery-identity-candidate-20261009.json).
+
 These records were moved verbatim from the README preface. They describe their own versions and are not the current installation contract.
 
 Fixed VectorCraft plugin dev.31/source dev.29 passes independent cold installation for every domain skill,7 installed guard tests and1 actual cold native create/reopen/revise/export case. Across the three updated domains:41 distinct empty caches,21 guards and3 native cases pass; all64 installed skill hashes remain unchanged. Art bundle upgrade and full V1 remain separate. [Evidence](docs/evidence/craft-three-domain-output-guards-fixed-first-use-20261007.json).

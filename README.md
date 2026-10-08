@@ -8,7 +8,9 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.37`; companion plugin: `0.1.0-dev.41`; 13 independent skills.
+Current skill source: `0.1.0-dev.38`; companion plugin: `0.1.0-dev.49`; 13 independent skills.
+
+Source38 persists the actual delivery directory inode, device and manifest digest before rename, including nested packaged-link deliveries. Companion plugin49 is a candidate consuming that identity and binding completed receipts. This extends optional Harness control without adding a plugin dependency to standalone workflows; fullV1 remains open.
 
 Verified first-use platform: macOS arm64 and Python 3.11+. Pinned runtimes install into the user data directory; skill files stay in their host-loaded directory. These are development releases; complete V1 acceptance and generic Skills CLI installation remain open.
 
