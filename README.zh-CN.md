@@ -8,7 +8,9 @@
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.39`；目标配套插件：`0.1.0-dev.52`；13 个独立技能。
+当前技能源：`0.1.0-dev.39`；配套插件：`0.1.0-dev.53`；13 个独立技能。
+
+配套公开固定插件53／源39完成VC-DM-003全部四场景，插件任务4.7–4.9完成。真实品牌误改注入、同色非消费者隔离、中文修订及独立重开、两种SVG文字模式与18项入口拒绝通过；13技能摘要保持。源39不可变标签未改，完整V1仍开放。[逐场景证据](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-brand-text-fixed53-20261009.json)。
 
 配套公开插件51／源38已完成路径几何4.3与组合／布尔4.6固定验收：六组原生几何保存／重开与18份导出，24组布尔工作流／Harness／SDK边界；七项几何与17项目标源测试通过。已知／未知失败为真实原生成功后的显式注入，不代表引擎缺陷。独立技能快照未改，完整V1仍开放。 [Geometry](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-geometry-fixed51-20261009.json) · [Boolean](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-boolean-fixed51-20261009.json).
 

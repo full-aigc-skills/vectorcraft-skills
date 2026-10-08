@@ -8,7 +8,9 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.39`; companion target plugin: `0.1.0-dev.52`; 13 independent skills.
+Current skill source: `0.1.0-dev.39`; companion plugin: `0.1.0-dev.53`; 13 independent skills.
+
+Companion public fixed plugin53/source39 qualifies all four VC-DM-003 scenarios and completes plugin tasks4.7–4.9: real injected brand faults, same-RGB nonconsumer isolation, Chinese revision/reopen, two SVG text modes and18 route refusals;13 skill digests unchanged. Source39 remains immutable; full V1 remains open. [Scenario evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-brand-text-fixed53-20261009.json).
 
 Companion public plugin51/source38 completed fixed acceptance for geometry4.3 and grouping/boolean4.6: six native geometry save/reopen cases with18 exports and24 boolean workflow/Harness/SDK boundary cases; seven geometry and17 targeted source tests passed. Known/unknown faults were explicitly injected after native success, not engine defect reports. Independent skill snapshots are unchanged; full V1 remains open. [Geometry](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-geometry-fixed51-20261009.json) · [Boolean](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-boolean-fixed51-20261009.json).
 
