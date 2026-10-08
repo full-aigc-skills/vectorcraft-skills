@@ -8,7 +8,9 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.38`; companion plugin: `0.1.0-dev.50`; 13 independent skills.
+Current skill source: `0.1.0-dev.38`; companion plugin: `0.1.0-dev.51`; 13 independent skills.
+
+Companion public plugin51/source38 passes all five VC-TX-003 scenarios: five actual native cases,115 Node and43 Python tests,13 unchanged skills and13 stopped registered groups; plugin task3.9 closes. Independent source38 and skill snapshots are unchanged; its immutable tag is retained. Full V1 remains open. [Fixed cancellation and budget evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-budget-cancel-fixed51-20261009.json).
 
 Source38 persists actual delivery directory inode, device and manifest digest before rename, including linked-asset package subdirectories. Public installed plugin50/source38 passes all seven VC-TX-002 scenarios and closes plugin task3.6; complete V1 remains open. [Fixed scenario evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-task-recovery-fixed50-20261009.json). These are optional Harness records; standalone workflows remain independent.
 
