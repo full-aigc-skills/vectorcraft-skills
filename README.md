@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.43`; companion published plugin: `0.1.0-dev.60`; 13 independent skills.
+Current skill source: `0.1.0-dev.43`; companion published plugin: `0.1.0-dev.61`; 13 independent skills.
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full VC-DM-004 qualification at fixed54 is complete; see the four-scenario evidence below. GUI/model/full V1 remain separate.
 
@@ -218,3 +218,5 @@ Companion public58/source43 passed all three artifact-lineage scenarios on actua
 Companion public59/source43 on actual Codex0.153.4 macOS arm64 passes all three native-project/exchange-loss scenarios: independent reopening, editable native text/freeform gradients, three decoded exports and20 refusals. All13 skill digests remain unchanged;5.6 closes,115/127 complete and12 open. [Qualification](https://github.com/full-aigc-plugins/vectorcraft-plugin/releases/tag/v0.1.0-dev.59).
 
 Companion plugin60 fixes readonly checker bundle identity and stale checked evidence.118 Node and92 Python tests pass locally; independent source43 and all13 skill snapshots remain unchanged. Task6.3 and12 total tasks remain open. [Development release](https://github.com/full-aigc-plugins/vectorcraft-plugin/releases/tag/v0.1.0-dev.60).
+
+Companion public61/source43 qualifies all three current technical/creative separation scenarios on actual Codex0.153.4 macOS arm64:19 native boundaries,119 Node and104 Python tests pass;13 skill digests remain unchanged. Only6.3 closes;116/127 complete,11 open. Maximal-score receipts were explicit QA injections; actual creative judgment,GUI,other platforms and full V1 remain separate. [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-quality-fixed61-20261009.json).
