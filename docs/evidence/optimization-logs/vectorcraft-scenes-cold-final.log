@@ -1,0 +1,17 @@
+test_assets_carry_placement_and_symbol_selection (test_task_skill_first_use.TaskSkillContractTests.test_assets_carry_placement_and_symbol_selection) ... ok
+test_shapes_and_boolean_carry_explicit_selection (test_task_skill_first_use.TaskSkillContractTests.test_shapes_and_boolean_carry_explicit_selection) ... ok
+test_appearance_recolors_brand_and_preserves_icon_pixels (test_task_skill_first_use.TaskSkillFirstUseTests.test_appearance_recolors_brand_and_preserves_icon_pixels) ... ok
+test_artboards_resize_icon_and_export_correct_dimensions (test_task_skill_first_use.TaskSkillFirstUseTests.test_artboards_resize_icon_and_export_correct_dimensions) ... ok
+test_assets_embed_image_and_create_reusable_symbol (test_task_skill_first_use.TaskSkillFirstUseTests.test_assets_embed_image_and_create_reusable_symbol) ... ok
+test_boolean_union_is_editable_path_and_preserves_existing_icon (test_task_skill_first_use.TaskSkillFirstUseTests.test_boolean_union_is_editable_path_and_preserves_existing_icon) ... ok
+test_export_svg_pdf_png_retains_vector_structure_and_board_scope (test_task_skill_first_use.TaskSkillFirstUseTests.test_export_svg_pdf_png_retains_vector_structure_and_board_scope) ... ok
+test_paths_keep_control_handle_and_change_only_icon_board (test_task_skill_first_use.TaskSkillFirstUseTests.test_paths_keep_control_handle_and_change_only_icon_board) ... ok
+test_project_creates_and_reopens_native_geometry (test_task_skill_first_use.TaskSkillFirstUseTests.test_project_creates_and_reopens_native_geometry) ... ok
+test_selection_targets_icon_before_move_and_preserves_brand_board (test_task_skill_first_use.TaskSkillFirstUseTests.test_selection_targets_icon_before_move_and_preserves_brand_board) ... ok
+test_shapes_create_group_and_move_without_changing_existing_logo (test_task_skill_first_use.TaskSkillFirstUseTests.test_shapes_create_group_and_move_without_changing_existing_logo) ... ok
+test_text_revision_preserves_editable_type_and_icon (test_task_skill_first_use.TaskSkillFirstUseTests.test_text_revision_preserves_editable_type_and_icon) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 92.028s
+
+OK

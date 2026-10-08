@@ -82,6 +82,69 @@ class BrandVariantGuardTests(unittest.TestCase):
         self.assertEqual(report['status'], 'failed')
         self.assertEqual(report['affectedObjectIds'], [1, 2])
 
+    def test_consumer_noncolor_fields_cannot_change(self):
+        before = fixture()
+        for field in ('closed', 'text', 'transform', 'appearance'):
+            with self.subTest(field=field):
+                after = copy.deepcopy(before)
+                children = after['layers'][0]['kind']['children']
+                if field == 'closed': children[0]['kind']['path']['closed'] = False
+                if field == 'text': children[2]['kind']['runs'][0]['text'] = 'UNEXPECTED'
+                if field == 'transform': children[0]['transform'] = [1, 0, 0, 1, 100, 0]
+                if field == 'appearance': children[0]['paint']['opacity'] = .1
+                report = self.module.inspect_update(before, after, 'Brand Primary')
+                self.assertEqual(report['status'], 'failed')
+                self.assertTrue(report['affectedObjectIds'])
+
+    def test_expected_color_requires_every_bound_field_to_reach_target(self):
+        before = fixture(); after = copy.deepcopy(before)
+        after['layers'][0]['kind']['children'][0]['paint']['color'] = '#175cce'
+        # 路径更新不能掩盖文字消费者未更新。
+        report = self.module.inspect_update(before, after, 'Brand Primary', '#175cce')
+        self.assertEqual(report['status'], 'failed')
+        self.assertEqual(report['targetMismatchObjectIds'], [4])
+
+    def test_valid_noop_and_missing_consumers_are_explicit(self):
+        before = fixture()
+        report = self.module.inspect_update(before, before, 'Brand Primary', '#2366e8')
+        self.assertEqual(report['status'], 'passed')
+        self.assertEqual(report['effect'], 'verified_noop')
+        unchanged = self.module.inspect_update(before, before, 'Brand Primary', '#175cce')
+        self.assertEqual(unchanged['status'], 'failed')
+        missing = self.module.inspect_update(before, before, 'Missing Token', '#175cce')
+        self.assertEqual(missing['status'], 'failed')
+        self.assertEqual(missing['effect'], 'no_effect')
+
+    def test_target_swatch_and_unrelated_palette_entries_are_checked(self):
+        before = fixture()
+        before['swatches'] = [{'name':'Brand Primary', 'paint':{'color':'#2366e8'}},
+                              {'name':'Other', 'paint':{'color':'#000000'}}]
+        after = copy.deepcopy(before)
+        after['layers'][0]['kind']['children'][0]['paint']['color'] = '#175cce'
+        after['layers'][0]['kind']['children'][2]['kind']['runs'][0]['style']['fill']['color'] = '#175cce'
+        report = self.module.inspect_update(before, after, 'Brand Primary', '#175cce')
+        self.assertEqual(report['status'], 'failed', 'consumers cannot mask a swatch still at the old value')
+        after['swatches'][0]['paint']['color'] = '#175cce'
+        report = self.module.inspect_update(before, after, 'Brand Primary', '#175cce')
+        self.assertEqual(report['status'], 'passed')
+        after['swatches'][1]['paint']['color'] = '#ffffff'
+        report = self.module.inspect_update(before, after, 'Brand Primary', '#175cce')
+        self.assertEqual(report['status'], 'failed')
+
+    def test_authoring_models_and_tints_preserve_their_native_semantics(self):
+        cases = [({'model':'cmyk','c':.2,'m':.4,'y':.6,'k':.8}, {'model':'cmyk','c':.1,'m':.2,'y':.3,'k':.4}),
+                 ({'model':'gray','k':.6}, {'model':'gray','k':.3}),
+                 ({'model':'lab','l':40.,'a':20.,'b':-30.}, {'model':'lab','l':70.,'a':10.,'b':-15.})]
+        for target, tinted in cases:
+            with self.subTest(model=target['model']):
+                before=fixture();after=copy.deepcopy(before)
+                for child in after['layers'][0]['kind']['children']:
+                    if child['id']==2: child['paint'].update(color=target)
+                    if child['id']==4: child['kind']['runs'][0]['style']['fill'].update(color=tinted,tint=.5)
+                before['layers'][0]['kind']['children'][2]['kind']['runs'][0]['style']['fill']['tint']=.5
+                report=self.module.inspect_update(before,after,'Brand Primary',target)
+                self.assertEqual(report['status'],'passed')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,191 @@
+Readonly immutable HEAD baseline replay; final target tests copied into isolated archive.
+test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) ... 
+  test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) (payload={'error': 'native edit failed'}) ... FAIL
+  test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) (payload={'id': 7, 'error': 'a business field'}) ... ERROR
+test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) ... 
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"id\\":1,\\"id\\":2}"}]}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":NaN}"}]}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":Infinity}"}]}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":1e999}"}]}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"id":REQUEST_ID,"result":{"content":[]}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":999,"result":{"content":[]}}') ... ERROR
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":null}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":true,"message":"bad"}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":-32600,"message":7}}') ... FAIL
+test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) ... 
+  test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"document":{},"document":{}}') ... FAIL
+  test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":NaN}') ... FAIL
+  test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":Infinity}') ... FAIL
+  test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":1e999}') ... FAIL
+  test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"operations":[{"params":{"x":1,"x":2}}]}') ... FAIL
+
+======================================================================
+ERROR: test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) (payload={'id': 7, 'error': 'a business field'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 97, in test_native_error_and_business_error_field_are_distinct
+    self.assertEqual(module('commands').parse_reply(command_reply), payload)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<temporary-path>", line 151, in parse_reply
+    raise RuntimeError("semantic_error: " + json.dumps(result, ensure_ascii=False))
+RuntimeError: semantic_error: {"id": 7, "error": "a business field"}
+
+======================================================================
+ERROR: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":999,"result":{"content":[]}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 73, in test_sent_reply_ambiguity_is_unknown_without_replay
+    session.command('document.save', {'path':'unused'})
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<temporary-path>", line 80, in command
+    result = self.request('tools/call', {'name': 'run_command', 'arguments': {'command': identifier, 'params': params}})
+  File "<temporary-path>", line 71, in request
+    raise TimeoutError('outcome_unknown: request not retried')
+TimeoutError: outcome_unknown: request not retried
+
+======================================================================
+FAIL: test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) (payload={'error': 'native edit failed'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 88, in test_native_error_and_business_error_field_are_distinct
+    with self.assertRaisesRegex(RuntimeError, 'semantic_error'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"id\\":1,\\"id\\":2}"}]}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":NaN}"}]}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":Infinity}"}]}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id": REQUEST_ID, "result": {"content": [{"type": "text", "text": "{\\"value\\":1e999}"}]}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"id":REQUEST_ID,"result":{"content":[]}}')
+----------------------------------------------------------------------
+RuntimeError: unexpected_command_result
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "unexpected_command_result"
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":null}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: null
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: null"
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":true,"message":"bad"}}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: {"code": true, "message": "bad"}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: {"code": true, "message": "bad"}"
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":-32600,"message":7}}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: {"code": -32600, "message": 7}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<temporary-path>", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: {"code": -32600, "message": 7}"
+
+======================================================================
+FAIL: test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"document":{},"document":{}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 52, in test_workflow_plan_rejected_before_install_or_output
+    self.assertRegex(json.loads(result.stdout)['error'], 'duplicate_json_key|nonfinite_json_value')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: 'duplicate_json_key|nonfinite_json_value' not found in 'operations_required'
+
+======================================================================
+FAIL: test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":NaN}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 52, in test_workflow_plan_rejected_before_install_or_output
+    self.assertRegex(json.loads(result.stdout)['error'], 'duplicate_json_key|nonfinite_json_value')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: 'duplicate_json_key|nonfinite_json_value' not found in 'operations_required'
+
+======================================================================
+FAIL: test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":Infinity}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 52, in test_workflow_plan_rejected_before_install_or_output
+    self.assertRegex(json.loads(result.stdout)['error'], 'duplicate_json_key|nonfinite_json_value')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: 'duplicate_json_key|nonfinite_json_value' not found in 'operations_required'
+
+======================================================================
+FAIL: test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"value":1e999}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 52, in test_workflow_plan_rejected_before_install_or_output
+    self.assertRegex(json.loads(result.stdout)['error'], 'duplicate_json_key|nonfinite_json_value')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: 'duplicate_json_key|nonfinite_json_value' not found in 'operations_required'
+
+======================================================================
+FAIL: test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) (text='{"operations":[{"params":{"x":1,"x":2}}]}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 52, in test_workflow_plan_rejected_before_install_or_output
+    self.assertRegex(json.loads(result.stdout)['error'], 'duplicate_json_key|nonfinite_json_value')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Regex didn't match: 'duplicate_json_key|nonfinite_json_value' not found in 'unsupported_command: None'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.859s
+
+FAILED (failures=14, errors=2)

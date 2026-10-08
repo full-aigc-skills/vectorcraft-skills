@@ -1,0 +1,8 @@
+test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) ... ok
+test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) ... ok
+test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.651s
+
+OK

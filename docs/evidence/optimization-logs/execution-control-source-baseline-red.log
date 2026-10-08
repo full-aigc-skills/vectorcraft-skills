@@ -1,0 +1,51 @@
+Immutable HEAD baseline replay after implementation; not the original pre-implementation log.
+HEAD=ed4a8b2911306b0c4dfd912cca53777c2951c14b
+EEE
+======================================================================
+ERROR: test_cancel_deadline_epoch_and_source_change_block_next_native_request (test_execution_control.ExecutionControlTests.test_cancel_deadline_epoch_and_source_change_block_next_native_request)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 31, in test_cancel_deadline_epoch_and_source_change_block_next_native_request
+    root=Path(temporary);path,profile,state,events,source=self.fixture(root);m=self.load();control=m.ExecutionControl(path)
+                                                                               ~~~~~~~~~^^
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 15, in load
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1159, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1217, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<plugin-repository>/.local/execution-control-proof/source-baseline/skills/vectorcraft-use/scripts/execution_control.py'
+
+======================================================================
+ERROR: test_original_stage_identity_and_submitted_request_survive_reopen (test_execution_control.ExecutionControlTests.test_original_stage_identity_and_submitted_request_survive_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 45, in test_original_stage_identity_and_submitted_request_survive_reopen
+    root=Path(temporary);path,profile,state,events,source=self.fixture(root);m=self.load();control=m.ExecutionControl(path)
+                                                                               ~~~~~~~~~^^
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 15, in load
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1159, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1217, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<plugin-repository>/.local/execution-control-proof/source-baseline/skills/vectorcraft-use/scripts/execution_control.py'
+
+======================================================================
+ERROR: test_revision_checks_actual_object_fields_and_all_global_swatch_consumers (test_execution_control.ExecutionControlTests.test_revision_checks_actual_object_fields_and_all_global_swatch_consumers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 62, in test_revision_checks_actual_object_fields_and_all_global_swatch_consumers
+    m=self.load();control=m.ExecutionControl(path)
+  File "<plugin-repository>/.local/execution-control-proof/source-baseline/tests/test_execution_control.py", line 15, in load
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+                                                 ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1022, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1159, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1217, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: '<plugin-repository>/.local/execution-control-proof/source-baseline/skills/vectorcraft-use/scripts/execution_control.py'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+FAILED (errors=3)

@@ -23,7 +23,7 @@ class _BrandFaultSession(Session):
         target = os.environ.get('CRAFT_BRAND_FAULT_OBJECT')
         if target and method == 'tools/call' and arguments.get('command') == 'swatch.edit':
             injected = super().request('tools/call', {'name': 'run_command', 'arguments': {
-                'command': 'paint.setFill', 'params': {'ids': [int(target)], 'color': '#175cce'}}})
+                **json.loads(os.environ.get('CRAFT_BRAND_FAULT_COMMAND', json.dumps({'command': 'paint.setFill', 'params': {'ids': [int(target)], 'color': '#175cce'}})))}})
             with open(os.environ['CRAFT_BRAND_FAULT_LOG'], 'a') as stream:
                 stream.write(json.dumps({'objectId': int(target), 'nativeReply': injected})+'\\n')
         return result
@@ -48,7 +48,7 @@ class BrandGuardNativeTests(unittest.TestCase):
         else:
             context = tempfile.TemporaryDirectory(prefix='vector-brand-guard-')
         with context as temporary:
-            root = Path(temporary)
+            root = Path(temporary).resolve()
             origin = Path(os.environ.get('CRAFT_INSTALLED_BRAND_GUARD_SKILL', ROOT/'skills/vectorcraft-cli-appearance'))
             skill = root/'.agents/skills'/origin.name
             shutil.copytree(origin, skill, ignore=shutil.ignore_patterns('__pycache__'))
@@ -79,12 +79,14 @@ class BrandGuardNativeTests(unittest.TestCase):
                 plan['assets'] = {'badge': {'path': str(image), 'sha256': hashlib.sha256(image.read_bytes()).hexdigest()}}
                 plan['operations'].append({'command': 'asset.place', 'params': {'asset': 'badge', 'rect': [8, 80, 16, 16], 'link': True}})
 
-            def run(name, value, source=None, fault=None):
+            def run(name, value, source=None, fault=None, fault_command=None):
                 p = root/(name+'.json'); p.write_text(json.dumps(value))
                 argv = [sys.executable, '-I', '-B', str(skill/'scripts/workflow.py'), str(p), '--output', str(root/name), '--runtime-home', str(runtime)]
                 if source: argv += ['--source', str(source)]
                 env = dict(environment)
-                if fault: env.update(CRAFT_BRAND_FAULT_OBJECT=str(fault), CRAFT_BRAND_FAULT_LOG=str(root/(name+'-injection.jsonl')))
+                if fault:
+                    env.update(CRAFT_BRAND_FAULT_OBJECT=str(fault), CRAFT_BRAND_FAULT_LOG=str(root/(name+'-injection.jsonl')))
+                    if fault_command: env['CRAFT_BRAND_FAULT_COMMAND']=json.dumps(fault_command)
                 result = subprocess.run(argv, env=env, capture_output=True, text=True, timeout=180)
                 (root/(name+'.log')).write_text(result.stdout+result.stderr)
                 return result
@@ -107,11 +109,16 @@ class BrandGuardNativeTests(unittest.TestCase):
             cli = module('bootstrap').install(json.loads((skill/'scripts/runtime.lock.json').read_text()), runtime)['executable']
             sessions = module('mcp_session')
             failures = []
-            for mode in ('direct', 'native-gateway'):
+            faults=[('nonconsumer',target,None),
+                    ('consumer-geometry',manifest['bindings']['bound']['id'],{'command':'object.transform','params':{'ids':[manifest['bindings']['bound']['id']],'matrix':[1,0,0,1,9,0]}}),
+                    ('consumer-text',manifest['bindings']['wordmark']['id'],{'command':'text.setText','params':{'id':manifest['bindings']['wordmark']['id'],'text':'WRONG'}}),
+                    ('consumer-stroke',manifest['bindings']['bound']['id'],{'command':'paint.setStroke','params':{'ids':[manifest['bindings']['bound']['id']],'color':'#ff0000'}})]
+            for route,kind,target,fault_command in [(mode,kind,target,command) for mode in ('direct','native-gateway') for kind,target,command in faults]:
+                mode=route+'-'+kind
                 value = json.loads(json.dumps(revision))
-                if mode == 'native-gateway':
+                if route == 'native-gateway':
                     value['operations'] = [{'command': 'native.command', 'params': value['operations'][0]}]
-                result = run(mode, value, source, target)
+                result = run(mode, value, source, target, fault_command)
                 self.assertNotEqual(result.returncode, 0, 'unguarded workflow accepted a real native non-consumer mutation')
                 self.assertIn('brand_dependency_violation', result.stdout)
                 output = root/mode
@@ -168,7 +175,7 @@ class BrandGuardNativeTests(unittest.TestCase):
             (root/'acceptance.json').write_text(json.dumps({'schema': 'vectorcraft-brand-guard-native/v1',
                 'status': 'passed', 'fixedInstalled': bool(os.environ.get('CRAFT_INSTALLED_BRAND_GUARD_SKILL')),
                 'runtimeReused': True, 'nativeRuntimeSha256': manifest['runtimeSha256'],
-                'faultInjection': 'QA-only extra real native paint.setFill after swatch.edit reply',
+                'faultInjection': 'QA-only extra real native consumer text/geometry/stroke and non-consumer fill after swatch.edit reply',
                 'failures': failures, 'healthyReport': report, 'sourceFiles': original,
                 'healthyFiles': hashes(root/'healthy'), 'instrumentedSkillFiles': instrumented_identity,
                 'driverSha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}, indent=2)+'\n')

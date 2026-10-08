@@ -1,0 +1,152 @@
+Readonly immutable HEAD baseline replay; final target tests copied into isolated archive.
+test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) ... 
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-use') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-setup') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-project') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-paths') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-shapes') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-boolean') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-text') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-appearance') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-artboards') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-assets') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-export') ... FAIL
+  test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-selection') ... FAIL
+test_source_manifest_and_suite_have_one_version (test_skill_contracts.SkillContractTests.test_source_manifest_and_suite_have_one_version) ... FAIL
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-use')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-setup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-project')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-paths')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-shapes')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-boolean')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-text')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-appearance')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-artboards')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-assets')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-export')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_each_skill_has_self_contained_operation_contract_and_invocation_policy (test_skill_contracts.SkillContractTests.test_each_skill_has_self_contained_operation_contract_and_invocation_policy) (skill='vectorcraft-cli-selection')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 23, in test_each_skill_has_self_contained_operation_contract_and_invocation_policy
+    self.assertTrue(path.is_file(), 'missing independently installed operation contract')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : missing independently installed operation contract
+
+======================================================================
+FAIL: test_source_manifest_and_suite_have_one_version (test_skill_contracts.SkillContractTests.test_source_manifest_and_suite_have_one_version)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<temporary-path>", line 15, in test_source_manifest_and_suite_have_one_version
+    self.assertEqual(manifest['version'], suite['version'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '0.1.0-dev.32' != '0.1.0-dev.33'
+- 0.1.0-dev.32
+?            ^
++ 0.1.0-dev.33
+?            ^
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=14)

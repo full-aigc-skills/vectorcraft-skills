@@ -1,0 +1,22 @@
+name: Independent skill contracts and execution guards
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python3 -I -B scripts/build_skill_contracts.py --check
+      - run: python3 -I -B scripts/build_command_coverage.py --check
+      - run: python3 -I -B scripts/build_scenario_catalog.py --check
+      - run: python3 -I -B scripts/sync_skill_suite.py --check
+      - run: python3 -I -B -m unittest discover -s tests -v
+      - run: python3 -I -B scripts/verify_optimization_evidence.py --check
+      - name: Native acceptance boundary
+        run: python3 -c 'print("Native macOS arm64, fixed-install, GUI and host/model gates remain separate; skipped tests are not PASS.")'

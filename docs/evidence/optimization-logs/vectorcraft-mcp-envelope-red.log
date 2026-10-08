@@ -1,0 +1,50 @@
+test_native_error_and_business_error_field_are_distinct (test_entry_parity.EntryParityTests.test_native_error_and_business_error_field_are_distinct) ... ok
+test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) ... 
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":null}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":true,"message":"bad"}}') ... FAIL
+  test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":-32600,"message":7}}') ... FAIL
+test_workflow_plan_rejected_before_install_or_output (test_entry_parity.EntryParityTests.test_workflow_plan_rejected_before_install_or_output) ... ok
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":null}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: null
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<skills-repository>/tests/test_entry_parity.py", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: null"
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":true,"message":"bad"}}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: {"code": true, "message": "bad"}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<skills-repository>/tests/test_entry_parity.py", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: {"code": true, "message": "bad"}"
+
+======================================================================
+FAIL: test_sent_reply_ambiguity_is_unknown_without_replay (test_entry_parity.EntryParityTests.test_sent_reply_ambiguity_is_unknown_without_replay) (reply='{"id":REQUEST_ID,"error":{"code":-32600,"message":7}}')
+----------------------------------------------------------------------
+RuntimeError: mcp_error: {"code": -32600, "message": 7}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<skills-repository>/tests/test_entry_parity.py", line 72, in test_sent_reply_ambiguity_is_unknown_without_replay
+    with self.assertRaisesRegex(RuntimeError, 'outcome_unknown'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "outcome_unknown" does not match "mcp_error: {"code": -32600, "message": 7}"
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.659s
+
+FAILED (failures=3)

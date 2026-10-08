@@ -1,0 +1,6 @@
+test_native_save_happens_once_unknown_reply_preserves_reopenable_project (test_native_protocol_faults.NativeProtocolFaultTests.test_native_save_happens_once_unknown_reply_preserves_reopenable_project) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 12.322s
+
+OK

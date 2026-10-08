@@ -1,0 +1,6 @@
+test_post_save_protocol_fault_preserves_original_stage_and_blocks_replay (test_native_preserved_stage.NativePreservedStageTests.test_post_save_protocol_fault_preserves_original_stage_and_blocks_replay) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.017s
+
+OK

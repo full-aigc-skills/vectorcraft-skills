@@ -1,0 +1,6 @@
+test_targeted_revision_survives_reopen_without_changing_other_objects (test_native_command_revision.NativeCommandRevisionTests.test_targeted_revision_survives_reopen_without_changing_other_objects) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 9.523s
+
+OK
