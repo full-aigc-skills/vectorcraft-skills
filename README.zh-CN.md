@@ -194,4 +194,6 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 
 技能源41增加实际SVG图像局部范围、祖先变换及引用／载荷摘要，区分内嵌栅格、内嵌SVG与未知引用；无损矢量声明禁止，原生工程保留。5项红绿测试、3项原生重开与9份输出独立解码通过；195项源回归165通过／30条件跳过。旧源40证据按原身份保留，当前候选见[证据](docs/evidence/exchange-candidate41-20261009.json)，新插件固定验收仍待执行。
 
-公开固定插件55／源41通过Codex0.153.4隔离安装与13技能发现，实际安装副本的三类原生重开、九份SVG／PDF／PNG解码和四类披露拒绝通过，13技能摘要保持，运行时复用。仅关闭4.13／4.14，107项完成／20项开放；4.15仍缺不可交换实时效果的自动导出退化或明确拒绝，以及原始效果工程保全验收。显式effect.expandAppearance案例不代替该证据。 [Fixed subset evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-fixed55-20261009.json).
+历史子集：公开固定插件55／源41通过Codex0.153.4隔离安装与13技能发现，实际安装副本的三类原生重开、九份SVG／PDF／PNG解码和四类披露拒绝通过，13技能摘要保持，运行时复用。仅关闭4.13／4.14，107项完成／20项开放；4.15仍缺不可交换实时效果的自动导出退化或明确拒绝，以及原始效果工程保全验收。显式effect.expandAppearance案例不代替该证据。 [Fixed subset evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-fixed55-20261009.json).
+
+固定55／源41已覆盖当前VC-DM-005-P／N：自动自由渐变SVG退化与局部栅格范围披露、独立原生重开及渐变编辑、源工程保全、三格式解码和七类异常拒绝通过。任务4.15正式完成，当前108项完成／19项开放；GUI、模型、其他平台和完整V1仍开放。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-qualified55-20261009.json).
