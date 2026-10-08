@@ -216,3 +216,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 配套公开插件61／源43在实际Codex0.153.4 macOS arm64通过技术／创作证据分离全部三个场景：19项真实原生边界、119项Node及104项Python通过，13技能摘要保持。仅6.3关闭；116/127完成，11项开放。满分回执为明确QA注入，真实创作判断、GUI、其他平台与完整V1分别未验。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-quality-fixed61-20261009.json).
 
 配套公开插件62／源43修复回执到达时预算耗尽的处理，四次共享尝试内保留更高分只读原生候选并持久停止。实际Codex隔离安装确认13技能摘要未变。122项Node、104项Python通过；6.6完整四场景验收仍开放，116/127完成、11项开放。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-revision-budget-fixed62-20261009.json).
+
+配套插件62／本技能源43补充固定安装验收：三项真实原生修订验证小幅提升停滞、降分保留最佳及轮数上限；独占签名桌面修改源工程后，陈旧建议在修订执行前被拒绝，预算与最佳副本保全。插件114项Python测试通过，含10项证据测试；13项安装技能摘要未变。本库技能字节及开发标签43保持不变。任务仍为116/127完成、11项开放，6.6完整验收继续推进。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/f9a3cc47a3b00a1806de82a6e5f7ad48880ce736/docs/evidence/vectorcraft-revision-limits-fixed62-20261009.json).
