@@ -193,3 +193,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 固定54／源40的VC-DM-004四个当前场景已完成验收，任务4.12标记完成，当前105项完成／22项开放。31项原生边界、单导出技能空运行时首用、同工程跨秒PDF及局部品牌修改后的无关SVG／PNG／PDF字节一致性通过，13技能摘要保持。未知绘制范围以原生空子图层实测，并结合固定上游源码确认None语义；跨画板群组记录为完整依赖。源回归190项中160通过／30跳过，GUI、模型、其他平台和完整V1仍开放。 [Full scenario evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-artboards-fixed54-20261009.json). 本轮仅修复QA断言及补充验收，生产载荷和发布标签不变。
 
 技能源41增加实际SVG图像局部范围、祖先变换及引用／载荷摘要，区分内嵌栅格、内嵌SVG与未知引用；无损矢量声明禁止，原生工程保留。5项红绿测试、3项原生重开与9份输出独立解码通过；195项源回归165通过／30条件跳过。旧源40证据按原身份保留，当前候选见[证据](docs/evidence/exchange-candidate41-20261009.json)，新插件固定验收仍待执行。
+
+公开固定插件55／源41通过Codex0.153.4隔离安装与13技能发现，实际安装副本的三类原生重开、九份SVG／PDF／PNG解码和四类披露拒绝通过，13技能摘要保持，运行时复用。仅关闭4.13／4.14，107项完成／20项开放；4.15仍缺不可交换实时效果的自动导出退化或明确拒绝，以及原始效果工程保全验收。显式effect.expandAppearance案例不代替该证据。 [Fixed subset evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-fixed55-20261009.json).
