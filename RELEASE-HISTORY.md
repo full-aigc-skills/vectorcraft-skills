@@ -58,3 +58,8 @@ Historical source-candidate note: Source candidate: complete native workflow gat
 ## 0.1.0-dev.32
 
 Public swatch workflows enforce explicit dependency checks, retain native pre-edit checkpoints on failure and bind successful reports. Thirteen independent skills carry the same self-contained guard. Fixed plugin/installed acceptance is recorded separately; Art bundles are unchanged.
+
+
+## 0.1.0-dev.42
+
+Source42: registered asset subtree guards, native SVG instance bounds correction and verified export inheritance; candidate native and172-pass/30-skip regression evidence. Fixed companion acceptance remains separate.

@@ -8,7 +8,7 @@
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.40`；配套插件：`0.1.0-dev.54`；13 个独立技能。
+当前技能源：`0.1.0-dev.42`；配套已发布插件：`0.1.0-dev.55`；13 个独立技能。
 
 源40支持显式稳定artboardId与创建回执ID绑定，返工旧索引身份偏移、未知ID、冲突范围和重复输出在首次导出前拒绝；清单记录画板名称、尺寸、当前顺序与PNG预览顺序。公开旧53的两类静默偏移已原生复现，候选三类成功／四类拒绝通过。固定54完整VC-DM-004验收已完成，见文末四场景证据；GUI／模型／完整V1保持独立。
 
@@ -197,3 +197,5 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 历史子集：公开固定插件55／源41通过Codex0.153.4隔离安装与13技能发现，实际安装副本的三类原生重开、九份SVG／PDF／PNG解码和四类披露拒绝通过，13技能摘要保持，运行时复用。仅关闭4.13／4.14，107项完成／20项开放；4.15仍缺不可交换实时效果的自动导出退化或明确拒绝，以及原始效果工程保全验收。显式effect.expandAppearance案例不代替该证据。 [Fixed subset evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-fixed55-20261009.json).
 
 固定55／源41已覆盖当前VC-DM-005-P／N：自动自由渐变SVG退化与局部栅格范围披露、独立原生重开及渐变编辑、源工程保全、三格式解码和七类异常拒绝通过。任务4.15正式完成，当前108项完成／19项开放；GUI、模型、其他平台和完整V1仍开放。 [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-qualified55-20261009.json).
+
+技能源42候选增加已登记素材的品牌变体守卫：按真实栅格／SVG实例身份替换、原生边界校正、无关对象／层次／画板保全与摘要绑定的旧导出清单继承。固定55漏检原生无关图标误改已复现；候选九份输出解码、三份无关输出字节保全及错误依赖拒绝通过。202项源回归中172通过／30跳过；固定新插件及完整VC-DM-006另行验收。 [Candidate evidence](docs/evidence/brand-candidate42-20261009.json).

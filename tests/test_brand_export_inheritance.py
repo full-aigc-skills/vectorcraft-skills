@@ -35,4 +35,18 @@ class BrandExportInheritanceTests(unittest.TestCase):
    with patch.object(self.m,'asset_module',return_value=module),patch.object(module,'preflight',side_effect=preflight):
     with self.assertRaises(Observed):self.m.execute(plan,root/'out',source=source,runtime_home=root/'runtime')
    self.assertEqual(seen[0]['exports'],[])
+ def test_asset_replacement_inherits_and_checks_prior_export_plan(self):
+  for corrupt in [False,True]:
+   with self.subTest(corrupt=corrupt),tempfile.TemporaryDirectory() as t:
+    root=Path(t);source,files,exports=self.fixture(root);seen=[];module=self.m.asset_module()
+    if corrupt:(source/'plan.json').write_text('{}')
+    plan={'expectedProjectSha256':files['project.vectorcraft'],'operations':[{'command':'asset.replace','params':{'asset':'logo','replacement':'newLogo'}}]}
+    def preflight(value,*args):seen.append(value);raise Observed()
+    with patch.object(self.m,'asset_module',return_value=module),patch.object(module,'preflight',side_effect=preflight):
+     if corrupt:
+      with self.assertRaisesRegex(ValueError,'brand_source_plan_digest_mismatch'):self.m.execute(plan,root/'out',source=source,runtime_home=root/'runtime')
+     else:
+      with self.assertRaises(Observed):self.m.execute(plan,root/'out',source=source,runtime_home=root/'runtime')
+      self.assertEqual(seen[0].get('exports'),exports)
+    self.assertFalse((root/'out').exists());self.assertFalse((root/'runtime').exists())
 if __name__=='__main__':unittest.main()

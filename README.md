@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.40`; companion plugin: `0.1.0-dev.54`; 13 independent skills.
+Current skill source: `0.1.0-dev.42`; companion published plugin: `0.1.0-dev.55`; 13 independent skills.
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full VC-DM-004 qualification at fixed54 is complete; see the four-scenario evidence below. GUI/model/full V1 remain separate.
 
@@ -203,3 +203,5 @@ Source41 discloses actual SVG image local geometry, ancestor transforms and refe
 Historical subset: Public fixed55/source41 passes isolated Codex0.153.4 installation/discovery of13 skills,three installed-copy native reopen cases,nine SVG/PDF/PNG decodes and four disclosure refusals;13 digests unchanged,pinned runtime reused. Only4.13/4.14 close,107 complete/20 open.4.15 still needs automatic fallback or explicit refusal for nonexchangeable live effects and preservation of the original live-effect project. The explicit effect.expandAppearance case does not establish that behavior. [Fixed subset evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-fixed55-20261009.json).
 
 Fixed55/source41 qualifies both current VC-DM-005-P/N scenarios: automatic freeform SVG fallback and local raster scope disclosure, independent native reopening and gradient editing, source preservation, three export decodes and seven refusals. Task4.15 closes:108 complete/19 open. GUI,models,other platforms and full V1 remain open. [Evidence](https://github.com/full-aigc-plugins/vectorcraft-plugin/blob/main/docs/evidence/vectorcraft-exchange-qualified55-20261009.json).
+
+Source42 candidate adds registered asset variant guards: real raster/SVG identity mappings, native instance bounds correction, unrelated object/stacking/artboard preservation and verified source export inheritance. The fixed55 nonconsumer-mutation gap is reproduced natively. Nine candidate export decodes, three unchanged unrelated outputs and dependency refusals pass. Source regression:172 passed/30 skipped of202; fixed plugin and complete VC-DM-006 qualification are separate. [Candidate evidence](docs/evidence/brand-candidate42-20261009.json).

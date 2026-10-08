@@ -58,3 +58,8 @@ Historical source-candidate note: Source candidate: complete native workflow gat
 ## 0.1.0-dev.32
 
 公开色板工作流增加显式依赖检查，失败保留原生修改前检查点，成功绑定依赖报告。13项独立技能均自包含守卫。固定插件和安装后验收单独记录；Art领域包未升级。
+
+
+## 0.1.0-dev.42
+
+技能源42：登记素材子树守卫、SVG实例原生边界校正与摘要核验后的导出继承；候选原生及172通过／30跳过回归证据齐备，配套固定安装独立验收。
