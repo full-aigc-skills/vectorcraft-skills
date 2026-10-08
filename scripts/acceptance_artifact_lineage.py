@@ -20,7 +20,7 @@ plan={'document':{'name':'Lineage acceptance','width':96,'height':80,'units':'Pi
  {'command':'asset.place','params':{'asset':'logo','rect':[12,16,36,24]}},
  {'command':'shape.rectangle','params':{'x':60,'y':10,'width':15,'height':15}},
  {'command':'paint.setFill','params':{'color':'#2266ee'}}], 'exports':[{'format':f,'artboard':0} for f in ('svg','pdf','png')]}
-first=out/'initial';manifest=w.execute(plan,first,runtime_home=runtime);record=loss.verify_lineage(first,manifest)
+first=out/'initial';manifest=w.execute(plan,first,runtime_home=runtime,read_roots=[out]);record=loss.verify_lineage(first,manifest)
 assert len(record['outputs'])==3 and len(record['assets'])==1 and record['parent']['status']=='creation'
 before=tree(first);moved=out/'moved package with spaces';shutil.move(first,moved)
 assert tree(moved)==before and loss.verify_lineage(moved,manifest)==record

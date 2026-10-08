@@ -89,7 +89,7 @@ class WorkflowTests(unittest.TestCase):
             for digest, operations, error in [('0'*64, [{'command': 'asset.place', 'params': {'asset': 'product'}}], 'asset_digest_mismatch'), (self.module.sha(asset), [], 'asset_not_consumed')]:
                 plan = {'document': {'width': 80, 'height': 50}, 'assets': {'product': {'path': str(asset), 'sha256': digest}}, 'operations': operations}
                 with self.subTest(error=error), self.assertRaisesRegex(ValueError, error):
-                    self.module.execute(plan, root/'delivery', runtime_home=root/'runtime')
+                    self.module.execute(plan, root/'delivery', runtime_home=root/'runtime', read_roots=[root])
                 self.assertFalse((root/'runtime').exists())
                 self.assertFalse((root/'delivery').exists())
 
@@ -100,7 +100,7 @@ class WorkflowTests(unittest.TestCase):
             image.write_text('<svg xmlns="http://www.w3.org/2000/svg"><image href="file:///outside.png"/></svg>')
             plan = {'document': {'width': 80, 'height': 50}, 'assets': {'logo': {'path': str(image), 'sha256': self.module.sha(image)}}, 'operations': [{'command': 'asset.place', 'params': {'asset': 'logo'}}]}
             with self.assertRaisesRegex(ValueError, 'asset_svg_external_dependency'):
-                self.module.execute(plan, root/'delivery', runtime_home=root/'runtime')
+                self.module.execute(plan, root/'delivery', runtime_home=root/'runtime', read_roots=[root])
             source = root/'source';source.mkdir()
             project = source/'project.vectorcraft';project.write_bytes(b'project fixture')
             dependency = source/'image.png';dependency.write_bytes(b'old asset')

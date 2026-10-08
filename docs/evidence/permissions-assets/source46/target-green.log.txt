@@ -1,0 +1,21 @@
+test_invalid_root_shapes_are_refused (test_asset_read_authorization.AssetDescriptorTests.test_invalid_root_shapes_are_refused) ... ok
+test_link_swap_between_resolution_and_open_is_refused_before_bytes (test_asset_read_authorization.AssetDescriptorTests.test_link_swap_between_resolution_and_open_is_refused_before_bytes) ... ok
+test_non_regular_file_is_refused_without_blocking (test_asset_read_authorization.AssetDescriptorTests.test_non_regular_file_is_refused_without_blocking) ... ok
+test_collection_rechecks_authority_after_parent_replacement (test_asset_read_authorization.AssetReadAuthorizationTests.test_collection_rechecks_authority_after_parent_replacement) ... ok
+test_collection_rejects_same_bytes_under_replaced_file_identity (test_asset_read_authorization.AssetReadAuthorizationTests.test_collection_rejects_same_bytes_under_replaced_file_identity) ... ok
+test_explicit_root_allows_preflight_and_collection (test_asset_read_authorization.AssetReadAuthorizationTests.test_explicit_root_allows_preflight_and_collection) ... ok
+test_metadata_path_and_digest_cannot_authorize_content_read (test_asset_read_authorization.AssetReadAuthorizationTests.test_metadata_path_and_digest_cannot_authorize_content_read) ... ok
+test_plan_metadata_cannot_supply_root_or_extra_command (test_asset_read_authorization.AssetReadAuthorizationTests.test_plan_metadata_cannot_supply_root_or_extra_command) ... ok
+test_symlinked_parent_cannot_escape_authorized_root (test_asset_read_authorization.AssetReadAuthorizationTests.test_symlinked_parent_cannot_escape_authorized_root) ... ok
+test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output (test_asset_read_authorization.RegisteredCommandInputTests.test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output) ... ok
+test_managed_authorization_roots_override_caller_broadening (test_asset_read_authorization.WorkflowAssetAuthorizationTests.test_managed_authorization_roots_override_caller_broadening) ... ok
+test_untrusted_plan_roots_do_not_grant_authority_or_install_runtime (test_asset_read_authorization.WorkflowAssetAuthorizationTests.test_untrusted_plan_roots_do_not_grant_authority_or_install_runtime) ... ok
+test_duplicate_cli_bindings_are_refused (test_asset_read_authorization.WorkflowCliAuthorizationTests.test_duplicate_cli_bindings_are_refused) ... ok
+test_managed_cli_checks_frozen_roots_before_asset_hash (test_asset_read_authorization.WorkflowCliAuthorizationTests.test_managed_cli_checks_frozen_roots_before_asset_hash) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.103s
+
+OK
+{"error": "asset_binding_invalid"}
+{"error": "asset_read_outside_root"}

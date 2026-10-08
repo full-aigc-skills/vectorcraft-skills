@@ -86,7 +86,7 @@ def run(destination, runtime):
     with_asset = workflow.execute({'document':{'width':128,'height':100,'units':'Pixels'},
         'assets':{'photo':{'path':str(image),'sha256':digest(image)}},
         'operations':operations+[{'command':'asset.place','params':{'asset':'photo','rect':[90,40,8,8],'link':True}}]},
-        asset_source,runtime_home=runtime)
+        asset_source,runtime_home=runtime,read_roots=[image.parent])
     asset_ids = [with_asset['bindings'][name]['id'] for name in ['outer','inner']]
     output = destination/'asset-revision'
     revised = workflow.execute({'expectedProjectSha256':with_asset['files']['project.vectorcraft'],

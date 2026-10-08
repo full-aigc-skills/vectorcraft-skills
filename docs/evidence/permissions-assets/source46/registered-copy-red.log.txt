@@ -1,0 +1,21 @@
+test_collection_rechecks_authority_after_parent_replacement (test_asset_read_authorization.AssetReadAuthorizationTests.test_collection_rechecks_authority_after_parent_replacement) ... ok
+test_collection_rejects_same_bytes_under_replaced_file_identity (test_asset_read_authorization.AssetReadAuthorizationTests.test_collection_rejects_same_bytes_under_replaced_file_identity) ... ok
+test_explicit_root_allows_preflight_and_collection (test_asset_read_authorization.AssetReadAuthorizationTests.test_explicit_root_allows_preflight_and_collection) ... ok
+test_metadata_path_and_digest_cannot_authorize_content_read (test_asset_read_authorization.AssetReadAuthorizationTests.test_metadata_path_and_digest_cannot_authorize_content_read) ... ok
+test_plan_metadata_cannot_supply_root_or_extra_command (test_asset_read_authorization.AssetReadAuthorizationTests.test_plan_metadata_cannot_supply_root_or_extra_command) ... ok
+test_symlinked_parent_cannot_escape_authorized_root (test_asset_read_authorization.AssetReadAuthorizationTests.test_symlinked_parent_cannot_escape_authorized_root) ... ok
+test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output (test_asset_read_authorization.RegisteredCommandInputTests.test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output) ... FAIL
+
+======================================================================
+FAIL: test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output (test_asset_read_authorization.RegisteredCommandInputTests.test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<repository>/tests/test_asset_read_authorization.py", line 107, in test_registered_path_swap_cannot_copy_outside_bytes_into_failure_output
+    self.assertFalse(copied.exists(), 'unauthorized outside bytes reached the failure output')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : unauthorized outside bytes reached the failure output
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.034s
+
+FAILED (failures=1)
