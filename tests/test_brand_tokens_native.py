@@ -18,7 +18,7 @@ class BrandTokenNativeTests(unittest.TestCase):
    shutil.copytree(Path(installed) if installed else ROOT/'skills/vectorcraft-cli-appearance',single,ignore=shutil.ignore_patterns('__pycache__'))
    spec=importlib.util.spec_from_file_location('isolated_token_workflow',single/'scripts/workflow.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
    plan=json.loads((single/'examples/brand-token-assets.json').read_text())
-   first=root/'v1';second=root/'v2';runtime=root/'fresh runtime';a=m.execute(plan,first,runtime_home=runtime)
+   first=root/'v1';second=root/'v2';runtime=Path(os.environ['CRAFT_BRAND_TOKEN_RUNTIME']) if os.environ.get('CRAFT_BRAND_TOKEN_RUNTIME') else root/'fresh runtime';a=m.execute(plan,first,runtime_home=runtime)
    revision={'expectedProjectSha256':a['files']['project.vectorcraft'],'operations':[{'command':'swatch.edit','params':{'name':{'$ref':'primary.name'},'color':'#175cce'}}]}
    b=m.execute(revision,second,source=first,runtime_home=runtime)
    for index in [1,3]:
@@ -33,7 +33,11 @@ class BrandTokenNativeTests(unittest.TestCase):
    self.assertEqual(b['sourceProjectSha256'],a['files']['project.vectorcraft'])
    bad=dict(revision,operations=[{'command':'swatch.edit','params':{'name':'MissingBrandToken-72625','color':'#ffffff'}}])
    with self.assertRaises((ValueError,RuntimeError)):m.execute(bad,root/'unknown-token',source=first,runtime_home=runtime)
-   self.assertFalse((root/'unknown-token').exists())
+   # 已进入原生操作的失败保留原位置现场；不得用目录不存在误判安全拒绝。
+   failure=json.loads((root/'unknown-token/failure.json').read_text())
+   self.assertFalse(failure['replayAllowed']);self.assertFalse((root/'unknown-token/manifest.json').exists())
+   stage=(root/'unknown-token'/failure['stage']).resolve()
+   for name,row in failure['files'].items():self.assertEqual(m.sha(stage/name),row['sha256'])
    self.assertEqual({o['path'] for o in a['outputs']},{o['path'] for o in b['outputs']})
    (first/'plan.json').write_text('{}')
    with self.assertRaisesRegex(ValueError,'brand_source_plan_digest_mismatch'):m.execute(revision,root/'tampered-plan',source=first,runtime_home=runtime)
