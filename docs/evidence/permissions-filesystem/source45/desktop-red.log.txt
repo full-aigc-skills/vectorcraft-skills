@@ -1,0 +1,42 @@
+test_gui_command_cannot_open_undeclared_project (test_native_desktop_filesystem_boundary.NativeDesktopFilesystemTests.test_gui_command_cannot_open_undeclared_project) ... FAIL
+test_gui_command_cannot_write_outside_delivery (test_native_desktop_filesystem_boundary.NativeDesktopFilesystemTests.test_gui_command_cannot_write_outside_delivery) ... FAIL
+test_normal_gui_native_save_reopen_and_export (test_native_desktop_filesystem_boundary.NativeDesktopFilesystemTests.test_normal_gui_native_save_reopen_and_export) ... ok
+
+======================================================================
+FAIL: test_gui_command_cannot_open_undeclared_project (test_native_desktop_filesystem_boundary.NativeDesktopFilesystemTests.test_gui_command_cannot_open_undeclared_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_desktop_filesystem_boundary.py", line 44, in test_gui_command_cannot_open_undeclared_project
+    self.check({'schema': 'craft-command-plan/v1', 'operations': [{'command': 'file.open', 'params': {'path': str(self.seed)}}]}, 'FAIL')
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_desktop_filesystem_boundary.py", line 31, in check
+    self.assertEqual(receipt['result'], result, receipt.get('error'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'FAIL'
+- PASS
++ FAIL
+
+
+======================================================================
+FAIL: test_gui_command_cannot_write_outside_delivery (test_native_desktop_filesystem_boundary.NativeDesktopFilesystemTests.test_gui_command_cannot_write_outside_delivery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_desktop_filesystem_boundary.py", line 48, in test_gui_command_cannot_write_outside_delivery
+    self.check({'schema': 'craft-command-plan/v1', 'operations': [
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {'command': 'file.new', 'params': {'width': 64, 'height': 64, 'units': 'Pixels'}},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        {'command': 'file.save', 'params': {'path': str(escaped)}}]}, 'FAIL')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_desktop_filesystem_boundary.py", line 31, in check
+    self.assertEqual(receipt['result'], result, receipt.get('error'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'PASS' != 'FAIL'
+- PASS
++ FAIL
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.895s
+
+FAILED (failures=2)

@@ -1,0 +1,28 @@
+test_explicit_roots_allow_native_conversion (test_native_cli_filesystem_boundary.NativeCliFilesystemTests.test_explicit_roots_allow_native_conversion) ... FAIL
+test_read_permission_does_not_imply_write_permission (test_native_cli_filesystem_boundary.NativeCliFilesystemTests.test_read_permission_does_not_imply_write_permission) ... ok
+test_unbound_native_arguments_cannot_grant_read_or_write (test_native_cli_filesystem_boundary.NativeCliFilesystemTests.test_unbound_native_arguments_cannot_grant_read_or_write) ... FAIL
+
+======================================================================
+FAIL: test_explicit_roots_allow_native_conversion (test_native_cli_filesystem_boundary.NativeCliFilesystemTests.test_explicit_roots_allow_native_conversion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_cli_filesystem_boundary.py", line 39, in test_explicit_roots_allow_native_conversion
+    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 0 : usage: cli.py [-h] [--runtime-home RUNTIME_HOME] [--archive ARCHIVE] ...
+cli.py: error: unrecognized arguments: --read-root
+
+
+======================================================================
+FAIL: test_unbound_native_arguments_cannot_grant_read_or_write (test_native_cli_filesystem_boundary.NativeCliFilesystemTests.test_unbound_native_arguments_cannot_grant_read_or_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_native_cli_filesystem_boundary.py", line 25, in test_unbound_native_arguments_cannot_grant_read_or_write
+    self.assertNotEqual(result.returncode, 0)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.143s
+
+FAILED (failures=2)

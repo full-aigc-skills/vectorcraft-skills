@@ -37,9 +37,9 @@ class SetupFailureTests(unittest.TestCase):
     with patch.object(module.subprocess,'run',side_effect=[receipt,OSError('native_fixture_failure')]) as run:code=module.main()
     self.assertEqual(run.call_count,2)
    else:
-    boot=SimpleNamespace(install=lambda *args:{'executable':'fixture-cli'},setup_failure=lambda *args:(_ for _ in ()).throw(AssertionError('incorrect setup diagnostic')))
+    boot=SimpleNamespace(install=lambda *args:{'executable':'/fixture-cli'},setup_failure=lambda *args:(_ for _ in ()).throw(AssertionError('incorrect setup diagnostic')))
     mocked=SimpleNamespace(loader=SimpleNamespace(exec_module=lambda module:None))
-    with patch.object(module.importlib.util,'spec_from_file_location',return_value=mocked),patch.object(module.importlib.util,'module_from_spec',return_value=boot),patch.object(module.subprocess,'run',side_effect=OSError('native_fixture_failure')) as run:code=module.main()
+    with patch.object(module.importlib.util,'spec_from_file_location',return_value=mocked),patch.object(module.importlib.util,'module_from_spec',return_value=boot),patch.object(module.subprocess,'run',side_effect=OSError('native_fixture_failure')) as run,patch('platform.system',return_value='Darwin'):code=module.main()
     self.assertEqual(run.call_count,1)
   self.assertEqual(code,1);reply=json.loads(output.getvalue());self.assertEqual(reply['error'],'native_fixture_failure');self.assertNotIn('dependencySetup',reply)
 

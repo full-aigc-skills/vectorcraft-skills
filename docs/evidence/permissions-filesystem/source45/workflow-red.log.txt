@@ -1,0 +1,26 @@
+test_model_command_cannot_open_undeclared_project (test_workflow_native_filesystem_boundary.WorkflowNativeFilesystemTests.test_model_command_cannot_open_undeclared_project) ... FAIL
+test_model_command_cannot_save_outside_stage (test_workflow_native_filesystem_boundary.WorkflowNativeFilesystemTests.test_model_command_cannot_save_outside_stage) ... FAIL
+test_normal_creation_save_and_independent_reopen (test_workflow_native_filesystem_boundary.WorkflowNativeFilesystemTests.test_normal_creation_save_and_independent_reopen) ... ok
+
+======================================================================
+FAIL: test_model_command_cannot_open_undeclared_project (test_workflow_native_filesystem_boundary.WorkflowNativeFilesystemTests.test_model_command_cannot_open_undeclared_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_workflow_native_filesystem_boundary.py", line 38, in test_model_command_cannot_open_undeclared_project
+    with self.assertRaises((ValueError, RuntimeError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'RuntimeError'>) not raised
+
+======================================================================
+FAIL: test_model_command_cannot_save_outside_stage (test_workflow_native_filesystem_boundary.WorkflowNativeFilesystemTests.test_model_command_cannot_save_outside_stage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "WORKSPACE/full-aigc-skills-repositories/vectorcraft-skills/tests/test_workflow_native_filesystem_boundary.py", line 43, in test_model_command_cannot_save_outside_stage
+    with self.assertRaises((ValueError, RuntimeError)):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'RuntimeError'>) not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.322s
+
+FAILED (failures=2)

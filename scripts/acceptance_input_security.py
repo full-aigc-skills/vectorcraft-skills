@@ -41,7 +41,7 @@ def main():
     import xml.etree.ElementTree as ET
     ET.parse(args.output/'artboard-1.svg')
     lock=json.loads((BASE/'runtime.lock.json').read_text());runtime=args.runtime_home/'vectorcraft'/lock['resolvedVersion']/'vectorcraft-cli'
-    with load('mcp_session').Session([str(runtime.resolve()),'mcp','--headless']) as session:
+    with load('mcp_session').Session([str(runtime.resolve()),'mcp','--headless'],filesystem={'readRoots':[str(args.output.resolve())],'writeRoots':[]}) as session:
         session.command('document.open',{'path':str((args.output/'project.vectorcraft').resolve())})
         reopened=session.command('document.json',{})
         assert obj(reopened,2)['appearance']['items'][0]['paint']==target
@@ -53,6 +53,6 @@ def main():
         'driverSha256':sha(Path(__file__)),'runtimeSha256':sha(runtime),'sourceProjectSha256':source_hash,
         'sourcePreserved':True,'targetPaint':target,'controlTextPreserved':True,'independentNativeReopen':True,
         'reopenProcessStopped':True,'files':manifest['files'],'exports':[x['format'] for x in manifest['outputs']],
-        'scope':'Actual source candidate native revision,three exports and independent reopen under filtered child environments;not host routing,secret-reference resolution,full permission sandbox or fixed plugin qualification'}
+        'scope':'Actual source candidate native revision,three exports and independent reopen under filtered environments and explicit kernel file scopes;not host routing,secret-reference resolution,complete entry-point audit or fixed plugin qualification'}
     args.report.write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n');print(json.dumps({'result':'PASS','exports':3,'nativeReopen':True}))
 if __name__=='__main__':main()
