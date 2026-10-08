@@ -1,12 +1,14 @@
 # VectorCraft 独立技能
 
+候选修复 native.command 品牌返工漏导出：两入口继承已核验清单，真实九文件原生验收及控制资产保全通过；固定安装和Art捆绑验收另行验证。[架构](docs/VectorCraft-Brand-Gateway-Export-Architecture.zh_CN.md)。
+
 固定插件36／技能源32通过13项独立原生冷安装、26项真实工作流测试和52个误改拒绝案例。64安装身份保持；51项未变技能复用已复核的历史冷启动证据。Art内置升级与完整V1仍开放。[固定验收](docs/VectorCraft-Fixed-Brand-Guard-Architecture.zh_CN.md)。
 
 固定安装外观技能新增“同色但未绑定 token”验收：仅已绑定消费者更新，非消费者原生属性、无关 SVG／PNG／PDF 与原交付保持不变。本轮复用运行时，不关闭新增 V1 任务。[验收架构](docs/VectorCraft-Same-Color-Token-Architecture.zh_CN.md)。
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.32`；目标插件：`0.1.0-dev.36`；13 个独立技能。
+当前技能源：`0.1.0-dev.33`；目标插件：`0.1.0-dev.37`；13 个独立技能。
 
 已验证首次使用平台：macOS arm64、Python 3.11+。固定运行时安装在用户数据目录，技能文件保留在宿主加载目录。当前为开发版本；完整首版验收及通用 Skills CLI 实际安装仍未完成。
 

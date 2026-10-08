@@ -1,12 +1,14 @@
 # VectorCraft Skills
 
+Candidate fixes missing brand variants through native.command: both entries now inherit verified exports, with real9-file native acceptance and preserved controls. Fixed installed and Art bundle acceptance remain separate. [Architecture](docs/VectorCraft-Brand-Gateway-Export-Architecture.md).
+
 Fixed plugin36/source32 passes13 independent native cold installations,26 real workflow tests and52 injected erroneous-update refusals. All64 installed identities match;51 unchanged skills retain revalidated historical cold evidence. Art bundled upgrades and complete V1 remain open. [Fixed acceptance](docs/VectorCraft-Fixed-Brand-Guard-Architecture.md).
 
 Fixed installed appearance-skill verification now includes same-RGB objects without a brand-token link. Only linked consumers change; native properties, unrelated SVG/PNG/PDF and original deliveries remain preserved. Warm runtime verification; no additional V1 task closes. [Acceptance architecture](docs/VectorCraft-Same-Color-Token-Architecture.md).
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current source: `0.1.0-dev.32`; target plugin: `0.1.0-dev.36`; 13 independent skills.
+Current source: `0.1.0-dev.33`; target plugin: `0.1.0-dev.37`; 13 independent skills.
 
 Verified first-use platform: macOS arm64 and Python 3.11+. Pinned runtimes install into the user data directory; skill files stay in their host-loaded directory. These are development releases; complete V1 acceptance and generic Skills CLI installation remain open.
 
