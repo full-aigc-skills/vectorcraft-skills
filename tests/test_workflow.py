@@ -5,7 +5,7 @@ import unittest
 import json
 import tempfile
 
-SOURCE = Path(__file__).resolve().parents[1] / 'skills/vectorcraft-use/scripts/workflow.py'
+SOURCE = Path(__file__).resolve().parents[1] / 'skills/vectorcraft-harness/scripts/workflow.py'
 
 class WorkflowTests(unittest.TestCase):
     def setUp(self):

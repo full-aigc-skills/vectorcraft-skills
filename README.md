@@ -8,7 +8,7 @@ Fixed installed appearance-skill verification now includes same-RGB objects with
 
 Create Logo, icon and brand assets as `.vectorcraft` with applicable SVG, PDF and PNG exports.
 
-Current skill source: `0.1.0-dev.46`; companion published plugin: `0.1.0-dev.63`; 13 independent skills.
+Current skill source: `0.1.0-dev.47`; companion published plugin: `0.1.0-dev.63`; 14 independent skills (13 domain skills + 1 built-in execution harness).
 
 Source40 adds explicit stable artboardId and actual-ID bindings for creation receipts. Legacy revision index shifts, unknown IDs, conflicts and duplicate outputs refuse before the first export. Manifests expose names, dimensions, native order and PNG preview order. Two silent old53 failures were reproduced natively; candidate three successful mappings/four refusals passed. Full VC-DM-004 qualification at fixed54 is complete; see the four-scenario evidence below. GUI/model/full V1 remain separate.
 
@@ -24,13 +24,13 @@ Verified first-use platform: macOS arm64 and Python 3.11+. Pinned runtimes insta
 
 ## First use
 
-Invoke **`vectorcraft-use`** in your host. For direct CLI use, set `SKILL_DIR` to the absolute directory of the `SKILL.md` actually loaded by that host. It may be under user/project `.agents/skills`, the plugin, or a host cache; use the actual path. Each entry below installs/verifies its locked runtime before invoking it.
+Invoke **`vectorcraft-use`** in your host. All execution goes through the built-in **vectorcraft-harness** skill: set `HARNESS_DIR` to its actually loaded absolute directory, and `SKILL_DIR` to the domain skill directory (for example vectorcraft-use). It may be under user/project `.agents/skills`, the plugin, or a host cache; use the actual path. Each entry below installs/verifies its locked runtime before invoking it.
 
 <!-- CRAFT_FIRST_USE_START -->
 ```bash
-: "${SKILL_DIR:?Set to the actual loaded skill directory}"
-python3 -I -B "$SKILL_DIR/scripts/cli.py" -- --version
-python3 -I -B "$SKILL_DIR/scripts/cli.py" -- commands
+: "${HARNESS_DIR:?Set to the actually loaded vectorcraft-harness skill directory}"
+python3 -I -B "$HARNESS_DIR/scripts/cli.py" -- --version
+python3 -I -B "$HARNESS_DIR/scripts/cli.py" -- commands
 ```
 <!-- CRAFT_FIRST_USE_END -->
 

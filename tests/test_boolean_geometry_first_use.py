@@ -35,7 +35,7 @@ class BooleanGeometryFirstUseTests(unittest.TestCase):
             shutil.copytree(os.environ['CRAFT_INSTALLED_VECTOR_BOOLEAN_SKILL'], skill,
                             ignore=shutil.ignore_patterns('__pycache__'))
             self.assertEqual(len(list(skill.parent.iterdir())), 1)
-            spec = importlib.util.spec_from_file_location('isolated_boolean_workflow', skill / 'scripts/workflow.py')
+            spec = importlib.util.spec_from_file_location('isolated_boolean_workflow', ROOT / 'skills/vectorcraft-harness/scripts/workflow.py')
             workflow = importlib.util.module_from_spec(spec); spec.loader.exec_module(workflow)
             runtime = root / 'empty-runtime'
             self.assertFalse(runtime.exists())

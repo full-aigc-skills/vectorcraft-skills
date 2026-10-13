@@ -8,7 +8,7 @@
 
 Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SVG、PDF、PNG。
 
-当前技能源：`0.1.0-dev.46`；配套已发布插件：`0.1.0-dev.63`；13 个独立技能。
+当前技能源：`0.1.0-dev.47`；配套已发布插件：`0.1.0-dev.63`；14 个独立技能（13 领域技能 + 1 内置执行 harness）。
 
 源40支持显式稳定artboardId与创建回执ID绑定，返工旧索引身份偏移、未知ID、冲突范围和重复输出在首次导出前拒绝；清单记录画板名称、尺寸、当前顺序与PNG预览顺序。公开旧53的两类静默偏移已原生复现，候选三类成功／四类拒绝通过。固定54完整VC-DM-004验收已完成，见文末四场景证据；GUI／模型／完整V1保持独立。
 
@@ -24,13 +24,13 @@ Logo、图标与品牌图形需求进入，交付 `.vectorcraft` 及适用的 SV
 
 ## 首次使用
 
-在宿主中调用 **`vectorcraft-use`**。直接使用 CLI 时，将 `SKILL_DIR` 设为宿主实际加载的 `SKILL.md` 所在绝对目录；可能位于用户／项目 `.agents/skills`、插件内部或宿主缓存，以实际路径为准。以下入口在调用前安装并核验固定运行时。
+在宿主中调用 **`vectorcraft-use`**。所有执行经由内置的 **vectorcraft-harness** 技能：将 `HARNESS_DIR` 设为该技能实际加载的绝对目录，`SKILL_DIR` 设为领域技能（如 vectorcraft-use）实际加载的绝对目录；可能位于用户／项目 `.agents/skills`、插件内部或宿主缓存，以实际路径为准。以下入口在调用前安装并核验固定运行时。
 
 <!-- CRAFT_FIRST_USE_START -->
 ```bash
-: "${SKILL_DIR:?Set to the actual loaded skill directory}"
-python3 -I -B "$SKILL_DIR/scripts/cli.py" -- --version
-python3 -I -B "$SKILL_DIR/scripts/cli.py" -- commands
+: "${HARNESS_DIR:?Set to the actually loaded vectorcraft-harness skill directory}"
+python3 -I -B "$HARNESS_DIR/scripts/cli.py" -- --version
+python3 -I -B "$HARNESS_DIR/scripts/cli.py" -- commands
 ```
 <!-- CRAFT_FIRST_USE_END -->
 

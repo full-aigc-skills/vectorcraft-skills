@@ -73,7 +73,7 @@ class SameColorTokenFirstUseTests(unittest.TestCase):
                 plan_file = root/(name+'.json')
                 plan_file.write_text(json.dumps(value), encoding='utf-8')
                 output = root/name
-                argv = [sys.executable, '-I', '-B', str(skill/'scripts/workflow.py'),
+                argv = [sys.executable, '-I', '-B', str(ROOT/'skills/vectorcraft-harness/scripts/workflow.py'),
                         str(plan_file), '--output', str(output), '--runtime-home', str(runtime)]
                 if source:
                     argv += ['--source', str(source)]

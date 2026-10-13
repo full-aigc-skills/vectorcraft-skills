@@ -60,7 +60,11 @@ class BrandGuardNativeTests(unittest.TestCase):
                 self.assertEqual(identity,entry['sha256']);fixed_installed=True
             skill = root/'.agents/skills'/origin.name
             shutil.copytree(origin, skill, ignore=shutil.ignore_patterns('__pycache__'))
-            self.assertEqual(len(list(skill.parent.iterdir())), 1)
+            # 执行实现收敛在 vectorcraft-harness：单独复制的执行副本是 harness；领域技能只提供场景示例。
+            self.assertFalse((skill/'scripts').exists())
+            skill = root/'.agents/skills/vectorcraft-harness'
+            shutil.copytree(ROOT/'skills/vectorcraft-harness', skill, ignore=shutil.ignore_patterns('__pycache__'))
+            self.assertEqual(len(list(skill.parent.iterdir())), 2)
             baseline = os.environ.get('CRAFT_BRAND_GUARD_BASELINE_WORKFLOW')
             if baseline:
                 shutil.copyfile(baseline, skill/'scripts/workflow.py')

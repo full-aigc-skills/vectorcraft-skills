@@ -5,7 +5,7 @@ import sys
 import tempfile
 import unittest
 
-MODULE = Path(__file__).resolve().parents[1] / 'skills/vectorcraft-use/scripts/mcp_session.py'
+MODULE = Path(__file__).resolve().parents[1] / 'skills/vectorcraft-harness/scripts/mcp_session.py'
 FAKE = '''import json,sys,time
 from pathlib import Path
 for line in sys.stdin:

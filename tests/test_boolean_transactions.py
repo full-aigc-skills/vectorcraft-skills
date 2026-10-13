@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPTS = ROOT/'skills/vectorcraft-use/scripts'
+SCRIPTS = ROOT/'skills/vectorcraft-harness/scripts'
 
 
 def load(name):

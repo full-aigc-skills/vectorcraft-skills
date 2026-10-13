@@ -14,7 +14,7 @@ def png():
         return struct.pack('>I',len(data))+name+data+struct.pack('>I',zlib.crc32(name+data)&0xffffffff)
     return b'\x89PNG\r\n\x1a\n'+chunk(b'IHDR',struct.pack('>IIBBBBB',1,1,8,6,0,0,0))+chunk(b'IDAT',zlib.compress(b'\0\xff\0\0\xff'))+chunk(b'IEND',b'')
 def module():
-    spec=importlib.util.spec_from_file_location('scope_loss',ROOT/'skills/vectorcraft-use/scripts/exchange_loss.py')
+    spec=importlib.util.spec_from_file_location('scope_loss',ROOT/'skills/vectorcraft-harness/scripts/exchange_loss.py')
     result=importlib.util.module_from_spec(spec);spec.loader.exec_module(result);return result
 class SvgRasterScopeTests(unittest.TestCase):
     def test_embedded_raster_geometry_and_ancestor_transforms_disclosed(self):

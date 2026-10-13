@@ -11,12 +11,14 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 DOMAIN = json.loads((ROOT / "skill-suite.json").read_text())["pluginId"]
 BASE = ROOT / "skills" / (DOMAIN + "-use")
+# 执行实现唯一收敛在 harness；反射与 AST 读取走 harness，文档产物仍落在 use 参考目录。
+EXEC = ROOT / "skills" / (DOMAIN + "-harness")
 
 def capture():
     def load(name):
-        spec = importlib.util.spec_from_file_location("capture_" + name, BASE / "scripts" / (name + ".py"))
+        spec = importlib.util.spec_from_file_location("capture_" + name, EXEC / "scripts" / (name + ".py"))
         value = importlib.util.module_from_spec(spec); spec.loader.exec_module(value); return value
-    lock = json.loads((BASE / "scripts/runtime.lock.json").read_text())
+    lock = json.loads((EXEC / "scripts/runtime.lock.json").read_text())
     installed = load("bootstrap").install(lock, Path.home() / ".local/share/craft-runtimes")
     argv = [installed["executable"], "mcp"] + (["--headless"] if DOMAIN == "vectorcraft" else [])
     if DOMAIN == "effectcraft":
@@ -40,7 +42,7 @@ def build(check=False):
     reflection = json.loads((BASE / "references/commands.json").read_text())
     snapshot = json.loads((BASE / "references/native-command-snapshot.json").read_text())
     current = {r["id"]:r for r in snapshot["commands"]}
-    node = ast.parse((BASE / "scripts/workflow.py").read_text())
+    node = ast.parse((EXEC / "scripts/workflow.py").read_text())
     mapped = set()
     for entry in node.body:
         if isinstance(entry, ast.Assign) and any(isinstance(t, ast.Name) and t.id == "ALLOWED" for t in entry.targets):

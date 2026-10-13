@@ -23,7 +23,7 @@ def module(skill, name):
 
 
 def run(destination, runtime):
-    dependencies = ['skills/vectorcraft-use/scripts/'+name+'.py' for name in
+    dependencies = ['skills/vectorcraft-harness/scripts/'+name+'.py' for name in
                     ['boolean_transactions','workflow','native_workflow','commands','mcp_session','preserved_stage','execution_control']]
     dependencies += ['tests/test_boolean_transactions.py','tests/test_execution_control.py','scripts/acceptance_boolean_transactions.py','skill-suite.json','.claude-plugin/plugin.json']
     dependencies += ['scripts/verify_optimization_evidence.py']
@@ -34,8 +34,8 @@ def run(destination, runtime):
         return hashlib.sha256(''.join(p.relative_to(folder).as_posix()+'\0'+digest(p)+'\n' for p in files).encode()).hexdigest()
     skills = {folder.name:skill_digest(folder) for folder in (ROOT/'skills').iterdir() if folder.is_dir()}
     destination.mkdir()
-    skill = destination/'installed/vectorcraft-cli-boolean'
-    shutil.copytree(ROOT/'skills/vectorcraft-cli-boolean', skill, ignore=shutil.ignore_patterns('__pycache__'))
+    skill = destination/'installed/vectorcraft-harness'
+    shutil.copytree(ROOT/'skills/vectorcraft-harness', skill, ignore=shutil.ignore_patterns('__pycache__'))
     skill_files = {str(p.relative_to(skill)):digest(p) for p in skill.rglob('*') if p.is_file()}
     workflow = module(skill,'workflow')
     source = destination/'source'

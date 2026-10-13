@@ -6,7 +6,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class Observed(Exception):pass
 class BrandExportInheritanceTests(unittest.TestCase):
  def setUp(self):
-  spec=importlib.util.spec_from_file_location('inheritance_workflow',ROOT/'skills/vectorcraft-use/scripts/workflow.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
+  spec=importlib.util.spec_from_file_location('inheritance_workflow',ROOT/'skills/vectorcraft-harness/scripts/workflow.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
  def fixture(self,root):
   source=root/'source';source.mkdir();(source/'project.vectorcraft').write_bytes(b'fixed native');previous={'operations':[],'exports':[{'format':'svg','artboard':0},{'format':'png','artboard':0},{'format':'pdf','artboard':0}]};(source/'plan.json').write_text(json.dumps(previous));files={n:hashlib.sha256((source/n).read_bytes()).hexdigest() for n in ['project.vectorcraft','plan.json']};(source/'manifest.json').write_text(json.dumps({'files':files,'bindings':{}}));return source,files,previous['exports']
  def revision(self,sha,mode):

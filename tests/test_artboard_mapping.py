@@ -4,7 +4,7 @@ from pathlib import Path
 import unittest
 ROOT=Path(__file__).resolve().parents[1]
 def module():
- spec=importlib.util.spec_from_file_location('mapping',ROOT/'skills/vectorcraft-use/scripts/artboard_mapping.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+ spec=importlib.util.spec_from_file_location('mapping',ROOT/'skills/vectorcraft-harness/scripts/artboard_mapping.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 class ArtboardMappingTests(unittest.TestCase):
  def setUp(self):
   self.m=module();self.a={'id':11,'name':'Logo','rect':{'x0':0,'y0':0,'x1':128,'y1':96}};self.b={'id':22,'name':'Icon','rect':{'x0':200,'y0':20,'x1':280,'y1':84}};self.native={'artboards':[self.a,self.b]};self.shifted={'artboards':[self.b,self.a]}

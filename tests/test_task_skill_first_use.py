@@ -50,7 +50,7 @@ class TaskSkillFirstUseTests(unittest.TestCase):
         cls.temporary = tempfile.TemporaryDirectory(prefix='vectorcraft-task-fixture-')
         cls.fixture = Path(cls.temporary.name)
         skill = ROOT / 'skills/vectorcraft-use'
-        spec = importlib.util.spec_from_file_location('vector_task_fixture', skill / 'scripts/workflow.py')
+        spec = importlib.util.spec_from_file_location('vector_task_fixture', ROOT / 'skills/vectorcraft-harness/scripts/workflow.py')
         workflow = importlib.util.module_from_spec(spec); spec.loader.exec_module(workflow)
         result = workflow.execute(json.loads((skill / 'examples/brand-assets.json').read_text()),
                                   cls.fixture / 'base', runtime_home=cls.fixture / 'fixture-runtime')
@@ -73,7 +73,9 @@ class TaskSkillFirstUseTests(unittest.TestCase):
         self.addCleanup(lambda: self.assertEqual(digest(self.project), self.project_sha))
 
     def install_only(self, task):
-        self.skill = self.root / '.agents/skills' / ('vectorcraft-cli-' + task)
+        # 执行实现收敛在 vectorcraft-harness：单独复制的是 harness；领域技能不再自带脚本。
+        self.assertFalse((ROOT / 'skills' / ('vectorcraft-cli-' + task) / 'scripts').exists())
+        self.skill = self.root / '.agents/skills' / 'vectorcraft-harness'
         shutil.copytree(ROOT / 'skills' / self.skill.name, self.skill,
                         ignore=shutil.ignore_patterns('__pycache__'))
         self.assertEqual(len(list((self.root / '.agents/skills').iterdir())), 1)

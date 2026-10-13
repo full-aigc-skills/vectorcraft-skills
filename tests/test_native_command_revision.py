@@ -28,7 +28,7 @@ class NativeCommandRevisionTests(unittest.TestCase):
             root = Path(temporary)
             skill = root / "single-skill"
             shutil.copytree(source, skill)
-            spec = importlib.util.spec_from_file_location("revision_commands", skill / "scripts/commands.py")
+            spec = importlib.util.spec_from_file_location("revision_commands", ROOT / "skills/vectorcraft-harness/scripts/commands.py")
             commands = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(commands)
             runtime = root / "empty-runtime" if os.environ.get("CRAFT_NATIVE_COLD") == "1" else None

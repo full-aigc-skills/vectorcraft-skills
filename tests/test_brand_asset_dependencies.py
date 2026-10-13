@@ -12,7 +12,7 @@ def inspected(ids):
  return {'layers':[{'id':i,'bounds':{'x':12,'y':16,'width':60,'height':40}} for i in ids]}
 class BrandAssetDependenciesTests(unittest.TestCase):
  def setUp(self):
-  spec=importlib.util.spec_from_file_location('asset_dependencies',ROOT/'skills/vectorcraft-use/scripts/brand_variants.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
+  spec=importlib.util.spec_from_file_location('asset_dependencies',ROOT/'skills/vectorcraft-harness/scripts/brand_variants.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
  def check(self,before,after,mapping,bounds_after=None):
   return self.m.inspect_asset_update(before,after,'Logo',mapping,inspected(mapping),bounds_after or inspected([i for ids in mapping.values() for i in ids]))
  def test_raster_identity_retained_and_explicit_dependency_recorded(self):

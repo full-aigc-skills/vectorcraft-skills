@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SVG = b'<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect width="16" height="16"/></svg>'
 
 def load(name):
-    spec = importlib.util.spec_from_file_location('asset_permission_' + name, ROOT / 'skills/vectorcraft-use/scripts' / (name + '.py'))
+    spec = importlib.util.spec_from_file_location('asset_permission_' + name, ROOT / 'skills/vectorcraft-harness/scripts' / (name + '.py'))
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module

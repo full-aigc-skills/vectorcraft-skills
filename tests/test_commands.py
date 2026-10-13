@@ -7,7 +7,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 DOMAIN = json.loads((ROOT / "skill-suite.json").read_text())["pluginId"]
-SCRIPT = ROOT / "skills" / (DOMAIN + "-use") / "scripts" / "commands.py"
+SCRIPT = ROOT / "skills" / (DOMAIN + "-harness") / "scripts" / "commands.py"
 
 def module():
     spec = importlib.util.spec_from_file_location("command_entry", SCRIPT)
@@ -65,7 +65,7 @@ class CommandsTests(unittest.TestCase):
 
     def test_every_reflected_command_has_exact_parameters_and_owner(self):
         m = module()
-        original = json.loads((SCRIPT.parent.parent / "references/commands.json").read_text())["commands"]
+        original = json.loads((ROOT / "skills" / (DOMAIN + "-use") / "references/commands.json").read_text())["commands"]
         rows = {r["id"]: r for r in m.catalog()["commands"]}
         self.assertEqual(set(rows), {r["id"] for r in original})
         names = {r["name"] for r in json.loads((ROOT / "skill-suite.json").read_text())["skills"]}

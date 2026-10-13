@@ -9,7 +9,7 @@ import unittest
 ROOT=Path(__file__).resolve().parents[1]
 
 def module():
-    spec=importlib.util.spec_from_file_location('lineage',ROOT/'skills/vectorcraft-use/scripts/exchange_loss.py')
+    spec=importlib.util.spec_from_file_location('lineage',ROOT/'skills/vectorcraft-harness/scripts/exchange_loss.py')
     m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 
 class ArtifactLineageTests(unittest.TestCase):

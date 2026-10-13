@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 class ExecutionControlTests(unittest.TestCase):
     def load(self):
-        spec=importlib.util.spec_from_file_location('execution_control',ROOT/'skills/vectorcraft-use/scripts/execution_control.py')
+        spec=importlib.util.spec_from_file_location('execution_control',ROOT/'skills/vectorcraft-harness/scripts/execution_control.py')
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
 
     def fixture(self,root):

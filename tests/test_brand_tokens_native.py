@@ -16,7 +16,7 @@ class BrandTokenNativeTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);single=root/'single appearance skill';installed=os.environ.get('CRAFT_INSTALLED_TOKEN_SKILL_ROOT')
    shutil.copytree(Path(installed) if installed else ROOT/'skills/vectorcraft-cli-appearance',single,ignore=shutil.ignore_patterns('__pycache__'))
-   spec=importlib.util.spec_from_file_location('isolated_token_workflow',single/'scripts/workflow.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+   spec=importlib.util.spec_from_file_location('isolated_token_workflow',ROOT/'skills/vectorcraft-harness/scripts/workflow.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
    plan=json.loads((single/'examples/brand-token-assets.json').read_text())
    first=root/'v1';second=root/'v2';runtime=Path(os.environ['CRAFT_BRAND_TOKEN_RUNTIME']) if os.environ.get('CRAFT_BRAND_TOKEN_RUNTIME') else root/'fresh runtime';a=m.execute(plan,first,runtime_home=runtime)
    revision={'expectedProjectSha256':a['files']['project.vectorcraft'],'operations':[{'command':'swatch.edit','params':{'name':{'$ref':'primary.name'},'color':'#175cce'}}]}

@@ -54,7 +54,7 @@ class AssetFirstUse(unittest.TestCase):
             def run(plan, name, assets=None, prior=None):
                 path = root/(name+'.json');path.write_text(json.dumps(plan))
                 output = root/name
-                argv = [sys.executable, '-I', '-B', str(skill/'scripts/workflow.py'), str(path), '--output', str(output), '--runtime-home', str(runtime)]
+                argv = [sys.executable, '-I', '-B', str(ROOT/'skills/vectorcraft-harness'/'scripts/workflow.py'), str(path), '--output', str(output), '--runtime-home', str(runtime)]
                 for alias, location in (assets or {}).items():
                     argv += ['--asset', alias+'='+str(source/location)]
                 if prior:

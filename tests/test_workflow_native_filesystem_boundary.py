@@ -14,7 +14,7 @@ SOURCE = os.environ.get('VECTORCRAFT_PERMISSION_SOURCE')
 @unittest.skipUnless(platform.system() == 'Darwin' and BINARY and SOURCE, 'explicit native permission probe required')
 class WorkflowNativeFilesystemTests(unittest.TestCase):
     def setUp(self):
-        spec = importlib.util.spec_from_file_location('workflow_permissions', ROOT / 'skills/vectorcraft-use/scripts/workflow.py')
+        spec = importlib.util.spec_from_file_location('workflow_permissions', ROOT / 'skills/vectorcraft-harness/scripts/workflow.py')
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)
         self.temporary = tempfile.TemporaryDirectory(prefix='vectorcraft workflow scope ')

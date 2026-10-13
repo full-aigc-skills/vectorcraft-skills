@@ -1,7 +1,7 @@
 {
   "schema": "craft-skill-suite/v1",
   "pluginId": "vectorcraft",
-  "version": "0.1.0-dev.46",
+  "version": "0.1.0-dev.47",
   "source": {
     "repository": "https://github.com/storytold/vectorcraft",
     "commit": "36a6a8ae49f0e2d1059361ab1f842b1ec172bc9e",
@@ -177,6 +177,14 @@
         "object.isolate",
         "object.exitIsolation"
       ]
+    },
+    {
+      "name": "vectorcraft-harness",
+      "title": "内置执行 harness",
+      "description": "全部领域技能共用的统一执行通道：首次安装、原生命令入口、workflow 编排与桌面桥接脚本都在本技能 scripts/ 内。",
+      "kind": "harness",
+      "commandCount": 0,
+      "commandPrefixes": []
     }
   ],
   "resourceSource": "vectorcraft-use",

@@ -1,5 +1,10 @@
 # Version-bound release records
 
+## dev.47 (2026-10-13)
+
+Converged duplicated execution payloads into one built-in vectorcraft-harness skill (five documented entries plus execution-contract JSON); 13 domain skills dropped their scripts/ and route by name via HARNESS_DIR; sync, coverage and cold-install generators updated for the new layout. Default regressions pass under the new layout; target-platform and host acceptance remain open.
+
+
 ## dev.44 (2026-10-09)
 
 Environment and protocol-diagnostic boundaries:6 targeted tests and183 default regressions pass,30 skip;13 independent cold installs,native revision,three exports and reopen pass. Source44 does not replace source43 inside plugin63;full permission qualification and V1 remain open. [Evidence](docs/evidence/permissions-candidate44-20261009.json).

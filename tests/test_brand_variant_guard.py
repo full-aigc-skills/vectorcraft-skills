@@ -18,7 +18,7 @@ def fixture():
 
 class BrandVariantGuardTests(unittest.TestCase):
     def setUp(self):
-        path = ROOT/'skills/vectorcraft-use/scripts/brand_variants.py'
+        path = ROOT/'skills/vectorcraft-harness/scripts/brand_variants.py'
         spec = importlib.util.spec_from_file_location('brand_variants_test', path)
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)

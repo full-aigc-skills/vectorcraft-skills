@@ -24,7 +24,7 @@ class ArtboardExportFirstUseTests(unittest.TestCase):
             def hashes(directory):
                 return {str(p.relative_to(directory)): hashlib.sha256(p.read_bytes()).hexdigest() for p in directory.rglob('*') if p.is_file()}
             skill_before = hashes(skill)
-            spec = importlib.util.spec_from_file_location('isolated_artboards', skill/'scripts/workflow.py')
+            spec = importlib.util.spec_from_file_location('isolated_artboards', ROOT/'skills/vectorcraft-harness'/'scripts/workflow.py')
             workflow = importlib.util.module_from_spec(spec); spec.loader.exec_module(workflow)
             runtime = root/'empty-runtime'; self.assertFalse(runtime.exists())
             boards = [(0,0,128,96,'Logo'), (200,20,80,64,'Icon'), (400,-40,96,128,'Portrait variant')]
@@ -72,7 +72,7 @@ class ArtboardExportFirstUseTests(unittest.TestCase):
                     samples.append({'revision':directory.name,'artboard':i,'size':[w,h],'centerRgb':list(expected),'pdfVectorOnly':True})
             unaffected = {fmt: {'before':first_files[f'artboard-2.{fmt}'],'after':hashes(second)[f'artboard-2.{fmt}']} for fmt in ('svg','png','pdf')}
             if os.environ.get('CRAFT_VECTOR_ARTBOARD_FAILURE_EVIDENCE'):
-                proof={'schema':'vectorcraft-artboard-unaffected-export-regression/v1','status':'failed' if any(v['before']!=v['after'] for v in unaffected.values()) else 'passed','scope':'fixed installed export skill copied alone, empty public native runtime; actual different-size artboards; independent PNG/PDF dimensions and visible color checks completed before export identity gate','unaffectedExports':unaffected,'samples':samples,'initialSvg':(first/'artboard-2.svg').read_text(),'revisedSvg':(second/'artboard-2.svg').read_text(),'runtimeLockSha256':hashlib.sha256((skill/'scripts/runtime.lock.json').read_bytes()).hexdigest(),'driverSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+                proof={'schema':'vectorcraft-artboard-unaffected-export-regression/v1','status':'failed' if any(v['before']!=v['after'] for v in unaffected.values()) else 'passed','scope':'fixed installed export skill copied alone, empty public native runtime; actual different-size artboards; independent PNG/PDF dimensions and visible color checks completed before export identity gate','unaffectedExports':unaffected,'samples':samples,'initialSvg':(first/'artboard-2.svg').read_text(),'revisedSvg':(second/'artboard-2.svg').read_text(),'runtimeLockSha256':hashlib.sha256((ROOT/'skills/vectorcraft-harness'/'scripts/runtime.lock.json').read_bytes()).hexdigest(),'driverSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
                 with Path(os.environ['CRAFT_VECTOR_ARTBOARD_FAILURE_EVIDENCE']).open('x') as stream: json.dump(proof,stream,indent=2)
             for fmt in ('svg','png','pdf'): self.assertEqual((first/f'artboard-2.{fmt}').read_bytes(),(second/f'artboard-2.{fmt}').read_bytes())
             self.assertEqual(hashes(first),first_files)
@@ -91,7 +91,7 @@ class ArtboardExportFirstUseTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'output_exists'): workflow.execute(plan,first,runtime_home=runtime)
             self.assertEqual(hashes(first),first_files); self.assertEqual(hashes(skill),skill_before); self.assertFalse(list(skill.rglob('*.pyc')))
             if os.environ.get('CRAFT_VECTOR_ARTBOARD_EVIDENCE'):
-                proof={'schema':'vectorcraft-artboard-exports-first-use/v1','scope':'fixed installed export skill copied alone; empty default public native runtime install; distinct rectangles and global RGB token; independent Pillow/PyMuPDF output checks','samples':samples,'pdfExportDate':pdf_date,'originalFiles':first_files,'revisedFiles':hashes(second),'artboards':a['artboards'],'unrelatedIconAllFormatsUnchanged':True,'invalidBoardRejected':True,'sourceAndSkillFilesPreserved':True,'runtimeLockSha256':hashlib.sha256((skill/'scripts/runtime.lock.json').read_bytes()).hexdigest()}
+                proof={'schema':'vectorcraft-artboard-exports-first-use/v1','scope':'fixed installed export skill copied alone; empty default public native runtime install; distinct rectangles and global RGB token; independent Pillow/PyMuPDF output checks','samples':samples,'pdfExportDate':pdf_date,'originalFiles':first_files,'revisedFiles':hashes(second),'artboards':a['artboards'],'unrelatedIconAllFormatsUnchanged':True,'invalidBoardRejected':True,'sourceAndSkillFilesPreserved':True,'runtimeLockSha256':hashlib.sha256((ROOT/'skills/vectorcraft-harness'/'scripts/runtime.lock.json').read_bytes()).hexdigest()}
                 proof.update({'sameProjectPdfAcrossSecondsUnchanged':True,'sameProjectFiles':repeated['files'],'failedStagePreserved':True,'failureReplayAllowed':failure['replayAllowed'],'driverSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
                 with Path(os.environ['CRAFT_VECTOR_ARTBOARD_EVIDENCE']).open('x') as stream: json.dump(proof,stream,indent=2)
 

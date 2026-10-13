@@ -7,9 +7,9 @@ SOURCE=os.environ.get('VECTORCRAFT_PERMISSION_SOURCE')
 @unittest.skipUnless(platform.system()=='Darwin' and BINARY and SOURCE,'explicit native permission probe required')
 class NativeFilesystemBoundaryTests(unittest.TestCase):
  def setUp(self):
-  spec=importlib.util.spec_from_file_location('native_permission_commands',ROOT/'skills/vectorcraft-use/scripts/commands.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
+  spec=importlib.util.spec_from_file_location('native_permission_commands',ROOT/'skills/vectorcraft-harness/scripts/commands.py');self.m=importlib.util.module_from_spec(spec);spec.loader.exec_module(self.m)
   self.tmp=tempfile.TemporaryDirectory(prefix='vectorcraft permission roots ');self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name);self.project=self.root/'authorized';self.project.mkdir();self.outside=self.root/'outside';self.outside.mkdir();self.seed=self.outside/'seed.vectorcraft';shutil.copyfile(SOURCE,self.seed)
-  self.lock=json.loads((ROOT/'skills/vectorcraft-use/scripts/runtime.lock.json').read_text());self.sha=hashlib.sha256(Path(BINARY).read_bytes()).hexdigest();self.assertEqual(self.sha,self.lock['artifacts']['darwin-arm64']['binarySha256'])
+  self.lock=json.loads((ROOT/'skills/vectorcraft-harness/scripts/runtime.lock.json').read_text());self.sha=hashlib.sha256(Path(BINARY).read_bytes()).hexdigest();self.assertEqual(self.sha,self.lock['artifacts']['darwin-arm64']['binarySha256'])
  def run_plan(self,operations,inputs=None,alias=False):
   output=self.project/'delivery'
   def installer(*args):

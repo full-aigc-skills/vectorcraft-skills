@@ -14,7 +14,7 @@ SOURCE = os.environ.get('VECTORCRAFT_PERMISSION_SOURCE')
 @unittest.skipUnless(platform.system() == 'Darwin' and BINARY and SOURCE, 'explicit native permission probe required')
 class NativeCliFilesystemTests(unittest.TestCase):
     def invoke(self, target, *scope):
-        return subprocess.run([sys.executable, '-I', '-B', str(ROOT / 'skills/vectorcraft-use/scripts/cli.py'),
+        return subprocess.run([sys.executable, '-I', '-B', str(ROOT / 'skills/vectorcraft-harness/scripts/cli.py'),
             '--runtime-home', str(Path(BINARY).parents[2]), *scope, '--', 'convert', SOURCE, str(target)],
             capture_output=True, text=True, timeout=30)
 

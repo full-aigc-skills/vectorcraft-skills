@@ -14,7 +14,7 @@ class ChineseTextNativeTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as d:
    root=Path(d);skill=root/'.agents/skills/vectorcraft-cli-text'
    shutil.copytree(Path(os.environ.get('CRAFT_INSTALLED_TEXT_SKILL_ROOT',ROOT/'skills/vectorcraft-cli-text')),skill,ignore=shutil.ignore_patterns('__pycache__'))
-   spec=importlib.util.spec_from_file_location('w',skill/'scripts/workflow.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+   spec=importlib.util.spec_from_file_location('w',ROOT/'skills/vectorcraft-harness/scripts/workflow.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
    plan=json.loads((skill/'examples/chinese-text.json').read_text());runtime=root/'fresh runtime';first=root/'v1';second=root/'v2'
    a=m.execute(plan,first,runtime_home=runtime)
    if os.environ.get('CRAFT_TEXT_EVIDENCE_DIR'):

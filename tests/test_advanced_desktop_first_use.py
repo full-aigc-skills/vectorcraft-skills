@@ -12,6 +12,8 @@ class AdvancedDesktopFirstUse(unittest.TestCase):
   original=hashes(source)
   with tempfile.TemporaryDirectory(prefix='craft-advanced-desktop-') as td:
    root=Path(td);skill=root/'.agents/skills'/source.name;skill.parent.mkdir(parents=True);shutil.copytree(source,skill);before=hashes(skill);plan=json.loads((skill/'examples/commands-advanced.json').read_text());extension={'filmcraft':'fcproj','effectcraft':'ecproj','photocraft':'pcraft','vectorcraft':'vectorcraft'}[DOMAIN];path={'$output':'project.'+extension}
+   # 执行实现收敛在 vectorcraft-harness：桌面入口经 harness 副本执行。
+   executor=root/'.agents/skills/vectorcraft-harness';shutil.copytree(ROOT/'skills/vectorcraft-harness',executor,ignore=shutil.ignore_patterns('__pycache__'))
    if DOMAIN=='filmcraft':
     operations=[]
     for op in plan['operations']:
@@ -22,7 +24,7 @@ class AdvancedDesktopFirstUse(unittest.TestCase):
    elif DOMAIN=='photocraft':plan['operations'] += [{'tool':'doc_open','params':{'path':path}},{'tool':'doc_inspect','params':{}}]
    else:plan['operations'] += [{'command':'document.open','params':{'path':path}},{'tool':'inspect_document','params':{}}]
    plan['operations'].insert(-1,{'tool':'inspect_ui' if DOMAIN=='vectorcraft' else 'ui_inspect','params':{}})
-   frozen=root/'plan.json';frozen.write_text(json.dumps(plan));output=root/'output';result=subprocess.run(['/opt/anaconda3/bin/python3','-I','-B',str(skill/'scripts/desktop.py'),'run',str(frozen),'--output',str(output),'--runtime-home',str(root/'runtime')],capture_output=True,text=True,timeout=800,env=dict(os.environ,PATH='/usr/bin:/bin'));self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+   frozen=root/'plan.json';frozen.write_text(json.dumps(plan));output=root/'output';result=subprocess.run(['/opt/anaconda3/bin/python3','-I','-B',str(executor/'scripts/desktop.py'),'run',str(frozen),'--output',str(output),'--runtime-home',str(root/'runtime')],capture_output=True,text=True,timeout=800,env=dict(os.environ,PATH='/usr/bin:/bin'));self.assertEqual(result.returncode,0,result.stdout+result.stderr)
    receipt=json.loads((output/'success.json').read_text());desktop=json.loads((output/'desktop-session.json').read_text());self.assertEqual(receipt['result'],'PASS');self.assertTrue(desktop['ownedProcessesStopped']);self.assertTrue(desktop['listenerOwnedByPID']);inspection=receipt['steps'][-1]['result']
    if DOMAIN=='filmcraft':self.assertEqual(len(inspection['video'][0]['items']),2)
    elif DOMAIN=='effectcraft':self.assertGreaterEqual(inspection['items'][0]['layers'],3)

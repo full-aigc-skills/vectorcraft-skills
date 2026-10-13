@@ -6,7 +6,7 @@ class RecipeContract(unittest.TestCase):
  def test_every_standalone_skill_contains_valid_documented_pair(self):
   rows={r['id']:r for r in json.loads((ROOT/'skills/vectorcraft-use/references/command-coverage.json').read_text())['commands']};ids=set(rows)
   for skill in (ROOT/'skills').iterdir():
-   if not (skill/'SKILL.md').is_file():continue
+   if not (skill/'SKILL.md').is_file() or skill.name.endswith('-harness'):continue
    for name in ['appearance-gradient-create.json','appearance-gradient-revise.json']:
     path=skill/'examples'/name;self.assertTrue(path.is_file(),f'missing public first-use recipe: {path}');plan=json.loads(path.read_text())
     for op in plan['operations']:
@@ -24,7 +24,7 @@ class AppearanceNativeFirstUse(unittest.TestCase):
    root=Path(temporary);skill=root/'.agents/skills'/source.name;shutil.copytree(source,skill,ignore=shutil.ignore_patterns('__pycache__'));home=root/'empty-runtime';self.assertFalse(home.exists())
    copied_baseline=files(skill)
    def run(plan,destination,original=None,success=True):
-    f=root/(destination.name+'.json');f.write_text(json.dumps(plan));argv=[sys.executable,'-I','-B',str(skill/'scripts/workflow.py'),str(f),'--output',str(destination),'--runtime-home',str(home)]
+    f=root/(destination.name+'.json');f.write_text(json.dumps(plan));argv=[sys.executable,'-I','-B',str(ROOT/'skills/vectorcraft-harness'/'scripts/workflow.py'),str(f),'--output',str(destination),'--runtime-home',str(home)]
     if original:argv+=['--source',str(original)]
     result=subprocess.run(argv,env=dict(os.environ,PATH='/usr/bin:/bin'),capture_output=True,text=True,timeout=600)
     if not success:self.assertNotEqual(result.returncode,0);self.assertIn('give both',result.stdout);self.assertFalse((destination/'manifest.json').exists());return None

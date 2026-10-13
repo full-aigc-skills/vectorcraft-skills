@@ -15,7 +15,7 @@ SOURCE = os.environ.get('VECTORCRAFT_PERMISSION_SOURCE')
 @unittest.skipUnless(platform.system() == 'Darwin' and BINARY and SOURCE and os.environ.get('VECTORCRAFT_PERMISSION_DESKTOP') == '1', 'explicit signed desktop permission probe required')
 class NativeDesktopFilesystemTests(unittest.TestCase):
     def setUp(self):
-        spec = importlib.util.spec_from_file_location('desktop_permissions', ROOT / 'skills/vectorcraft-use/scripts/desktop_session.py')
+        spec = importlib.util.spec_from_file_location('desktop_permissions', ROOT / 'skills/vectorcraft-harness/scripts/desktop_session.py')
         self.module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(self.module)
         self.tmp = tempfile.TemporaryDirectory(prefix='vectorcraft desktop scope ')

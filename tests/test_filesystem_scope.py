@@ -7,7 +7,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
-MODULE = runpy.run_path(str(ROOT / 'skills/vectorcraft-use/scripts/filesystem_scope.py'))
+MODULE = runpy.run_path(str(ROOT / 'skills/vectorcraft-harness/scripts/filesystem_scope.py'))
 
 class FilesystemScopeTests(unittest.TestCase):
     def test_unknown_model_policy_fields_are_rejected(self):

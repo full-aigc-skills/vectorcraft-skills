@@ -4,7 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[1]
 def load(name):
- p=ROOT/'skills/vectorcraft-use/scripts'/(name+'.py');s=importlib.util.spec_from_file_location('security_test_'+name,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+ p=ROOT/'skills/vectorcraft-harness/scripts'/(name+'.py');s=importlib.util.spec_from_file_location('security_test_'+name,p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 FAKE="""import json,os,sys
 for line in sys.stdin:
  r=json.loads(line)
