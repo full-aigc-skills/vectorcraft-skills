@@ -232,3 +232,9 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 ## 场景技能开发候选
 
 已增加 6 个领域场景技能及 1 个内嵌编辑器入口。详见 [场景目录](docs/scene-skills.md)。本地未发布候选，不代表全部场景的创作质量已验收。
+
+## 矢量场景操作手册 / Vector scene playbooks
+
+新增8条带具体方法和参数的矢量工作流，见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
+
+Eight workflows include explicit commands, parameters, object selection and editable/outlined delivery. This candidate does not establish host UI synchronization.
