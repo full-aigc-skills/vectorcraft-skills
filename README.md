@@ -234,3 +234,13 @@ Development44 filters inherited native-process environments,withholds untrusted 
 Development45 adds macOS native file scopes to the complete gateway,workflow,raw CLI and owned signed GUI,with pre-RPC rejection for known filesystem commands and limited system-alias/Metal resources. All28 targeted tests pass,including kernel refusals without Python prechecks and actual GUI save/reopen/export. Of241 regression tests,193 pass and48 skip. All13 independent space-path,empty-runtime public cold installs discover585 commands;actual native revision,three exports and independent reopen pass. Python asset preflight authorization,real host secret references and fixed-plugin permission acceptance remain open;tasks7.4–7.6 stay unchecked. Low-level Session callers need explicit policies;this does not sandbox the Python host.[Evidence](docs/evidence/permissions-candidate45-20261009.json);[Architecture](docs/VectorCraft-Native-File-Permissions-Architecture.md).
 
 Source46 adds trusted asset read roots, descriptor-based regular-file reads, identity/digest rechecks and safe registered-input copies. Managed CLI checks frozen authorization before hashing any asset; standalone callers bind `--read-root` or `--asset NAME=/absolute/path`. Source46 evidence covers local regression only; the source45 native/cold evidence remains historical and is not reused to qualify these changed skills. New native asset placement/rework, cold installs, host secret references and fixed-plugin qualification remain pending. [Candidate evidence](docs/evidence/permissions-candidate46-20261009.json).
+
+## 场景技能开发候选
+
+已增加 6 个领域场景技能及 1 个内嵌编辑器入口。详见 [场景目录](docs/scene-skills.md)。本地未发布候选，不代表全部场景的创作质量已验收。
+
+## 矢量场景操作手册 / Vector scene playbooks
+
+当前11条带具体方法和参数的矢量工作流（8条基础与3条0.12新增），见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
+
+Eight workflows include explicit commands, parameters, object selection and editable/outlined delivery. This candidate does not establish host UI synchronization.
