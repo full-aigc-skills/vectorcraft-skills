@@ -244,3 +244,7 @@ Source46 adds trusted asset read roots, descriptor-based regular-file reads, ide
 当前11条带具体方法和参数的矢量工作流（8条基础与3条0.12新增），见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
 
 Eight workflows include explicit commands, parameters, object selection and editable/outlined delivery. This candidate does not establish host UI synchronization.
+
+## Vector production scenario candidates
+
+Adds three independent skills: vectorcraft-clipped-illustration, vectorcraft-sticker-grid and vectorcraft-sticker-offset-border. Each includes native methods, concrete parameters, actual returned ID binding and editability checks after reopening. These additions are not released yet; real design quality and host editor synchronization remain unverified.
