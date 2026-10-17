@@ -228,3 +228,13 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 开发45在完整命令、主工作流、原始CLI与拥有的签名GUI进程上增加macOS文件权限策略，并在已知文件命令发送前拒绝越界路径，保留系统别名与Metal启动所需的有限资源。28项权限测试通过，含绕过Python预检的真实内核拒绝，以及GUI保存／重开／导出；241项回归中193项通过、48项跳过。13技能带空格单独安装、空运行时公开下载及585命令发现通过；实际原生修订、三导出与独立重开通过。Python素材预检授权、实际宿主秘密引用及固定插件权限验收仍开放，7.4–7.6不勾选。低层Session需显式策略，不声称Python宿主全进程隔离。[证据](docs/evidence/permissions-candidate45-20261009.json)；[架构](docs/VectorCraft-Native-File-Permissions-Architecture.zh_CN.md)。
 
 技能源46补充可信素材读取根、文件描述符普通文件读取、身份与摘要复核，以及登记输入的安全复制。受管CLI先检查冻结授权，再计算素材摘要；独立调用者通过 `--read-root` 或 `--asset NAME=/absolute/path` 显式绑定。源46证据仅覆盖本地回归，源45原生／冷启动证据保持历史归属，不能证明本次变化后的技能验收。新素材放置与继承返工、冷安装、宿主秘密引用及固定插件验收仍待完成。[候选证据](docs/evidence/permissions-candidate46-20261009.json)。
+
+## 场景技能开发候选
+
+已增加 6 个领域场景技能及 1 个内嵌编辑器入口。详见 [场景目录](docs/scene-skills.md)。本地未发布候选，不代表全部场景的创作质量已验收。
+
+## 矢量场景操作手册 / Vector scene playbooks
+
+当前11条带具体方法和参数的矢量工作流（8条基础与3条0.12新增），见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
+
+Eight workflows include explicit commands, parameters, object selection and editable/outlined delivery. This candidate does not establish host UI synchronization.
