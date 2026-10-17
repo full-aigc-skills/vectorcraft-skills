@@ -235,6 +235,6 @@ dev.5 补齐分组/布尔/符号的显式选择前置及资产技能的公开图
 
 ## 矢量场景操作手册 / Vector scene playbooks
 
-新增8条带具体方法和参数的矢量工作流，见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
+当前11条带具体方法和参数的矢量工作流（8条基础与3条0.12新增），见 [vectorcraft-scenario-playbooks](skills/vectorcraft-scenario-playbooks/SKILL.md)。包含独立对象选择、文字母版和轮廓交付；本地候选不代表宿主同步显示已验收。
 
 Eight workflows include explicit commands, parameters, object selection and editable/outlined delivery. This candidate does not establish host UI synchronization.

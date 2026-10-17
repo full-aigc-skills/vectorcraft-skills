@@ -4,7 +4,7 @@
 
 ## 大目录按需发现
 
-原生CLI仍有770个编辑命令，新版MCP没有增加命令ID，扩展了目录查询参数。先读取实际工具schema，再调用：
+真实0.11与0.12原生CLI目录为749→770：新增21个命令，72个参数描述变化。新版MCP还扩展了目录查询参数。先读取实际工具schema，再调用：
 
 ```json
 {"name":"command_list","arguments":{"query":"graph.","brief":true}}
@@ -31,3 +31,15 @@ vectorcraft-cli convert master.vectorcraft delivery.ai --ai-version 7 --hidden-o
 ## 既有命令的行为修复
 
 0.12发布还包含Transform Again/Transform Each、Reflect轴向、画板复制与导出隔离、SVG文字控制字符等修复。不能因命令ID与0.11相同就认为行为已对齐。涉及这些任务时先核对实际运行时版本和对象、另存测试副本，按相应业务检查几何、画板边界与输出warnings；本补充没有把这些全部标为验收通过。
+
+## 三条新增场景的实际命令
+
+以下步骤完整参数见[结构化场景](recipes.json)，仅0.12原生执行通过，内嵌0.12候选仍在构建。
+
+| 场景ID | 命令顺序与关键参数 | 检查 |
+| --- | --- | --- |
+| dimension-unit-delivery | dimension.create：mode linear，a [20,50]、b [164,50]，options {units:in,precision:2,scale:"1:1"}；dimension.update：options {units:mm,precision:1} | 2.00 in→50.8 mm；scale是字符串，传数值1会失败 |
+| intertwine-overlap-order | 创建两条色带并以实际ID选择；object.intertwine.make；object.intertwine.arrange：at [100,80]，order toggle；副本上object.intertwine.release | 只交换重叠区，保留两条对象；释放后恢复原顺序 |
+| csv-text-variants | variable.define：name offer、kind text；variable.bind：variable offer、ids为实际文字；dataset.import：csv含name,offer；dataset.select：name B；dataset.export | 活文字BETA，重开切A为ALPHA；导出含两套数据 |
+
+其他新增命令还包括dimension.applyToAll、action.batch、数据集导入导出、图表/图像动态变量、批量导出预设、交织编辑/释放、选区更新、符号选项与文字步进。它们在0.12目录中存在，不代表这些场景均已验收。批量动作的saveAndClose会覆盖源文件，不能把发现能力当作覆盖授权；先使用destination folder并保留母版。
